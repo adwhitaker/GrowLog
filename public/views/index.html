@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="growLogApp">
+  <head>
+    <meta charset="utf-8">
+    <title>GrowLog</title>
+
+    <!--  Angular -->
+    <script src="vendors/angular.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-route.min.js" charset="utf-8"></script>
+    <script src="vendors/angular-animate.min.js" charset="utf-8"></script>
+
+    <!-- jQuery -->
+    <script src="vendors/jquery.min.js" charset="utf-8"></script>
+
+    <!--  application config, controllers, and services -->
+    <script src="scripts/app.module.js" charset="utf-8"></script>
+    <script src="scripts/main.controller.js" charset="utf-8"></script>
+
+    <!--  Bootstrap -->
+    <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
+    <script src="vendors/ui-bootstrap.js" charset="utf-8"></script>
+    <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
+
+    <!--  moment.js -->
+    <script src="vendors/moment.js" charset="utf-8"></script>
+
+    <!--  css -->
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/ui-bootstrap-csp.css">
+
+    <base href="/" />
+  </head>
+  
+  <body ng-controller="MainController as main">
+    <!-- header -->
+    <header>
+
+    </header>
+
+    <!-- main content -->
+    <main>
+      <ng-view></ng-view>
+    </main>
+
+    <!-- footer -->
+    <footer>
+
+    </footer>
+  </body>
+</html>
