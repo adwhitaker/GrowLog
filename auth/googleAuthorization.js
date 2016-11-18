@@ -1,10 +1,12 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2');
+const UserService = require('../services/users');
 
 exports.setup = function () {
   // serialize the user session
   passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    console.log('user', user);
+    done(null, user.google_id);
   });
 
   // deserialize the user session
@@ -18,11 +20,18 @@ exports.setup = function () {
 
   // find or create Google user
   passport.use(new GoogleStrategy({
+    authorizationURL: process.env.AUTHORIZATION_URL,
+    tokenURL: process.env.TOKEN_URL,
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL,
   },
   function (accessToken, refreshToken, profile, done) {
+
+    console.log(`name ${profile.name.givenName} + ${profile.name.familyName}`);
+    console.log('accessToken', accessToken);
+    console.log(`refreshToken ${refreshToken}`);
+
     findOrCreate(profile.id, accessToken, refreshToken, function (err, user) {
       return done(err, user);
     });
@@ -36,18 +45,19 @@ function findOrCreate(googleID, accessToken, refreshToken, done) {
   UserService.findUserById(googleID, accessToken, refreshToken).then(function (user) {
 
     if (user) { // if user found in DB, updates access and refresh tokens
-      UserService.updateTokens(googleID, accessToken, refreshToken);
-      return done(null, user);
+      return UserService.updateTokens(googleID, accessToken, refreshToken).then(function (user) {
+        return done(null, user);
+      });
     }
 
     if (!user) { // if user not found, creates new user
-      UserService.createNewUser(googleID, accessToken, refreshToken).then(function (user) {
+      return UserService.createNewUser(googleID, accessToken, refreshToken).then(function (user) {
         return done(null, user);
       });
     };
 
   }).catch(function (err) {
-    console.log('Error finding user', err);
+    console.log(`Error finding user ${err}`);
     done(err);
   });
 };
