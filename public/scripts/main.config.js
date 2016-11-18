@@ -12,5 +12,7 @@ function configVeggies($routerProvider, $locationProvider) {
     templateUrl: 'views/activity.html'
   }).when('/plant', {
     templateUrl: 'views/plant.html'
+  }).when('/inputs', {
+    templateUrl: 'views/inputs.html'
   }).otherwise();
 };
