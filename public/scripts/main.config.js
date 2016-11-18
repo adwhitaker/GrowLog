@@ -24,5 +24,7 @@ function configVeggies($routerProvider, $locationProvider) {
     templateUrl: 'views/other.html'
   }).when('/', {
     templateUrl: 'views/login.html'
+  }).when('/generatereport', {
+    templateUrl: 'views/generatereport.html'
   }).otherwise();
 };
