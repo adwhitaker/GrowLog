@@ -8,5 +8,7 @@ function configVeggies($routerProvider, $locationProvider) {
     templateUrl:'views/home.html'
   }).when('/seeds', {
     templateUrl: 'views/seeds.html'
+  }).when('/activity', {
+    templateUrl: 'views/activity.html'
   }).otherwise();
 };
