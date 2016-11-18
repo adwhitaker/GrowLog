@@ -33,7 +33,7 @@ exports.setup = function () {
 
 // find existing user or create new one if not found in DB
 function findOrCreate(googleID, accessToken, refreshToken, done) {
-  User.findUserById(googleID, accessToken, refreshToken).then(function (user) {
+  UserService.findUserById(googleID, accessToken, refreshToken).then(function (user) {
 
     if (user) { // if user found in DB, updates access and refresh tokens
       UserService.updateTokens(googleID, accessToken, refreshToken);

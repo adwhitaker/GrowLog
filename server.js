@@ -1,8 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
+
+const auth = require('./auth/googleAuthorization');
 
 const app = express();
 
@@ -12,6 +15,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 //route connections
+app.use('/auth/google', auth);
 
 // sets index.html as main file
 // check if user is authenticated
@@ -20,6 +24,7 @@ app.get('/*', function (req, res) {
 });
 
 // server connection
-var server = app.listen(3000, function () {
-  console.log('Listening on port', server.address().port);
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log('Listening on port', port);
 });
