@@ -29,6 +29,8 @@ function createNewUser(googleID, accessToken, refreshToken) {
       refresh_token: refreshToken
     };
 
+    console.log('newUser', newUser);
+
     knex.insert(newUser)
         .into('users')
         .returning('*')
@@ -55,7 +57,7 @@ function updateTokens(googleID, accessToken, refreshToken) {
                  .update(newTokens)
                  .returning('*')
                  .then(function (user) {
-                    resolve(user);
+                    resolve(user[0]);
                   }).catch(function (err) {
                     console.log(`Error Querying the DB ${err}`);
                     return reject(err);
