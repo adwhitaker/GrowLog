@@ -4,5 +4,7 @@ angular.module('growLogApp')
 function configVeggies($routerProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
-  $routerProvider.when().otherwise();
+  $routerProvider.when('/', {
+    templateUrl:'views/home.html'
+  }).otherwise();
 };
