@@ -5,17 +5,23 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
 
-const auth = require('./auth/googleAuthorization');
+const googleAuthorization = require('./auth/googleAuthorization');
+const googleAuthentication = require('./auth/googleAuthentication');
+const sessionConfig = require('./auth/sessionConfig');
 
 const app = express();
 
 // middleware
+googleAuthorization.setup();
+app.use(session(sessionConfig.sessionConfig));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //route connections
-app.use('/auth/google', auth);
+app.use('/auth/google', googleAuthentication);
 
 // sets index.html as main file
 // check if user is authenticated
