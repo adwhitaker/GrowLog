@@ -4,4 +4,4 @@ angular.module('growLogApp')
 function ActivityController() {
   var activity = this;
   console.log('ActivityController loaded');
-};
+}
