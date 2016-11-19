@@ -4,4 +4,4 @@ angular.module('growLogApp')
 function HomeController() {
   var home = this;
   console.log('HomeController loaded');
-};
+}
