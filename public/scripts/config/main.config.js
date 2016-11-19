@@ -35,6 +35,9 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/generatereport', {
     templateUrl: 'views/generatereport.html',
     controller: 'ReportController as report',
+  }).when('/newSeedForm', {
+    templateUrl: 'views/newSeedForm.html',
+    controller: 'NewSeedFormController as newSeed',
   });
 
   $locationProvider.html5Mode(true);
