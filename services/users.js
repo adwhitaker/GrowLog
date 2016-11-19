@@ -12,7 +12,7 @@ function findUserById(googleID, userName, userEmail, accessToken, refreshToken) 
         .then(function (user) {
           resolve(user[0]);
         }).catch(function (err) {
-          console.log(`Error Querying the DB ${err}`);
+          console.log('Error Querying the DB', err);
           return reject(err);
         });
 
@@ -39,7 +39,7 @@ function createNewUser(googleID, userName, userEmail, accessToken, refreshToken)
         .then(function (user) {
           resolve(user[0]);
         }).catch(function (err) {
-          console.log(`Error Querying the DB ${err}`);
+          console.log('Error Querying the DB', err);
           return reject(err);
         });
 
@@ -63,7 +63,7 @@ function updateTokens(googleID, userName, userEmail, accessToken, refreshToken) 
                  .then(function (user) {
                     resolve(user[0]);
                   }).catch(function (err) {
-                    console.log(`Error Querying the DB ${err}`);
+                    console.log('Error Querying the DB', err);
                     return reject(err);
                   });
   });
