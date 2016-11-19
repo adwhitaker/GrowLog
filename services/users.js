@@ -3,7 +3,7 @@ const config = require('../db/connections');
 const knex = require('knex')(config.development);
 
 // find user in the DB by ID
-function findUserById(googleID, accessToken, refreshToken) {
+function findUserById(googleID, userName, userEmail, accessToken, refreshToken) {
   return new Promise(function (resolve, reject) {
 
     knex.select()
@@ -20,11 +20,13 @@ function findUserById(googleID, accessToken, refreshToken) {
 };
 
 // create new user in DB after it is not found by ID
-function createNewUser(googleID, accessToken, refreshToken) {
+function createNewUser(googleID, userName, userEmail, accessToken, refreshToken) {
   return new Promise(function (resolve, reject) {
 
     var newUser = {
       google_id: googleID,
+      google_name: userName,
+      google_email: userEmail,
       access_token: accessToken,
       refresh_token: refreshToken
     };
@@ -45,10 +47,12 @@ function createNewUser(googleID, accessToken, refreshToken) {
 };
 
 // update access and refresh tokens in the DB
-function updateTokens(googleID, accessToken, refreshToken) {
+function updateTokens(googleID, userName, userEmail, accessToken, refreshToken) {
   return new Promise(function (resolve, reject) {
 
     var newTokens = {
+      google_name: userName,
+      google_email: userEmail,
       access_token: accessToken,
       refresh_token: refreshToken
     };
