@@ -4,12 +4,13 @@ const knex = require('knex')(config.development);
 
 router.route('/')
       .get(getSeeds)
-      .post(addSeeds);
+      .post(addSeed);
 
 router.route('/:id')
-      .put(updateSeeds)
+      .put(updateSeed)
       .delete(deleteSeed);
 
+// get all seeds from the DB
 function getSeeds(req, res) {
 
   knex.select()
@@ -23,16 +24,81 @@ function getSeeds(req, res) {
       });
 };
 
-function addSeeds(req, res) {
+// add new seed to the DB
+function addSeed(req, res) {
+  // object containing new seed information
+  var newSeed = {
+    generic: req.body.generic,
+    variety: req.body.variety,
+    family: req.body.family,
+    orderdate: req.body.orderdate,
+    quantity: req.body.quantity,
+    unitsperpack: req.body.unitsperpack,
+    quantity: req.body.quantityunits,
+    seedsperunit: req.body.seedsperunit,
+    manufacturer: eq.body.manufacturer,
+    supplier: req.body.supplier,
+    daystoharvest: req.body.daystoharvest,
+    receivedate: req.body.receivedate,
+    lotnumber: eq.body.lotnumber,
+    donation: req.body.donation,
+    plantouse: req.body.plantouse
+  };
 
+  knex.insert(newSeed)
+      .into('seeds')
+      .returning('*')
+      .then(function (seed) {
+        console.log('new seed added:', seed);
+        res.sendStatus(200);
+      }).catch(function (err) {
+        console.log('Error Querying the DB', err);
+      });
 };
 
-function updateSeeds(req, res) {
+// update seed in the DB
+function updateSeed(req, res) {
+  var seedID = req.params.id;
 
-}
+  // object containing seed information to update
+  var updateSeed = {
+    generic: req.body.generic,
+    variety: req.body.variety,
+    family: req.body.family,
+    orderdate: req.body.orderdate,
+    quantity: req.body.quantity,
+    unitsperpack: req.body.unitsperpack,
+    quantity: req.body.quantityunits,
+    seedsperunit: req.body.seedsperunit,
+    manufacturer: eq.body.manufacturer,
+    supplier: req.body.supplier,
+    daystoharvest: req.body.daystoharvest,
+    receivedate: req.body.receivedate,
+    lotnumber: eq.body.lotnumber,
+    donation: req.body.donation,
+    plantouse: req.body.plantouse
+  };
 
+  knex('seeds').where('id', id)
+               .update(updateSeed)
+               .then(function (response) {
+                  res.sendStatus(200);
+                }).catch(function (err) {
+                  console.log('Error Querying the DB', err);
+                });
+};
+
+// delete seed from DB
 function deleteSeed(req, res) {
+  var seedID = req.params.id;
 
+  knex('seeds').where('id', id)
+               .delete()
+               .then(function (response) {
+                  res.sendStatus(204);
+                }).catch(function (err) {
+                  console.log('Error Querying the DB', err);
+                });
 };
 
 module.exports = router;
