@@ -3,7 +3,7 @@ const passport = require('passport');
 
 router.get('/',
   passport.authenticate('google', {
-    scope: ['profile'],
+    scope: ['profile', 'email'],
     prompt: 'select_account',
     accessType: 'offline'
   }
