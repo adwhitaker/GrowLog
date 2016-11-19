@@ -46,7 +46,7 @@ CREATE TABLE location (
 CREATE TABLE activities (
   id SERIAL PRIMARY KEY,
 type varchar(40) NOT NULL
-)
+);
 
 CREATE TABLE act_loc_users (
   id SERIAL PRIMARY KEY,
@@ -54,12 +54,6 @@ CREATE TABLE act_loc_users (
   location_id integer NOT NULL REFERENCES location ON DELETE CASCADE,
   users_id integer NOT NULL REFERENCES users ON DELETE CASCADE
 );
-
-SELECT * FROM location
-JOIN act_loc_users ON location.id = act_loc_users.location_id
-JOIN activities ON activities.id = act_loc_users.act_id
-JOIN users ON users.id = act_loc_users.users_id;
-
 
 CREATE TABLE planted (
   id SERIAL PRIMARY KEY,
@@ -115,9 +109,7 @@ CREATE TABLE harvest (
   act_loc_users_id integer REFERENCES act_loc_users
 );
 
-
 -- RUN THIS AFTER YOU CREATE THE TABLES
-
 INSERT INTO activities ("type") VALUES ('plant');
 INSERT INTO activities ("type") VALUES ('water');
 INSERT INTO activities ("type") VALUES ('weeding');
