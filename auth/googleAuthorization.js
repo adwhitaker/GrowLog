@@ -28,11 +28,9 @@ exports.setup = function () {
   },
   function (accessToken, refreshToken, profile, done) {
 
-    console.log(`name ${profile.name.givenName} + ${profile.name.familyName}`);
-    console.log('accessToken', accessToken);
-    console.log(`refreshToken ${refreshToken}`);
+    var userName = `${profile.name.givenName} ${profile.name.familyName}`;
 
-    findOrCreate(profile.id, accessToken, refreshToken, function (err, user) {
+    findOrCreate(profile.id, userName, profile.email, accessToken, refreshToken, function (err, user) {
       return done(err, user);
     });
   }
@@ -41,23 +39,23 @@ exports.setup = function () {
 }; // end of exports.setup
 
 // find existing user or create new one if not found in DB
-function findOrCreate(googleID, accessToken, refreshToken, done) {
+function findOrCreate(googleID, userName, userEmail, accessToken, refreshToken, done) {
   UserService.findUserById(googleID, accessToken, refreshToken).then(function (user) {
 
     if (user) { // if user found in DB, updates access and refresh tokens
-      return UserService.updateTokens(googleID, accessToken, refreshToken).then(function (user) {
+      return UserService.updateTokens(googleID, userName, userEmail, accessToken, refreshToken).then(function (user) {
         return done(null, user);
       });
     }
 
     if (!user) { // if user not found, creates new user
-      return UserService.createNewUser(googleID, accessToken, refreshToken).then(function (user) {
+      return UserService.createNewUser(googleID, userName, userEmail, accessToken, refreshToken).then(function (user) {
         return done(null, user);
       });
     };
 
   }).catch(function (err) {
-    console.log(`Error finding user ${err}`);
+    console.log('Error finding user', err);
     done(err);
   });
 };
