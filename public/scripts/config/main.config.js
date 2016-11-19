@@ -23,7 +23,7 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/harvest', {
     templateUrl: 'views/harvest.html',
     controller: 'HarvestController as harvest',
-  }).when('issues', {
+  }).when('/issues', {
     templateUrl: 'views/issues.html',
     controller: 'IssuesController as issues',
   }).when('/other', {
