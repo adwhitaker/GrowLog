@@ -36,11 +36,11 @@ function addSeed(req, res) {
     unitsperpack: req.body.unitsperpack,
     quantity: req.body.quantityunits,
     seedsperunit: req.body.seedsperunit,
-    manufacturer: eq.body.manufacturer,
+    manufacturer: req.body.manufacturer,
     supplier: req.body.supplier,
     daystoharvest: req.body.daystoharvest,
     receivedate: req.body.receivedate,
-    lotnumber: eq.body.lotnumber,
+    lotnumber: req.body.lotnumber,
     donation: req.body.donation,
     plantouse: req.body.plantouse
   };
@@ -70,11 +70,11 @@ function updateSeed(req, res) {
     unitsperpack: req.body.unitsperpack,
     quantity: req.body.quantityunits,
     seedsperunit: req.body.seedsperunit,
-    manufacturer: eq.body.manufacturer,
+    manufacturer: req.body.manufacturer,
     supplier: req.body.supplier,
     daystoharvest: req.body.daystoharvest,
     receivedate: req.body.receivedate,
-    lotnumber: eq.body.lotnumber,
+    lotnumber: req.body.lotnumber,
     donation: req.body.donation,
     plantouse: req.body.plantouse
   };
