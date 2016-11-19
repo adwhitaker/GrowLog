@@ -30,9 +30,10 @@ exports.setup = function () {
 
     var userName = `${profile.name.givenName} ${profile.name.familyName}`;
 
-    findOrCreate(profile.id, userName, profile.email, accessToken, refreshToken, function (err, user) {
-      return done(err, user);
-    });
+    findOrCreate(profile.id, userName, profile.email, accessToken, refreshToken,
+      function (err, user) {
+        return done(err, user);
+      });
   }
 ));
 
@@ -43,13 +44,15 @@ function findOrCreate(googleID, userName, userEmail, accessToken, refreshToken, 
   UserService.findUserById(googleID, accessToken, refreshToken).then(function (user) {
 
     if (user) { // if user found in DB, updates access and refresh tokens
-      return UserService.updateTokens(googleID, userName, userEmail, accessToken, refreshToken).then(function (user) {
+      return UserService.updateTokens(googleID, userName, userEmail, accessToken, refreshToken)
+      .then(function (user) {
         return done(null, user);
       });
     }
 
     if (!user) { // if user not found, creates new user
-      return UserService.createNewUser(googleID, userName, userEmail, accessToken, refreshToken).then(function (user) {
+      return UserService.createNewUser(googleID, userName, userEmail, accessToken, refreshToken)
+      .then(function (user) {
         return done(null, user);
       });
     };
