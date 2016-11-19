@@ -4,4 +4,4 @@ angular.module('growLogApp')
 function SeedsController() {
   var seeds = this;
   console.log('SeedsController loaded');
-};
+}
