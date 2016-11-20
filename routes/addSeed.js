@@ -79,7 +79,7 @@ function updateSeed(req, res) {
     plantouse: req.body.plantouse
   };
 
-  knex('seeds').where('id', id)
+  knex('seeds').where('id', seedID)
                .update(updateSeed)
                .then(function (response) {
                   res.sendStatus(200);
@@ -92,7 +92,7 @@ function updateSeed(req, res) {
 function deleteSeed(req, res) {
   var seedID = req.params.id;
 
-  knex('seeds').where('id', id)
+  knex('seeds').where('id', seedID)
                .delete()
                .then(function (response) {
                   res.sendStatus(204);
