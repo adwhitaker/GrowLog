@@ -34,7 +34,7 @@ function addSeed(req, res) {
     orderdate: req.body.orderdate,
     quantity: req.body.quantity,
     unitsperpack: req.body.unitsperpack,
-    quantity: req.body.quantityunits,
+    quantityunits: req.body.quantityunits,
     seedsperunit: req.body.seedsperunit,
     manufacturer: req.body.manufacturer,
     supplier: req.body.supplier,
