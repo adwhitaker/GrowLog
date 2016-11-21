@@ -32,12 +32,19 @@ CREATE TABLE seedsinuse (
   id SERIAL PRIMARY KEY,
   seeds_id integer REFERENCES seeds,
   transfer boolean DEFAULT false,
-  quantity integer
+  quantity integer,
+  plantedassigndate date,
+  plantdate date,
+  plantduration integer,
+  projectedharvestdate date,
+  actualharvestdate date,
+  amountharvested integer,
+  amountharvestedunits varchar(10),
+  harvestduration integer
 );
 
 CREATE TABLE location (
   id SERIAL PRIMARY KEY,
-  seedsinuse_id integer REFERENCES seedsinuse,
   field varchar(10),
   section varchar(10),
   row varchar(10)
@@ -45,7 +52,14 @@ CREATE TABLE location (
 
 CREATE TABLE activities (
   id SERIAL PRIMARY KEY,
-type varchar(40) NOT NULL
+  type varchar(40) NOT NULL
+  assigndate date,
+  completedate date,
+  duration integer,
+  amount varchar(10),
+  weedtype varchar(50),
+  title varchar(100),
+  comments varchar(100)
 );
 
 CREATE TABLE act_loc_users (
@@ -55,67 +69,10 @@ CREATE TABLE act_loc_users (
   users_id integer NOT NULL REFERENCES users ON DELETE CASCADE
 );
 
-CREATE TABLE planted (
-  id SERIAL PRIMARY KEY,
-  assigndate date,
-  plantdate date,
-  duration integer,
-  act_loc_users_id integer REFERENCES act_loc_users
+CREATE TABLE seeds_in_use_loc (
+seedsinuse_id NOT NULL REFERENCES seedsinuse ON DELETE CASCADE,
+location_id NOT NULL REFERENCES location ON DELETE CASCADE
 );
-
-CREATE TABLE water (
-  id SERIAL PRIMARY KEY,
-  assigndate date,
-  completedate date,
-  duration integer,
-  amount varchar(10),
-  status boolean,
-  act_loc_users_id integer REFERENCES act_loc_users
-);
-
-CREATE TABLE weeding (
-  id SERIAL PRIMARY KEY,
-  assigndate date,
-  completedate date,
-  duration integer,
-  weedtype varchar(50),
-  comments varchar(100),
-  act_loc_users_id integer REFERENCES act_loc_users
-);
-
-CREATE TABLE issues (
-  id SERIAL PRIMARY KEY,
-  dateofissue date,
-  title varchar(100),
-  comments varchar(100),
-  closed boolean,
-  act_loc_users_id integer REFERENCES act_loc_users
-);
-
-CREATE TABLE other (
-  id SERIAL PRIMARY KEY,
-  title varchar(30),
-  comments varchar(150),
-  act_loc_users_id integer REFERENCES act_loc_users
-);
-
-CREATE TABLE harvest (
-  id SERIAL PRIMARY KEY,
-  projectedharvestdate date,
-  actualharvestdate date,
-  amountharvested integer,
-  amountharvestedunits varchar(10),
-  duration integer,
-  act_loc_users_id integer REFERENCES act_loc_users
-);
-
--- RUN THIS AFTER YOU CREATE THE TABLES
-INSERT INTO activities ("type") VALUES ('plant');
-INSERT INTO activities ("type") VALUES ('water');
-INSERT INTO activities ("type") VALUES ('weeding');
-INSERT INTO activities ("type") VALUES ('issues');
-INSERT INTO activities ("type") VALUES ('harvest');
-INSERT INTO activities ("type") VALUES ('other');
 
 -- EXAMPLE JOINS QUERY
 SELECT * FROM location

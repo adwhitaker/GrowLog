@@ -40,6 +40,7 @@
       <td>
         <input type="checkbox" name="seeduse" value="seeduse" ng-model="seedvar.seeduse"  ng-click="seeduse=!seeduse">
 {{seedvar.seeduse?'Yes':'No'}}
+<!-- start of module -->
 <form ng-show="seeduse">
 <label>Will Seed Be Transferred?</label>
 <input type="checkbox" name="transfer" value="transfer" ng-model="seedvar.transfer">
@@ -52,8 +53,9 @@
 <input type="text" class="form-control" ng-model="seedvar.section" /> {{seedvar.section}}
 <label>Row</label>
 <input type="text" class="form-control" ng-model="seedvar.row" /> {{seedvar.row}}
-<button type="button" class="btn btn-default" ng-click="addUsedSeed(seedvar.field)">Submit</button>
+<button type="button" class="btn btn-default" ng-click="seeds.addUsedSeed(seedvar.id, seedvar.transfer, seedvar.quan, seedvar.field, seedvar.section, seedvar.row)">Submit</button>
 </form>
+<!-- start of module -->
       </td>
         <td>{{seedvar.id}}</td>
         <td>{{seedvar.variety}}</td>

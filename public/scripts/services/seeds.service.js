@@ -10,14 +10,14 @@ function seedsService($http) {
   ctrl.getSeeds = function() {
           return $http.get('/addSeed').then(function(response) {
               console.log('response', response);
-              return response; //!!!!!!!!!!
+              return response;
           });
       } //end of getSeeds
-
-      ctrl.getUsedSeeds = function() {
-              return $http.post('/seedsInUse', transfer, quantity, field, section, row).then(function(response) {
+      ctrl.addUsedSeed = function(seedsId, transfer, quantity, field, section, row) {
+        console.log("field", field);
+              return $http.post('/seedsInUse', seedsId, transfer, quantity, field, section, row).then(function(response) {
                   console.log('response', response);
-                  return response; //!!!!!!!!!!
+                  return response;
               });
-          } //end of getSeeds
+          } //end of addUsedSeeds
 } //end of seedsService

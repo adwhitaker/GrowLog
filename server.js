@@ -25,7 +25,7 @@ app.use(passport.session());
 //route connections
 app.use('/auth/google', googleAuthentication);
 app.use('/addSeed', addSeed);
-app.use('/useSeed', seedsInUse);
+app.use('/seedsInUse', seedsInUse);
 
 // sets index.html as main file
 // check if user is authenticated

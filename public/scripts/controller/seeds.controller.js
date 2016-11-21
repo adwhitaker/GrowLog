@@ -11,7 +11,6 @@ function SeedsController(seedsService) {
         seedsService.getSeeds().then(function(response) {
             console.log("response", response);
             ctrl.seedArray = response.data;
-            //  console.log('get seed array', seeds.seedArray);
             console.log('get seed array', ctrl.seedArray);
 
 
@@ -20,12 +19,10 @@ function SeedsController(seedsService) {
         // seeds.seed = '';
     }
 
-    ctrl.addUsedSeed = function(field) {
-        console.log('add used seed');
-        console.log("field", field);
-        // seedsService.addUsedSeed().then(function(response) {
-        //     console.log("response", response);
-        // })
+    ctrl.addUsedSeed = function(seedsId, transfer, quantity, field, section, row) {
+        seedsService.addUsedSeed(seedsId, transfer, quantity, field, section, row).then(function(response) {
+            console.log("response", response);
+        })
     }
 
 }

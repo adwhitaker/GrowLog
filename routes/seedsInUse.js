@@ -26,7 +26,7 @@ function getUsedSeeds(req, res) {
 
 // add seed in use to DB and set location
 function addUsedSeed(req, res) {
-
+console.log('req body', req.body);
   var seedsInUseObject = {
     seeds_id: req.body.seedsId,
     transfer: req.body.transfer,
@@ -49,7 +49,7 @@ function addUsedSeed(req, res) {
 
         // insert used seed location in location table
         knex.insert(seedLocation)
-            .into('seedsinuse')
+            .into('location')
             .returning('*')
             .then(function (location) {
               console.log('location', location);
