@@ -38,13 +38,13 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/newSeedForm', {
     templateUrl: 'views/newSeedForm.html',
     controller: 'NewSeedFormController as newSeed',
-  }).when('/plantTaskForm', {
+  }).when('/plantForm', {
     templateUrl: 'views/plantForm.html',
     controller: 'PlantFormController as plantForm',
   }).when('/waterForm', {
     templateUrl: 'views/waterForm.html',
     controller: 'WaterFormController as waterForm'
-  }).when('/otherTaskForm', {
+  }).when('/otherForm', {
     templateUrl: 'views/otherForm.html',
     controller: 'OtherFormController as otherForm'
   }).when('/issuesForm', {
