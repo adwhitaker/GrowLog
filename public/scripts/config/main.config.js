@@ -43,13 +43,16 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'PlantFormController as plantForm',
   }).when('/waterForm', {
     templateUrl: 'views/waterForm.html',
-    controller: 'WaterFormController as waterForm'
+    controller: 'WaterFormController as waterForm',
   }).when('/otherForm', {
     templateUrl: 'views/otherForm.html',
-    controller: 'OtherFormController as otherForm'
+    controller: 'OtherFormController as otherForm',
   }).when('/issuesForm', {
     templateUrl: 'views/issuesForm.html',
-    controller: 'IssueFormController as issuesForm'
+    controller: 'IssueFormController as issuesForm',
+  }).when('/harvestForm', {
+    templateUrl: 'views/harvestForm.html',
+    controller: 'HarvestFormController as harvestForm',
   });
 
   $locationProvider.html5Mode(true);
