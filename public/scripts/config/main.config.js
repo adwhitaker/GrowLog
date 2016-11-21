@@ -44,6 +44,9 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/waterForm', {
     templateUrl: 'views/waterForm.html',
     controller: 'WaterFormController as waterForm'
+  }).when('/otherForm', {
+    templateUrl: 'views/otherForm.html',
+    controller: 'OtherFormController as otherForm'
   });
 
   $locationProvider.html5Mode(true);
