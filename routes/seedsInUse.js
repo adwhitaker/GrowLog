@@ -42,9 +42,10 @@ console.log('req body', req.body);
   // insert seed in use in seedinuse table
   knex.insert(seedsInUseObject)
       .into('seedsinuse')
-      .returning('*')
-      .then(function (result) {
-        seedLocation.seedsinuse_id = result.rows[0].id;
+      .returning('*').then(function (result) {
+        console.log("result", result);
+        console.log("result 0 id", result[0].id);
+        seedLocation.id = result[0].id;
         console.log('seedLocation', seedLocation);
 
         // insert used seed location in location table
@@ -53,7 +54,6 @@ console.log('req body', req.body);
             .returning('*')
             .then(function (location) {
               console.log('location', location);
-              return;
             }).catch(function (err) {
               console.log('Error Querying the DB', err);
             });
@@ -93,7 +93,6 @@ function updateUsedSeed(req, res) {
                      .returning('*')
                      .then(function (location) {
                         console.log('location', location);
-                        return;
                       }).catch(function (err) {
                         console.log('Error Querying the DB', err);
                       });
@@ -117,7 +116,6 @@ function deleteUsedSeed(req, res) {
                                  .delete()
                                  .then(function (response) {
                                     console.log('deleted');
-                                    return;
                                   }).catch(function (err) {
                                     console.log('Error Querying the DB', err);
                                   });

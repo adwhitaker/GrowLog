@@ -20,7 +20,16 @@ function SeedsController(seedsService) {
     }
 
     ctrl.addUsedSeed = function(seedsId, transfer, quantity, field, section, row) {
-        seedsService.addUsedSeed(seedsId, transfer, quantity, field, section, row).then(function(response) {
+      var seedsdata = {
+        seedsId: seedsId,
+        transfer: transfer,
+        quantity: quantity,
+        field: field,
+        section: section,
+        row: row
+      }
+      console.log("seedsdata", seedsdata);
+        seedsService.addUsedSeed(seedsdata).then(function(response) {
             console.log("response", response);
         })
     }

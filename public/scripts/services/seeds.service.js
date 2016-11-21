@@ -13,9 +13,10 @@ function seedsService($http) {
               return response;
           });
       } //end of getSeeds
-      ctrl.addUsedSeed = function(seedsId, transfer, quantity, field, section, row) {
-        console.log("field", field);
-              return $http.post('/seedsInUse', seedsId, transfer, quantity, field, section, row).then(function(response) {
+      ctrl.addUsedSeed = function(seedsdata) {
+        console.log("seedsdata", seedsdata);
+
+              return $http.post('/seedsInUse', seedsdata).then(function(response) {
                   console.log('response', response);
                   return response;
               });
