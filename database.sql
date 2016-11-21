@@ -52,7 +52,7 @@ CREATE TABLE location (
 
 CREATE TABLE activities (
   id SERIAL PRIMARY KEY,
-  type varchar(40) NOT NULL
+  type varchar(40) NOT NULL,
   assigndate date,
   completedate date,
   duration integer,
@@ -70,8 +70,8 @@ CREATE TABLE act_loc_users (
 );
 
 CREATE TABLE seeds_in_use_loc (
-seedsinuse_id NOT NULL REFERENCES seedsinuse ON DELETE CASCADE,
-location_id NOT NULL REFERENCES location ON DELETE CASCADE
+seedsinuse_id integer NOT NULL REFERENCES seedsinuse ON DELETE CASCADE,
+location_id integer NOT NULL REFERENCES location ON DELETE CASCADE
 );
 
 -- EXAMPLE JOINS QUERY
