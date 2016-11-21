@@ -13,7 +13,7 @@ router.route('/:id')
 function getActivities(req, res) {
 
   knex.select()
-      .from('activites')
+      .from('activities')
       .then(function (activities) {
         console.log('activities', activities);
         res.send(activities);
