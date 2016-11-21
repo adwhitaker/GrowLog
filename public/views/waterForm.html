@@ -1,29 +1,29 @@
 <div class="container">
     <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
-      <h1>Water Form</h1>
+      <h1>Watering</h1>
         <div class="form-group">
             <label for="field">Field:</label>
-            <input type="text" class="form-control" id="field">
+            <input type="text" class="form-control" id="field" ng-model="waterForm.activity.field">
         </div>
 
         <div class="form-group">
             <label for="section">Section:</label>
-            <input type="text" class="form-control" id="section">
+            <input type="text" class="form-control" id="section" ng-model="waterForm.activity.section">
         </div>
 
         <div class="form-group">
             <label for="row">Row:</label>
-            <input type="text" class="form-control" id="row">
+            <input type="text" class="form-control" id="row" ng-model="waterForm.activity.row">
         </div>
 
         <div class="form-group">
             <label for="row">Assign Date:</label>
-            <input type="date" class="form-control" id="assigndate">
+            <input type="date" class="form-control" id="assigndate" ng-model="waterForm.activity.date">
         </div>
 
         <div class="form-group row">
             <div class="col-xs-12 col-md-12">
-                <button type="submit" ng-click="" class="btn btn-primary">Submit</button>
+                <button type="submit" ng-click="waterForm.addActivity(waterForm.activity)" class="btn btn-primary">Submit</button>
                 <a href="/water" role="button" class="btn btn-default">Back</a>
             </div>
         </div>
