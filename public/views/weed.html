@@ -3,8 +3,32 @@
 <h3>Activities:</h3>
 
 <!-- to show list of to-dos -->
-<ng-repeat></ng-repeat>
-
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Field</th>
+        <th>Section</th>
+        <th>Row</th>
+        <th>Assign Date</th>
+        <th>Complete Date</th>
+        <th>Weed Type</th>
+        <th>Duration</th>
+        <th>Title</th>
+        <th>Comments</th>
+    </tr>
+    <tr ng-repeat="weedvar in weed.weedArray track by $index">
+      <!-- checkbox with ng show/hide to input location etc. -->
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+      <td>__</td>
+    </tr>
 <!-- button to add a new task -->
 <button type="button" class="btn btn-default">Add Task</button>
 
