@@ -52,7 +52,7 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'OtherFormController as otherForm',
   }).when('/issuesForm', {
     templateUrl: 'views/issuesForm.html',
-    controller: 'IssueFormController as issuesForm',
+    controller: 'IssueFormController as issueForm',
   }).when('/harvestForm', {
     templateUrl: 'views/harvestForm.html',
     controller: 'HarvestFormController as harvestForm',
