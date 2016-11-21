@@ -2,6 +2,6 @@ angular.module('growLogApp')
        .controller('WaterFormController', WaterFormController);
 
 function WaterFormController() {
-  var plantForm = this;
+  var waterForm = this;
   console.log('WaterFormController loaded');
 }
