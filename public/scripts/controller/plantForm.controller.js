@@ -4,4 +4,7 @@ angular.module('growLogApp')
 function PlantFormController() {
   var plantForm = this;
   console.log('PlantFormController loaded');
+  plantForm.submitPlant = function(plant) {
+    console.log(plant);
+  };
 }
