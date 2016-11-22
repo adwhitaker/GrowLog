@@ -1,11 +1,15 @@
 angular.module('growLogApp')
        .controller('WaterFormController', WaterFormController);
 
-function WaterFormController() {
+function WaterFormController(locationService) {
   var waterForm = this;
-  console.log('WaterFormController loaded');
 
-  waterForm.addActivity = function(activity) {
+  locationService.getLocations().then(function (response) {
+    waterForm.locations = response;
+    console.log(response);
+  });
+
+  waterForm.addActivity = function (activity) {
     var field = activity.field;
     var section = activity.section;
     var row = activity.row;
