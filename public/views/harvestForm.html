@@ -1,36 +1,36 @@
 <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
   <label for="field">Select Seed:</label>
   <div class="form-group row">
-      <select class="form-control" data-live-search="true">
-        <option data-tokens="tomato" value="">Tomato</option>
-        <option data-tokens="lettuce" value="">Lettuce</option>
-        <option data-tokens="apple" value="">Apple</option>
+      <select class="form-control" data-live-search="true" ng-model="harvestForm.harvest.choice">
+        <option data-tokens="tomato" value="tomato">Tomato</option>
+        <option data-tokens="lettuce" value="lettuce">Lettuce</option>
+        <option data-tokens="apple" value="apple">Apple</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="row">Harvest Date:</label>
-      <input type="date" class="form-control" id="harvestdate">
+      <input type="date" class="form-control" id="harvestdate" ng-model="harvestForm.harvest.harvestDate">
     </div>
 
     <div class="form-group">
       <label for="amountHarvested">Amount Harvested:</label>
-      <input type="number" class="form-control" id="amountHarvested">
+      <input type="number" class="form-control" id="amountHarvested" ng-model="harvestForm.harvest.amount">
     </div>
 
     <div class="form-group">
       <label for="harvestunits">Amount Harvested Units</label>
-      <input type="text" class="form-control" id="harvestunits">
+      <input type="text" class="form-control" id="harvestunits" ng-model="harvestForm.harvest.units">
     </div>
 
     <div class="form-group">
       <label for="harvestduration">Duration:</label>
-      <input type="text" class="form-control" id="harvestduration">
+      <input type="text" class="form-control" id="harvestduration" ng-model="harvestForm.harvest.duration">
     </div>
 
     <div class="form-group row">
       <div class="col-xs-12 col-md-12">
-        <button type="submit" ng-click="" class="btn btn-primary">Submit</button>
+        <button type="submit" ng-click="harvestForm.submitHarvest(harvestForm.harvest)" class="btn btn-primary">Submit</button>
         <a href="/harvest" role="button" class="btn btn-default">Back</a>
       </div>
     </div>
