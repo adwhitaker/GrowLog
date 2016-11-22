@@ -11,6 +11,10 @@ function IssueFormController($http) {
     var comments = task.comment;
     var data = {assigndate: date, title: title, comments: comments
     };
+    $http.post('/activity', data);
+
     issueForm.task = '';
+  }, function(error) {
+    console.log('Error posting request', error);
   };
 }
