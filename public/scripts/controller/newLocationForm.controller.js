@@ -6,7 +6,6 @@ function NewLocationFormController($http) {
   console.log('NewLocationFormController loaded');
 
   locationForm.addLocation = function(location) {
-    console.log('location:', location);
     var field = location.field;
     var section = location.section;
     var row = location.row;
