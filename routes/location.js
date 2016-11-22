@@ -72,4 +72,40 @@ function deleteLocation(req, res) {
                   });
 };
 
+function seedLocationJoinTable(newUsedSeed) {
+  var newSeedLocation = { seedsinuse_id: newUsedSeed.seed.id,
+                          location_id: newUsedSeed.location.id
+                        };
+
+  return knex.insert(newSeedLocation)
+             .into('seeds_in_use_loc')
+             .returning('*')
+             .then(function (result) {
+                return;
+              });
+};
+
+function updateSeedLocationJoinTable(updateUsedSeed) {
+  var joinID = updateUsedSeed.join_id;
+  var updateUsedSeed = { seedsinuse_id: updateUsedSeed.seed.id,
+                          location_id: updateUsedSeed.location.id,
+                        };
+
+  return knex('seeds_in_use_loc').where('id', joinID)
+                                 .update(updateUsedSeed)
+                                 .then(function (result) {
+                                    return;
+                                  });
+};
+
+function deleteSeedLocationJoinTable(deleteSeed) {
+  var joinID = deleteSeed.join_id;
+
+  return knex('seeds_in_use_loc').where('id', joinID)
+                                 .delete()
+                                 .then(function (result) {
+                                    return;
+                                  });
+};
+
 module.exports = router;

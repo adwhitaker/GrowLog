@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const config = require('../db/connections');
 const knex = require('knex')(config.development);
+const locationRoute = require('../location');
 
 router.route('/')
       .get(getUsedSeeds)
@@ -26,102 +27,83 @@ function getUsedSeeds(req, res) {
 
 // add seed in use to DB and set location
 function addUsedSeed(req, res) {
-console.log('req body', req.body);
-  var seedsInUseObject = {
-    seeds_id: req.body.seedsId,
-    transfer: req.body.transfer,
-    quantity: req.body.quantity
+
+  // object containing seed info and location info
+  var newUsedSeed = {
+    seed: {
+      seeds_id: req.body.seedsId,
+      transfer: req.body.transfer,
+      quantity: req.body.quantity
+    },
+    location_id: req.body.location_id
   };
 
-  var seedLocation = {
-    field: req.body.field,
-    section: req.body.section,
-    row: req.body.row
-  };
-
-  // insert seed in use in seedinuse table
-  knex.insert(seedsInUseObject)
+  // insert seed in use info in the db // return id number
+  knex.insert(newUsedSeed.seed)
       .into('seedsinuse')
-      .returning('*').then(function (result) {
-        console.log("result", result);
-        console.log("result 0 id", result[0].id);
-        seedLocation.id = result[0].id;
-        console.log('seedLocation', seedLocation);
-
-        // insert used seed location in location table
-        knex.insert(seedLocation)
-            .into('location')
-            .returning('*')
-            .then(function (location) {
-              console.log('location', location);
-            }).catch(function (err) {
-              console.log('Error Querying the DB', err);
-            });
-
+      .returning('*')
+      .then(function (result) {
+        newUsedSeed.seed.id = result[0].id;
+        return newUsedSeed;
+      })
+      .then(locationRoute.seedLocationJoinTable)
+      .then(function (result) {
         res.sendStatus(200);
-      }).catch(function (err) {
+      })
+      .catch(function (err) {
         console.log('Error Querying the DB', err);
       });
+
 };
 
 function updateUsedSeed(req, res) {
   var id = req.params.id;
 
-  var seedsInUseObject = {
-    seeds_id: req.body.seedsId,
-    transfer: req.body.transfer,
-    quantity: req.body.quantity
-  };
-
-  var seedLocation = {
-    field: req.body.field,
-    section: req.body.section,
-    row: req.body.row
+  var updateUsedSeed = {
+    seed: {
+      id: req.body.id,
+      seeds_id: req.body.seedsId,
+      transfer: req.body.transfer,
+      quantity: req.body.quantity
+    },
+    location_id: req.body.location_id,
+    join_id: req.body.join_id
   };
 
   knex('seedsinuse').where('id', id)
-               .update(seedsInUseObject)
-               .returning('*')
-               .then(function (result) {
-                  // seedLocation.seedsinuse_id = result.rows[0].id;
-                  seedLocation.seedsinuse_id = id;
-                  console.log('seedLocation', seedLocation);
-
-                  // insert used seed location in location table
-                  knex('location').where('seedsinuse_id', seedLocation.seedsinuse_id)
-                     .update(seedLocation)
-                     .returning('*')
-                     .then(function (location) {
-                        console.log('location', location);
-                      }).catch(function (err) {
-                        console.log('Error Querying the DB', err);
-                      });
-
-                  res.sendStatus(200);
-                }).catch(function (err) {
-                  console.log('Error Querying the DB', err);
-                });
+                    .update(updateUsedSeed)
+                    .returning('*')
+                    .then(function (result) {
+                      return updateUsedSeed;
+                    })
+                    .then(locationRoute.updateSeedLocationJoinTable)
+                    .then(function (result) {
+                      res.sendStatus(200);
+                    })
+                    .catch(function (err) {
+                      console.log('Error Querying the DB', err);
+                    });
 };
 
 function deleteUsedSeed(req, res) {
   var id = req.params.id;
 
+  var deleteSeed = {
+    location_id: req.body.location_id,
+    join_id: req.body.join_id
+  };
+
   // delete seed in use
   knex('seedsinuse').where('id', id)
                .delete()
-               .then(function (response) {
-
-                  // delete planted location
-                  knex('location').where('seedsinuse_id', id)
-                                 .delete()
-                                 .then(function (response) {
-                                    console.log('deleted');
-                                  }).catch(function (err) {
-                                    console.log('Error Querying the DB', err);
-                                  });
-
+               .then(function () {
+                  return deleteSeed;
+                })
+                .then(locationRoute.deleteSeedLocationJoinTable)
+                .then(function (result) {
                   res.sendStatus(204);
-                }).catch(function (err) {
+                })
+                .catch(function (err) {
                   console.log('Error Querying the DB', err);
                 });
 };
