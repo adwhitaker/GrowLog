@@ -11,7 +11,11 @@ function OtherFormController($http) {
     var comments = task.comments;
     var data = {title: title, comments: comments
     };
+    $http.post('/activity', data);
+
     // empty form after clicking 'Add task'
     otherForm.task = '';
+  }, function(error) {
+    console.log('Error posting request', error);
   };
 }
