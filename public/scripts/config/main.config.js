@@ -38,6 +38,9 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/newSeedForm', {
     templateUrl: 'views/newSeedForm.html',
     controller: 'NewSeedFormController as newSeed',
+  }).when('/newLocationForm', {
+    templateUrl: 'views/newLocationForm.html',
+    controller: 'NewLocationFormController as locationForm',
   }).when('/plantForm', {
     templateUrl: 'views/plantForm.html',
     controller: 'PlantFormController as plantForm',
