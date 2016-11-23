@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const config = require('../db/connections');
 const knex = require('knex')(config.development);
-const locationRoute = require('./location');
+const joinsTablesRoute = require('./joinsTables');
 
 router.route('/')
       .get(getUsedSeeds)
@@ -56,7 +56,7 @@ function addUsedSeed(req, res) {
         newUsedSeed.seed.id = result[0].id;
         return newUsedSeed;
       })
-      .then(locationRoute.joinsTable.seedLocationJoinTable)
+      .then(joinsTablesRoute.joinsTable.seedLocationJoinTable)
       .then(function (result) {
         res.sendStatus(200);
       })
@@ -94,7 +94,7 @@ function updateUsedSeed(req, res) {
                     .then(function (result) {
                       return updateUsedSeed;
                     })
-                    .then(locationRoute.joinsTable.updateSeedLocationJoinTable)
+                    .then(joinsTablesRoute.joinsTable.updateSeedLocationJoinTable)
                     .then(function (result) {
                       res.sendStatus(200);
                     })
@@ -117,7 +117,7 @@ function deleteUsedSeed(req, res) {
                .then(function () {
                   return deleteSeed;
                 })
-                .then(locationRoute.joinsTable.deleteSeedLocationJoinTable)
+                .then(joinsTablesRoute.joinsTable.deleteSeedLocationJoinTable)
                 .then(function (result) {
                   res.sendStatus(204);
                 })
