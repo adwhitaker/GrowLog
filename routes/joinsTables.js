@@ -2,9 +2,52 @@ const router = require('express').Router();
 const config = require('../db/connections');
 const knex = require('knex')(config.development);
 
+// add seed location and seed in use to seed_in_use_loc joins table
+function seedLocationJoinTable(newUsedSeed) {
+
+  var newSeedLocation = {
+    seedsinuse_id: newUsedSeed.seed.id,
+    location_id: newUsedSeed.location_id
+  };
+
+  return knex.insert(newSeedLocation)
+             .into('seeds_in_use_loc')
+             .returning('*')
+             .then(function (result) {
+                return;
+              });
+};
+
+// update seed location and seed in use to seed_in_use_loc joins table
+function updateSeedLocationJoinTable(updateUsedSeed) {
+
+  var joinID = updateUsedSeed.join_id;
+  var updateUsedSeed = {
+    seedsinuse_id: updateUsedSeed.seed.id,
+    location_id: updateUsedSeed.location_id,
+  };
+
+  return knex('seeds_in_use_loc').where('id', joinID)
+                                 .update(updateUsedSeed)
+                                 .then(function (result) {
+                                    return;
+                                  });
+};
+
+// delete seed location and seed in use to seed_in_use_loc joins table
+function deleteSeedLocationJoinTable(deleteSeed) {
+  var joinID = deleteSeed.join_id;
+
+  return knex('seeds_in_use_loc').where('id', joinID)
+                                 .delete()
+                                 .then(function (result) {
+                                    return;
+                                  });
+};
+
+// add activity, location, and user to act_loc_users joins table
 function addActivityLocationUserTable(newActivity) {
 
-  console.log('newActivity.id', newActivity.ids);
   return knex.insert(newActivity.ids)
              .into('act_loc_users')
              .returning('*')
@@ -13,9 +56,32 @@ function addActivityLocationUserTable(newActivity) {
               });
 };
 
-router.joinsTable = {
-  addActivityLocationUserTable,
+// update activity, location, and user to act_loc_users joins table
+function updateActivityLocationUserTable(updateActivity) {
 
+  return knex('act_loc_users').where('id', updateActivity.ids.joins_id)
+                              .update(updateActivity.ids)
+                              .then(function (result) {
+                                return;
+                              });
+};
+
+// delete activity, location, and user to act_loc_users joins table
+function deleteActivityLocationUserTable(joinsID) {
+  return knex('act_loc_users').where('id', joinsID)
+                              .delete()
+                              .then(function (result) {
+                                return;
+                              });
+};
+
+router.joinsTable = {
+  seedLocationJoinTable,
+  updateSeedLocationJoinTable,
+  deleteSeedLocationJoinTable,
+  addActivityLocationUserTable,
+  updateActivityLocationUserTable,
+  deleteActivityLocationUserTable
 };
 
 module.exports = router;
