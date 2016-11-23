@@ -3,7 +3,7 @@
     <h1>Watering</h1>
     <div class="form-group row">
       <label for="location">Location:</label>
-      <select class="form-control" ng-model="waterForm.activity.location"
+      <select class="form-control" id="location" ng-model="waterForm.activity.location"
       ng-options="'Field: ' + location.field + ' Section: ' + location.section +
       ' Row: ' + location.row for location in waterForm.locations">
       </select>
