@@ -2,7 +2,8 @@
   <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
     <h1>Issues:</h1>
     <div class="form-group row">
-      <select class="form-control" ng-model="issuesForm.location" ng-options="'Field: ' + location.field + ' Section: ' + location.section + ' Row: ' + location.row for location in issuesForm.task.location">
+      <label for="location">Location:</label>
+      <select class="form-control" ng-model="issueForm.task.location" id="location" ng-options="'Field: ' + location.field + ' Section: ' + location.section + ' Row: ' + location.row for location in issueForm.locations">
       </select>
     </div>
 
@@ -24,7 +25,7 @@
       <div class="form-group row">
         <div class="col-xs-12 col-md-12">
           <button type="button" ng-click="issueForm.addTask(issueForm.task)" class="btn btn-primary">Add Task</button>
-          <a href="/other" role="button" class="btn btn-default">Back</a>
+          <a href="/issues" role="button" class="btn btn-default">Back</a>
         </div>
       </div>
   </form>
