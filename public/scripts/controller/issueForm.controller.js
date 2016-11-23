@@ -1,4 +1,4 @@
-, angular.module('growLogApp')
+angular.module('growLogApp')
        .controller('IssueFormController', IssueFormController);
 
 function IssueFormController($http, locationService) {
