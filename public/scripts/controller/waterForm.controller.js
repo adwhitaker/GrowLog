@@ -1,24 +1,24 @@
 angular.module('growLogApp')
        .controller('WaterFormController', WaterFormController);
 
-function WaterFormController(locationService) {
+function WaterFormController($http, locationService) {
   var waterForm = this;
+  console.log('WaterFormController loaded');
 
   locationService.getLocations().then(function (response) {
     waterForm.locations = response;
     console.log(response);
   });
 
-  waterForm.addActivity = function (location, date) {
-    //need to redo this
-    console.log(location);
-    console.log(date);
+  waterForm.addActivity = function (activity) {
+    var location = activity.location_id;
+    var assigndate = activity.date;
+    var data = {location: location, type: 'water', assigndate: assigndate
+    };
+    $http.post('/activity', data);
 
-    // var field = activity.field;
-    // var section = activity.section;
-    // var row = activity.row;
-    // var date = activity.date;
-    // var data = {field: field, section: section, row: row, date: date};
     waterForm.activity = '';
+  }, function(error) {
+    console.log('Error posting request', error);
   };
 }
