@@ -2,7 +2,8 @@
   <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
     <h1>Other Tasks:</h1>
     <div class="form-group row">
-      <select class="form-control" ng-model="otherForm.location" ng-options="'Field: ' + location.field + ' Section: ' + location.section + ' Row: ' + location.row for location in otherForm.tasks.location">
+      <label for="location">Location:</label>
+      <select class="form-control" id="location" ng-model="otherForm.task.location" ng-options="'Field: ' + location.field + ' Section: ' + location.section + ' Row: ' + location.row for location in otherForm.locations">
       </select>
     </div>
 
