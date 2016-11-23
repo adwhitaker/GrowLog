@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const config = require('../db/connections');
 const knex = require('knex')(config.development);
-const locationRoute = require('../location');
+const locationRoute = require('./location');
 
 router.route('/')
       .get(getUsedSeeds)
