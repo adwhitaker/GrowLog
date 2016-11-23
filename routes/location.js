@@ -85,6 +85,7 @@ function seedLocationJoinTable(newUsedSeed) {
               });
 };
 
+// seeds in use and location joins table
 function updateSeedLocationJoinTable(updateUsedSeed) {
   var joinID = updateUsedSeed.join_id;
   var updateUsedSeed = { seedsinuse_id: updateUsedSeed.seed.id,
@@ -106,6 +107,12 @@ function deleteSeedLocationJoinTable(deleteSeed) {
                                  .then(function (result) {
                                     return;
                                   });
+};
+
+router.joinsTable = {
+  seedLocationJoinTable,
+  updateSeedLocationJoinTable,
+  deleteSeedLocationJoinTable
 };
 
 module.exports = router;
