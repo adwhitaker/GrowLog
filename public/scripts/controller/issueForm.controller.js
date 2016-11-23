@@ -11,11 +11,11 @@ function IssueFormController($http, locationService) {
 
   issueForm.addTask = function(task) {
     console.log('task', task);
-    var location = task.location_id;
+    var location_id = task.location_id;
     var assigndate = moment(task.date).format('L');
     var title = task.title;
     var comments = task.comments;
-    var data = {location: location, type: 'issues', assigndate: assigndate, title: title, comments: comments
+    var data = {location_id: location_id, type: 'issues', assigndate: assigndate, title: title, comments: comments
     };
     $http.post('/activity', data);
 
