@@ -10,10 +10,10 @@ function WaterFormController($http, locationService) {
     console.log(response);
   });
 
-  waterForm.addActivity = function (activity) {
-    var location = activity.location_id;
+  waterForm.addActivity = function(activity) {
+    var location_id = activity.location_id;
     var assigndate = moment(activity.date).format('L');
-    var data = {location: location, type: 'water', assigndate: assigndate
+    var data = {location_id: location_id, type: 'water', assigndate: assigndate
     };
     $http.post('/activity', data);
 
