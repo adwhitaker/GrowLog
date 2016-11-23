@@ -1,15 +1,21 @@
 angular.module('growLogApp')
        .controller('OtherFormController', OtherFormController);
 
-function OtherFormController($http) {
+function OtherFormController($http, locationService) {
   var otherForm = this;
   console.log('OtherFormController loaded');
 
+  locationService.getLocations().then(function(response) {
+    otherForm.locations = response;
+    console.log(response);
+  });
+
   otherForm.addTask = function(task) {
     console.log('task', task);
+    var location = task.location_id;
     var title = task.title;
     var comments = task.comments;
-    var data = {title: title, comments: comments
+    var data = {location: location, type: 'other', title: title, comments: comments
     };
     $http.post('/activity', data);
 
