@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const config = require('../db/connections');
 const knex = require('knex')(config.development);
+const joinsTablesRoute = require('./joinsTables');
 
 router.route('/')
       .get(getActivities)
@@ -24,27 +25,38 @@ function getActivities(req, res) {
 };
 
 function addActivity(req, res) {
-  var activityID = req.params.id;
-  var userID = req.user.id;
 
   var newActivity = {
-    type: req.body.type,
-    assigndate: req.body.assigndate,
-    completedate: req.body.completedate,
-    duration: req.body.duration,
-    amount: req.body.amount,
-    weedtype: req.body.weedtype,
-    title: req.body.title,
-    comments: req.body.comments
+    activity: {
+      type: req.body.type,
+      assigndate: req.body.assigndate,
+      completedate: req.body.completedate,
+      duration: req.body.duration,
+      amount: req.body.amount,
+      weedtype: req.body.weedtype,
+      title: req.body.title,
+      comments: req.body.comments
+    },
+    ids: {
+      users_id: req.user.id,
+      location_id: 3
+      // location_id: req.body.location_id
+    }
   };
 
-  knex.insert(newActivity)
+  console.log('new activity', newActivity);
+  knex.insert(newActivity.activity)
       .into('activities')
       .returning('*')
-      .then(function (activity) {
-        console.log('activity', activity);
+      .then(function (result) {
+        newActivity.ids.act_id = result[0].id;
+        return newActivity;
+      })
+      .then(joinsTablesRoute.joinsTable.addActivityLocationUserTable)
+      .then(function (result) {
         res.sendStatus(200);
-      }).catch(function (err) {
+      })
+        .catch(function (err) {
         console.log('Error Querying the DB', err);
       });
 };
