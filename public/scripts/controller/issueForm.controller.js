@@ -4,6 +4,7 @@ angular.module('growLogApp')
 function IssueFormController($http, locationService) {
   var issueForm = this;
   console.log('IssueFormController loaded');
+
   locationService.getLocations().then(function(response) {
     issueForm.locations = response;
     console.log(response);
@@ -11,7 +12,7 @@ function IssueFormController($http, locationService) {
 
   issueForm.addTask = function(task) {
     console.log('task', task);
-    var location_id = task.location_id;
+    var location_id = task.location.id;
     var assigndate = moment(task.date).format('L');
     var title = task.title;
     var comments = task.comments;
