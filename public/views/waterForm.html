@@ -1,22 +1,23 @@
 <div class="container">
-    <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
-      <h1>Watering</h1>
-        <div class="form-group row">
-          <select class="form-control" data-live-search="true" ng-model="plantForm.plant.choice">
-            <option ng-repeat="location in waterForm.locations" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}</option>
-          </select>
-        </div>
+  <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
+    <h1>Watering</h1>
+    <div class="form-group row">
+      <select class="form-control" ng-model="waterForm.location"
+      ng-options="'Field: ' + location.field + ' Section: ' + location.section +
+      ' Row: ' + location.row for location in waterForm.locations">
+      </select>
+    </div>
 
-        <div class="form-group">
-            <label for="row">Assign Date:</label>
-            <input type="date" class="form-control" id="assigndate" ng-model="waterForm.activity.date">
-        </div>
+    <div class="form-group">
+      <label for="row">Assign Date:</label>
+      <input type="date" class="form-control" id="assigndate" ng-model="waterForm.date">
+    </div>
 
-        <div class="form-group row">
-            <div class="col-xs-12 col-md-12">
-                <button type="submit" ng-click="waterForm.addActivity(waterForm.activity)" class="btn btn-primary">Submit</button>
-                <a href="/water" role="button" class="btn btn-default">Back</a>
-            </div>
-        </div>
-    </form>
+    <div class="form-group row">
+      <div class="col-xs-12 col-md-12">
+        <button type="submit" ng-click="waterForm.addActivity(waterForm.location.id, waterForm.date)" class="btn btn-primary">Submit</button>
+        <a href="/water" role="button" class="btn btn-default">Back</a>
+      </div>
+    </div>
+  </form>
 </div>
