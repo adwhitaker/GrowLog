@@ -8,11 +8,11 @@ function IssueFormController($http, locationService) {
     issueForm.locations = response;
     console.log(response);
   });
-  
+
   issueForm.addTask = function(task) {
     console.log('task', task);
     var location = task.location_id;
-    var assigndate = task.date;
+    var assigndate = moment(task.date).format('L');
     var title = task.title;
     var comments = task.comments;
     var data = {location: location, type: 'issues', assigndate: assigndate, title: title, comments: comments
