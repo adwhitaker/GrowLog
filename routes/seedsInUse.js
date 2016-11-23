@@ -35,7 +35,15 @@ function addUsedSeed(req, res) {
     seed: {
       seeds_id: req.body.seedsId,
       transfer: req.body.transfer,
-      quantity: req.body.quantity
+      quantity: req.body.quantity,
+      plantedassigndate: req.body.plantedassigndate,
+      plantdate: req.body.plantdate,
+      plantduration: req.body.plantduration,
+      projectedharvestdate: req.body.projectedharvestdate,
+      actualharvestdate: req.body.actualharvestdate,
+      amountharvested: req.body.amountharvested,
+      amountharvestedunits: req.body.amountharvestedunits,
+      harvestduration: req.body.harvestduration
     },
     location_id: req.body.location_id
   };
@@ -66,7 +74,15 @@ function updateUsedSeed(req, res) {
       id: req.body.id,
       seeds_id: req.body.seedsId,
       transfer: req.body.transfer,
-      quantity: req.body.quantity
+      quantity: req.body.quantity,
+      plantedassigndate: req.body.plantedassigndate,
+      plantdate: req.body.plantdate,
+      plantduration: req.body.plantduration,
+      projectedharvestdate: req.body.projectedharvestdate,
+      actualharvestdate: req.body.actualharvestdate,
+      amountharvested: req.body.amountharvested,
+      amountharvestedunits: req.body.amountharvestedunits,
+      harvestduration: req.body.harvestduration
     },
     location_id: req.body.location_id,
     join_id: req.body.join_id
