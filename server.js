@@ -8,10 +8,12 @@ const passport = require('passport');
 const googleAuthorization = require('./auth/googleAuthorization');
 const googleAuthentication = require('./auth/googleAuthentication');
 const sessionConfig = require('./auth/sessionConfig');
+const logout = require('./auth/logout');
 const addSeed = require('./routes/addSeed');
 const seedsInUse = require('./routes/seedsInUse');
 const activity = require('./routes/activity');
 const location = require('./routes/location');
+
 
 const app = express();
 
@@ -30,6 +32,7 @@ app.use('/addSeed', addSeed);
 app.use('/seedsInUse', seedsInUse);
 app.use('/activity', activity);
 app.use('/location', location);
+app.use('/logout', logout);
 
 // sets index.html as main file
 // check if user is authenticated
