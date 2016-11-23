@@ -9,12 +9,15 @@ function WeedFormController(locationService) {
       console.log(response);
     });
 
-    weedForm.addActivity = function (location, date) {
-      //need to redo this
-      console.log(location);
-      console.log(date);
+    weedForm.addActivity = function (activity) {
+      var location = activity.location_id;
+      var assigndate = activity.date;
+      var data = {location: location, type: 'weed', assigndate: assigndate
+      };
+      $http.post('/activity', data);
 
       weedForm.activity = '';
+    }, function(serror) {
+      console.log('Error posting request', error);
     };
-
-}
+  }

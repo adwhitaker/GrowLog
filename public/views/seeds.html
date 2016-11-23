@@ -40,22 +40,21 @@
       <td>
         <input type="checkbox" name="seeduse" value="seeduse" ng-model="seedvar.seeduse"  ng-click="seeduse=!seeduse">
 {{seedvar.seeduse?'Yes':'No'}}
-<!-- start of module -->
+<!-- start of modal -->
 <form ng-show="seeduse">
 <label>Will Seed Be Transferred?</label>
 <input type="checkbox" name="transfer" value="transfer" ng-model="seedvar.transfer">
 {{seedvar.transfer?'Yes':'No'}}
 <label>Quantity</label>
 <input type="number" class="form-control" ng-model="seedvar.quan" /> {{seedvar.quan}}
-<label>Field</label>
-<input type="text" class="form-control" ng-model="seedvar.field" /> {{seedvar.field}}
-<label>Section</label>
-<input type="text" class="form-control" ng-model="seedvar.section" /> {{seedvar.section}}
-<label>Row</label>
-<input type="text" class="form-control" ng-model="seedvar.row" /> {{seedvar.row}}
-<button type="button" class="btn btn-default" ng-click="seeds.addUsedSeed(seedvar.id, seedvar.transfer, seedvar.quan, seedvar.field, seedvar.section, seedvar.row)">Submit</button>
+<label>Location</label>
+  <select class="form-control" ng-model="seeds.location"
+  ng-options="'Field: ' + location.field + ' Section: ' + location.section +
+  ' Row: ' + location.row for location in seeds.locations">
+  </select>
+<button type="button" class="btn btn-default" ng-click="seeds.addUsedSeed(seedvar.id, seedvar.transfer, seedvar.quan, seedvar.location.id)">Submit</button>
 </form>
-<!-- start of module -->
+<!-- end of modal -->
       </td>
         <td>{{seedvar.id}}</td>
         <td>{{seedvar.variety}}</td>

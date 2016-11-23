@@ -2,10 +2,16 @@ angular.module('growLogApp')
     .controller('SeedsController', SeedsController);
 
 
-function SeedsController(seedsService) {
+function SeedsController(seedsService, locationService) {
     console.log('SeedsController loaded');
     var ctrl = this;
     ctrl.seedArray = [];
+
+    locationService.getLocations().then(function (response) {
+      ctrl.locations = response;
+      console.log(response);
+    });
+
     ctrl.getSeeds = function() {
         console.log('get seeds');
         seedsService.getSeeds().then(function(response) {
@@ -19,19 +25,19 @@ function SeedsController(seedsService) {
         // seeds.seed = '';
     }
 
-    ctrl.addUsedSeed = function(seedsId, transfer, quantity, field, section, row) {
+    ctrl.addUsedSeed = function(seedsId, transfer, quantity, location) {
       var seedsdata = {
         seedsId: seedsId,
         transfer: transfer,
         quantity: quantity,
-        field: field,
-        section: section,
-        row: row
+        location: location
       }
       console.log("seedsdata", seedsdata);
         seedsService.addUsedSeed(seedsdata).then(function(response) {
             console.log("response", response);
         })
     }
+
+
 
 }
