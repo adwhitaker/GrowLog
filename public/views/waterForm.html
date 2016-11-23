@@ -2,9 +2,10 @@
   <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
     <h1>Watering</h1>
     <div class="form-group row">
-      <select class="form-control" ng-model="waterForm.location"
+      <label for="location">Location:</label>
+      <select class="form-control" ng-model="waterForm.activity.location"
       ng-options="'Field: ' + location.field + ' Section: ' + location.section +
-      ' Row: ' + location.activity.row for location in waterForm.location">
+      ' Row: ' + location.row for location in waterForm.locations">
       </select>
     </div>
 
