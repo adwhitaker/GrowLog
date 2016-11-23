@@ -16,6 +16,8 @@ function getUsedSeeds(req, res) {
 
   knex.select()
       .from('seedsinuse')
+      .join('seeds_in_use_loc', 'seedsinuse.id', 'seeds_in_use_loc.seedsinuse_id')
+      .join('location', 'seeds_in_use_loc.location_id', 'location.id')
       .then(function (response) {
         console.log('response', response);
         res.send(response);
