@@ -16,7 +16,6 @@ function getActivities(req, res) {
   knex.select()
       .from('activities')
       .then(function (activities) {
-        console.log('activities', activities);
         res.send(activities);
       }).catch(function (err) {
         console.log('Error Querying the DB', err);
@@ -75,7 +74,7 @@ function updateActivity(req, res) {
     },
     ids: {
       users_id: req.user.id,
-      location_id: req.body.location_id
+      location_id: req.body.location_id,
       act_id: req.params.id
     },
     joins_id: req.body.joins_id
