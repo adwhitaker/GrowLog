@@ -46,7 +46,7 @@ function addUsedSeed(req, res) {
         newUsedSeed.seed.id = result[0].id;
         return newUsedSeed;
       })
-      .then(locationRoute.seedLocationJoinTable)
+      .then(locationRoute.joinsTable.seedLocationJoinTable)
       .then(function (result) {
         res.sendStatus(200);
       })
@@ -76,7 +76,7 @@ function updateUsedSeed(req, res) {
                     .then(function (result) {
                       return updateUsedSeed;
                     })
-                    .then(locationRoute.updateSeedLocationJoinTable)
+                    .then(locationRoute.joinsTable.updateSeedLocationJoinTable)
                     .then(function (result) {
                       res.sendStatus(200);
                     })
@@ -99,7 +99,7 @@ function deleteUsedSeed(req, res) {
                .then(function () {
                   return deleteSeed;
                 })
-                .then(locationRoute.deleteSeedLocationJoinTable)
+                .then(locationRoute.joinsTable.deleteSeedLocationJoinTable)
                 .then(function (result) {
                   res.sendStatus(204);
                 })
