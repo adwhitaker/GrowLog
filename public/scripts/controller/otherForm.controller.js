@@ -13,9 +13,10 @@ function OtherFormController($http, locationService) {
   otherForm.addTask = function(task) {
     console.log('task', task);
     var location = task.location_id;
+    var assigndate = moment(task.date).format('L');
     var title = task.title;
     var comments = task.comments;
-    var data = {location: location, type: 'other', title: title, comments: comments
+    var data = {location: location, type: 'other', assigndate: assigndate, title: title, comments: comments
     };
     $http.post('/activity', data);
 
