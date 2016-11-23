@@ -70,6 +70,7 @@ CREATE TABLE act_loc_users (
 );
 
 CREATE TABLE seeds_in_use_loc (
+id SERIAL PRIMARY KEY,
 seedsinuse_id integer NOT NULL REFERENCES seedsinuse ON DELETE CASCADE,
 location_id integer NOT NULL REFERENCES location ON DELETE CASCADE
 );
