@@ -73,9 +73,10 @@ function deleteLocation(req, res) {
 };
 
 function seedLocationJoinTable(newUsedSeed) {
-  var newSeedLocation = { seedsinuse_id: newUsedSeed.seed.id,
-                          location_id: newUsedSeed.location.id
-                        };
+  var newSeedLocation = {
+    seedsinuse_id: newUsedSeed.seed.id,
+    location_id: newUsedSeed.location_id
+  };
 
   return knex.insert(newSeedLocation)
              .into('seeds_in_use_loc')
@@ -88,9 +89,10 @@ function seedLocationJoinTable(newUsedSeed) {
 // seeds in use and location joins table
 function updateSeedLocationJoinTable(updateUsedSeed) {
   var joinID = updateUsedSeed.join_id;
-  var updateUsedSeed = { seedsinuse_id: updateUsedSeed.seed.id,
-                          location_id: updateUsedSeed.location.id,
-                        };
+  var updateUsedSeed = {
+    seedsinuse_id: updateUsedSeed.seed.id,
+    location_id: updateUsedSeed.location_id,
+  };
 
   return knex('seeds_in_use_loc').where('id', joinID)
                                  .update(updateUsedSeed)
