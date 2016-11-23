@@ -39,8 +39,7 @@ function addActivity(req, res) {
     },
     ids: {
       users_id: req.user.id,
-      location_id: 3
-      // location_id: req.body.location_id
+      location_id: req.body.location_id
     }
   };
 
@@ -62,37 +61,54 @@ function addActivity(req, res) {
 };
 
 function updateActivity(req, res) {
-  var activityID = req.params.id;
-  var userId = req.user.id;
 
   var updateActivity = {
-    type: req.body.type,
-    assigndate: req.body.assigndate,
-    completedate: req.body.completedate,
-    duration: req.body.duration,
-    amount: req.body.amount,
-    weedtype: req.body.weedtype,
-    title: req.body.title,
-    comments: req.body.comments
+    activity: {
+      type: req.body.type,
+      assigndate: req.body.assigndate,
+      completedate: req.body.completedate,
+      duration: req.body.duration,
+      amount: req.body.amount,
+      weedtype: req.body.weedtype,
+      title: req.body.title,
+      comments: req.body.comments
+    },
+    ids: {
+      users_id: req.user.id,
+      location_id: req.body.location_id
+      act_id: req.params.id
+    },
+    joins_id: req.body.joins_id
   };
 
   knex('activity').where('id', activityID)
-                  .update(updateActivity)
+                  .update(updateActivity.activity)
                   .then(function (response) {
+                    return updateActivity;
+                  })
+                  .then(joinsTablesRoute.joinsTable.updateActivityLocationUserTable)
+                  .then(function (result) {
                     res.sendStatus(200);
-                  }).catch(function (err) {
+                  })
+                  .catch(function (err) {
                     console.log('Error Querying the DB', err);
                   });
 };
 
 function deleteActivity(req, res) {
   var activityID = req.params.id;
+  var joinsID = req.body.joins_id;
 
   knex('activity').where('id', activityID)
                   .delete()
-                  .then(function (response) {
+                  .then(function (result) {
+                    return joinsID;
+                  })
+                  .then(joinsTablesRoute.joinsTable.deleteActivityLocationUserTable)
+                  .then(function (result) {
                     res.sendStatus(204);
-                  }).catch(function (err) {
+                  })
+                  .catch(function (err) {
                     console.log('Error Querying the DB', err);
                   });
 };
