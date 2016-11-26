@@ -13,8 +13,7 @@ function seedsService($http) {
 
   ctrl.getSeeds = function () {
     return $http.get('/addSeed').then(function (response) {
-      seeds.seeds = response.data;
-      return;
+      return response.data;
     }).catch(function (err) {
       console.log('err', err);
     });
