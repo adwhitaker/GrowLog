@@ -7,7 +7,7 @@ function seedLocationJoinTable(newUsedSeed) {
 
   var newSeedLocation = {
     seedsinuse_id: newUsedSeed.seed.id,
-    location_id: newUsedSeed.location_id
+    location_id: newUsedSeed.location_id,
   };
 
   return knex.insert(newSeedLocation)
