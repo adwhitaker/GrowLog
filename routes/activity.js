@@ -12,10 +12,15 @@ router.route('/:id')
       .delete(deleteActivity);
 
 function getActivities(req, res) {
+  // var type = req.query.type;
 
   knex.select()
       .from('activities')
+      .join('act_loc_users', 'act_loc_users.act_id', 'activities.id')
+      .join('location', 'act_loc_users.location_id', 'location.id')
+      // .where('type', type)
       .then(function (activities) {
+        console.log('activites returned from DB', activities);
         res.send(activities);
       }).catch(function (err) {
         console.log('Error Querying the DB', err);
