@@ -12,12 +12,16 @@ function OtherFormController($http, locationService) {
 
   otherForm.addTask = function(task) {
     console.log('task', task);
-    var location_id = task.location.id;
-    var assigndate = moment(task.date).format('L');
-    var title = task.title;
-    var comments = task.comments;
-    var data = {location_id: location_id, type: 'other', assigndate: assigndate, title: title, comments: comments
+    var id = task.id;
+
+    var data = {
+      location_id: task.location.id,
+      type: 'other',
+      assigndate: moment(task.date).format('L'),
+      title: task.title,
+      comments: task.comments
     };
+
     $http.post('/activity', data);
 
     // empty form after clicking 'Add task'
