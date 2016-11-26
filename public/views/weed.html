@@ -1,39 +1,42 @@
 <h1>Weed</h1>
 
 <h3>Activities:</h3>
-
+<div data-ng-init="weed.getActivities()">
+</div>
 <!-- to show list of to-dos -->
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Field</th>
-        <th>Section</th>
-        <th>Row</th>
-        <th>Assign Date</th>
-        <th>Complete Date</th>
-        <th>Weed Type</th>
-        <th>Duration</th>
-        <th>Title</th>
-        <th>Comments</th>
+<div class="row">
+    <div class="col-md-10">
+        <div class="table-responsive">
+<table class="table table-hover">
+    <th>Id</th>
+    <th>Assign Date</th>
+    <th>Type</th>
+    <th>Comments</th>
+    <th>Field</th>
+<th>Section</th>
+<th>
+  Row
+</th>
     </tr>
     <tr ng-repeat="weedvar in weed.weedArray track by $index">
-      <!-- checkbox with ng show/hide to input location etc. -->
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
-      <td>__</td>
+        <!-- checkbox with ng show/hide to input location etc. -->
+        <td>{{weedvar.id}}</td>
+        <td>{{weedvar.assigndate | date:'yyyy-MM-dd'}}</td>
+        <td>{{weedvar.weedtype}}</td>
+        <td>{{weedvar.comments}}</td>
+        <td>{{weedvar.field}}</td>
+        <td>{{weedvar.section}}</td>
+        <td>{{weedvar.row}}</td>
     </tr>
-<!-- button to add a new task -->
-<a href="/weedForm" role="button" class="btn btn-default">Add Weeding Task</a>
+  </table>
+</div>
+</div>
+</div>
+    <!-- button to add a new task -->
+    <a href="/weedForm" role="button" class="btn btn-default">Add Weeding Task</a>
 
-<!-- button to go back to activities page -->
-<a href="/activity" role="button" class="btn btn-default">Back</a>
+    <!-- button to go back to activities page -->
+    <a href="/activity" role="button" class="btn btn-default">Back</a>
 
-<!-- button to go home -->
-<a href="/home" role="button" class="btn btn-default">Home</a>
+    <!-- button to go home -->
+    <a href="/home" role="button" class="btn btn-default">Home</a>
