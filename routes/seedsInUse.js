@@ -45,7 +45,7 @@ function addUsedSeed(req, res) {
       amountharvestedunits: req.body.amountharvestedunits,
       harvestduration: req.body.harvestduration
     },
-    location_id: req.body.location_id
+    location_id: req.body.locationId
   };
 
   // insert seed in use info in the db // return id number
