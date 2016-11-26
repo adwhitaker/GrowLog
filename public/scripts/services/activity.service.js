@@ -43,12 +43,41 @@ function activityService($http) {
         };
       });
 
-      console.log('object of activities', activity.activitiesObject);
       return;
     }).catch(function (err) {
-      console.log('err', err);
+      console.log('Error Getting Tasks', err);
     });
 
+  };
+
+  // adds an activity in the DB
+  activity.addActivity = function (newActivityInfo) {
+    return $http.post('/activity', newActivityInfo).then(function (response) {
+      activity.getActivities();
+      return;
+    }).catch(function (err) {
+      console.log('Error Getting Tasks', err);
+    });
+  };
+
+  // updates the activity in the DB
+  activity.updateActivity = function (id, updatedActivityInfo) {
+    return $http.put('/activity/' + id, updatedActivityInfo).then(function (response) {
+      activity.getActivities();
+      return;
+    }).catch(function (err) {
+      console.log('Error Getting Tasks', err);
+    });
+  };
+
+  // deletes activity in the DB
+  activity.deleteActivity = function (id) {
+    return $http.delete('/activity/' + id).then(function (response) {
+      activity.getActivities();
+      return;
+    }).catch(function (err) {
+      console.log('Error Getting Tasks', err);
+    });
   };
 
   // initial get all activities from DB
