@@ -5,23 +5,26 @@ function PlantFormController($http, locationService, seedsService) {
   var plantForm = this;
   console.log('PlantFormController loaded');
 
-  locationService.getLocations().then(function(response) {
-    plantForm.locations = response;
+  seedsService.getSeeds().then(function (response) {
+    plantForm.allSeeds = response;
+    console.log(response);
   });
 
-  plantForm.usedSeeds = seedsService;
-
+  locationService.getLocations().then(function (response) {
+    plantForm.locations = response;
+  });
+  
   plantForm.submitPlant = function(plant) {
-    var seedsId = plant.choice.seeds_id;
+    var seedsId = plant.choice.id;
+        console.log(seedsId);
     var plantedassigndate = moment(plant.assignDate).format('L');
-    var choice = plant.choice;
     var projectedharvestdate = moment(plant.harvestDate).format('L');
     var quantity = plant.quantity;
     var transfer = plant.transfer;
-    var location_id = plant.location.id;
-    var data = {plantedassigndate: plantedassigndate, choice: choice,
-      projectedharvestdate: projectedharvestdate, quantity: quantity,
-      transfer: transfer, location_id: location_id, seeds_id: seedsId};
+    var locationId = plant.location.id;
+    var data = { seedsId: seedsId, transfer: transfer, plantedassigndate: plantedassigndate,
+                projectedharvestdate: projectedharvestdate, quantity: quantity,
+                locationId: locationId, };
     $http.post('/seedsInUse', data);
 
     plantForm.plant = '';

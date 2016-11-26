@@ -4,8 +4,8 @@
     <div class="form-group row">
       <label for="field">Select Seed:</label>
       <select class="form-control" data-live-search="true" ng-model="plantForm.plant.choice"
-      ng-options="'Field: ' + usedSeed.field + ' Section: ' + usedSeed.section +
-      ' Row: ' + usedSeed.row + ' id: ' + usedSeed.seeds_id for usedSeed in plantForm.usedSeeds.seeds.usedSeeds">
+      ng-options="'ID: ' + seed.id + ' | Family: ' + seed.family + ' | Generic: ' + seed.generic +
+      ' | Quantity: ' + seed.quantity for seed in plantForm.allSeeds">
       </select>
     </div>
     <div class="form-group">
