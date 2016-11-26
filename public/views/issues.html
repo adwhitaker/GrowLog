@@ -1,15 +1,38 @@
-<h1>Issues</h1>
+<div class="container">
+  <div class="row">
+    <h1 class="col-xs-12 col-md-12">Issues</h1>
+  </div>
 
-<h3>Activities:</h3>
+  <h3>Activities:</h3>
 
-<!-- to show list of to-dos -->
-<ng-repeat></ng-repeat>
+  <!-- to show list of to-dos -->
+  <ul class="list-group row">
+    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="issue in issues.listActiveIssues | orderBy: issues.listActiveIssues.assigndate">
+      <div class="row">
+        <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{issue.title}}</a></h4>
+        <div class="material-switch pull-right col-xs-4 col-md-2">
+          <input id="{{issue.id}}" name="{{issue.id}}" type="checkbox" ng-click="issues.completeIssue(issue.id)">
+          <label for="{{issue.id}}" class="label-success"></label>
+        </div>
+      </div>
+      <div class="row" ng-show="showDetails">
+        <p class="col-xs-6 col-md-8">{{issue.comments}}</p>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="issues.editIssue()" role="button" class="btn btn-default">edit</a>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="issues.deleteIssue()" role="button" class="btn btn-danger">delete</a>
+        </div>
+      </div>
+    </li>
+  </ul>
 
-<!-- button to add a new task -->
-<a href="/issuesForm" role="button" class="btn btn-default">Add Issue</a>
+  <!-- button to add a new task -->
+  <a href="/issuesForm" role="button" class="btn btn-default">Add Issue</a>
 
-<!-- button to go back to activities page -->
-<a href="/activity" role="button" class="btn btn-default">Back</a>
+  <!-- button to go back to activities page -->
+  <a href="/activity" role="button" class="btn btn-default">Back</a>
 
-<!-- button to go home -->
-<a href="/home" role="button" class="btn btn-default">Home</a>
+  <!-- button to go home -->
+  <a href="/home" role="button" class="btn btn-default">Home</a>
+</div>
