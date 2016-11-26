@@ -103,7 +103,7 @@ function deleteActivity(req, res) {
   var activityID = req.params.id;
   var joinsID = req.body.joins_id;
 
-  knex('activity').where('id', activityID)
+  knex('activities').where('id', activityID)
                   .delete()
                   .then(function (result) {
                     return joinsID;
