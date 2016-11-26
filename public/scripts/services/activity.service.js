@@ -7,11 +7,12 @@ function activityService($http) {
 
   // activities are returned from the DB and stored here
   var activitiesObject = {
-    allActivities: [],
     issues: [],
     issuesComplete: [],
     water: [],
     waterComplete: [],
+    weed: [],
+    weedComplete: [],
     other: [],
     otherComplete: []
   };
@@ -20,7 +21,6 @@ function activityService($http) {
 
   // get activities from DB
   activity.getActivities = function () {
-
 
     return $http.get('/activity').then(function (response) {
       let allActivities = response.data;
@@ -32,6 +32,8 @@ function activityService($http) {
       activity.activitiesObject.waterComplete = [];
       activity.activitiesObject.other = [];
       activity.activitiesObject.otherComplete = [];
+      activity.activitiesObject.weed = [];
+      activity.activitiesObject.weedComplete = [];
 
       allActivities.forEach(function (newActivity) {
         if (newActivity.completedate) {
@@ -41,6 +43,7 @@ function activityService($http) {
         };
       });
 
+      console.log('object of activities', activity.activitiesObject);
       return;
     }).catch(function (err) {
       console.log('err', err);
