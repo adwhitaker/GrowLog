@@ -4,34 +4,27 @@
 <div data-ng-init="weed.getActivities()">
 </div>
 <!-- to show list of to-dos -->
-<div class="row">
-    <div class="col-md-10">
-        <div class="table-responsive">
-<table class="table table-hover">
-    <th>Id</th>
-    <th>Assign Date</th>
-    <th>Type</th>
-    <th>Comments</th>
-    <th>Field</th>
-<th>Section</th>
-<th>
-  Row
-</th>
-    </tr>
-    <tr ng-repeat="weedvar in weed.weedArray track by $index">
-        <!-- checkbox with ng show/hide to input location etc. -->
-        <td>{{weedvar.id}}</td>
-        <td>{{weedvar.assigndate | date:'yyyy-MM-dd'}}</td>
-        <td>{{weedvar.weedtype}}</td>
-        <td>{{weedvar.comments}}</td>
-        <td>{{weedvar.field}}</td>
-        <td>{{weedvar.section}}</td>
-        <td>{{weedvar.row}}</td>
-    </tr>
-  </table>
-</div>
-</div>
-</div>
+<ul class="list-group row">
+  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="weedvar in weed.listActiveIssues | orderBy: weed.listActiveIssues.assigndate">
+    <div class="row">
+      <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{weedvar.weedtype}}</a></h4>
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="{{weedvar.id}}" name="{{weedvar.id}}" type="checkbox" ng-click="weed.completeIssue(weedvar.id)">
+        <label for="{{weedvar.id}}" class="label-success"></label>
+      </div>
+    </div>
+    <div class="row" ng-show="showDetails">
+      <p class="col-xs-6 col-md-8">{{weedvar.comments}}</p>
+      <div class="col-xs-2 col-md-2">
+        <a href="#" ng-click="weed.editIssue()" role="button" class="btn btn-default">edit</a>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <a href="#" ng-click="weed.deleteIssue()" role="button" class="btn btn-danger">delete</a>
+      </div>
+    </div>
+  </li>
+</ul>
+
     <!-- button to add a new task -->
     <a href="/weedForm" role="button" class="btn btn-default">Add Weeding Task</a>
 

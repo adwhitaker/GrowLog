@@ -1,7 +1,7 @@
 angular.module('growLogApp')
        .controller('WeedFormController', WeedFormController);
 
-function WeedFormController($http, locationService) {
+function WeedFormController($http, locationService, activityService) {
   var weedForm = this;
 
     locationService.getLocations().then(function (response) {
