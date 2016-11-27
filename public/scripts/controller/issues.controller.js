@@ -14,8 +14,8 @@ function IssuesController(activityService, $route) {
   };
 
   //delete issue
-  issues.deleteIssue = function (activityId) {
-    activityService.deleteActivity(activityId).then(issues.refresh());
+  issues.deleteIssue = function (activityId, joinsId) {
+    activityService.deleteActivity(activityId, joinsId).then(issues.refresh());
   };
 
   issues.completeIssue = function(id, issueObject) {
