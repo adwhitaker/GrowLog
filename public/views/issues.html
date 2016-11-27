@@ -7,21 +7,37 @@
 
   <!-- to show list of to-dos -->
   <ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="issue in issues.listActiveIssues | orderBy: issues.listActiveIssues.assigndate">
+    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="issue in issues.listActiveIssues">
       <div class="row">
-        <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{issue.title}}</a></h4>
+        <div class="col-xs-8 col-md-10">
+          <h4><a href="#" ng-click="showDetails = !showDetails">{{issue.title}}</a></h4>
+          <p>Field: {{issue.field}} | Section: {{issue.section}} | Row: {{issue.row}}</p>
+        </div>
         <div class="material-switch pull-right col-xs-4 col-md-2">
-          <input id="{{issue.id}}" name="{{issue.id}}" type="checkbox" ng-click="issues.completeIssue(issue.id)">
-          <label for="{{issue.id}}" class="label-success"></label>
+          <input id="{{issue.act_id}}" name="{{issue.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
+          <label for="{{issue.act_id}}" class="label-success"></label>
         </div>
       </div>
       <div class="row" ng-show="showDetails">
-        <p class="col-xs-6 col-md-8">{{issue.comments}}</p>
+        <div class="col-xs-6 col-md-8">
+          <p>{{issue.comments}}</p>
+        </div>
         <div class="col-xs-2 col-md-2">
           <a href="#" ng-click="issues.editIssue()" role="button" class="btn btn-default">edit</a>
         </div>
         <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="issues.deleteIssue()" role="button" class="btn btn-danger">delete</a>
+          <a href="#" ng-click="issues.deleteIssue(issue.act_id)" role="button" class="btn btn-danger">delete</a>
+        </div>
+      </div>
+      <div class="form-horizontal" ng-show="completeDetails">
+        <div class="form-group row">
+          <div class="col-xs-10 col-md-10">
+            <label for="{{issue.act_id}}">Comments</label>
+            <textarea class="form-control" id="{{issue.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{issue.act_id}} ng-model="issue.comments"></textarea>
+          </div>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="issues.completeIssue(issue.act_id, issue)" role="button" class="btn btn-success">Complete</a>
         </div>
       </div>
     </li>
