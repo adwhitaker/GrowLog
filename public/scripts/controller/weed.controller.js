@@ -1,20 +1,22 @@
 angular.module('growLogApp')
     .controller('WeedController', WeedController);
 
-function WeedController($http, activityService) {
+function WeedController($http, activityService, $route) {
     var weed = this;
     weed.weedArray;
+
+    weed.refresh = function () {
+      $route.reload();
+    };
+
     console.log('WeedController loaded');
     activityService.getActivities().then(function(response) {
         weed.listActiveIssues = activityService.activitiesObject.weed;
     });
 
-    weed.deleteActivity = function(id, joins_id) {
-        var data = {
-            id: id,
-            joins_id: joins_id
-        }
-        activityService.deleteActivity(data).then(function(response) {});
+    weed.deleteActivity = function(activityId, joinsId) {
+
+      activityService.deleteActivity(activityId, joinsId).then(weed.refresh());
     };
 
 
