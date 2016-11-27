@@ -14,11 +14,14 @@
           <label for="{{other.id}}" class="label-success"></label>
         </div>
       </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="other.editOther()" role="button" class="btn btn-default">Edit</a>
-      </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="other.deleteOther()" role="button" class="btn btn-danger">Delete</a>
+      <div class="row" ng-show="showDetails">
+        <p class="col-xs-6 col-md-8">{{other.comments}}</p>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="other.editOther()" role="button" class="btn btn-default">Edit</a>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="other.deleteOther()" role="button" class="btn btn-danger">Delete</a>
+        </div>
       </div>
     </li>
   </ul>
