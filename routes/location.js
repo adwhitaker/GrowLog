@@ -42,17 +42,20 @@ function addLocation(req, res) {
       });
 };
 
-function updateLocation(req, res) {
-  var locationID = req.params.id;
 
-  var updateLocation = {
+function updateLocation(req, res) {
+  console.log('req.body', req.body);
+
+  console.log("req.params", req.params);
+  var locationID = req.params.id;
+  var updatedLocation = {
     field: req.body.field,
     section: req.body.section,
     row: req.body.row,
   };
 
   knex('location').where('id', locationID)
-                  .update(updateLocation)
+                  .update(updatedLocation)
                   .then(function (response) {
                     res.sendStatus(200);
                   }).catch(function (err) {

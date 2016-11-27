@@ -17,4 +17,14 @@ function NewLocationFormController($http) {
   }, function(error) {
     console.log('error posting request', error);
   };
+
+  locationForm.getLocation = function() {
+    $http.get('/location');
+    // empty form after clicking 'submit'
+    locationForm.location = '';
+  }, function(error) {
+    console.log('error posting request', error);
+  };
+//
+
 }

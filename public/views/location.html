@@ -1,0 +1,60 @@
+
+<h1>location </h1>
+
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="table-responsive">
+<table class="table table-hover">
+<th>
+  Edit
+</th>
+    <th>Id</th>
+
+    <th>Field</th>
+    <th>Section</th>
+    <th>Row</th>
+
+
+    </tr>
+    <tr ng-repeat="locvar in location.locationArray track by $index">
+        <!-- checkbox with ng show/hide to input location etc. -->
+
+        <td>
+          <input type="checkbox" name="locedit" value="locedit" ng-model="locvar.locedit"  ng-click="locedit=!locedit">
+          <!-- start of modal -->
+          <form ng-show="locedit">
+
+            <label>Field</label>
+
+          <input type="text" name="info" class="form-control" ng-model="locvar.field" />
+          <label>Section</label>
+
+          <input type="text" name="info" class="form-control" ng-model="locvar.section" />
+          <label>Row</label>
+
+          <input type="text" name="info" class="form-control" ng-model="locvar.row" />
+          <button type="button" class="btn btn-default" ng-click="location.updateLocation(locvar.id, locvar.field, locvar.section, locvar.row)">Submit</button>
+
+          </form>
+          <!-- end of modal -->
+        </td>
+        <td>{{locvar.id}}</td>
+        <td>{{locvar.field}}</td>
+        <td>{{locvar.section}}</td>
+        <td>{{locvar.row}}</td>
+
+    </tr>
+  </table>
+</div>
+</div>
+</div>
+
+<!-- button to add -->
+<a href="/newLocationForm" role="button" class="btn btn-default">Add New Location</a>
+
+<!-- button to go back to activities page -->
+<a href="/activities" role="button" class="btn btn-default">Back</a>
+
+<!-- button to go home -->
+<a href="/home" role="button" class="btn btn-default">Home</a>

@@ -11,6 +11,9 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/activity', {
     templateUrl: 'views/activity.html',
     controller: 'ActivityController as activity',
+  }).when('/location', {
+    templateUrl: 'views/location.html',
+    controller: 'LocationController as location',
   }).when('/plant', {
     templateUrl: 'views/plant.html',
     controller: 'PlantController as plant',
