@@ -14,7 +14,9 @@ router.route('/:id')
 function getActivities(req, res) {
   // var type = req.query.type;
 
-  knex.select()
+  knex.select('type', 'assigndate', 'completedate', 'duration', 'amount', 'weedtype',
+      'title', 'comments', 'act_loc_users.id', 'act_id', 'location_id', 'users_id', 'field',
+      'section', 'row')
       .from('activities')
       .join('act_loc_users', 'act_loc_users.act_id', 'activities.id')
       .join('location', 'act_loc_users.location_id', 'location.id')
@@ -65,7 +67,7 @@ function addActivity(req, res) {
 };
 
 function updateActivity(req, res) {
-
+console.log(req);
   var updateActivity = {
     activity: {
       type: req.body.type,
@@ -78,14 +80,14 @@ function updateActivity(req, res) {
       comments: req.body.comments
     },
     ids: {
-      users_id: req.user.id,
+      users_id: req.body.users_id,
       location_id: req.body.location_id,
       act_id: req.params.id
     },
     joins_id: req.body.joins_id
   };
 
-  knex('activity').where('id', activityID)
+  knex('activities').where('id', updateActivity.ids.act_id)
                   .update(updateActivity.activity)
                   .then(function (response) {
                     return updateActivity;
