@@ -1,11 +1,31 @@
 <div class="container">
-
-<h1>Watering</h1>
+  <div class="row">
+    <h1 class="col-xs-12 col-md-12">Water</h1>
+  </div>
 
 <h3>Activities:</h3>
 
 <!-- to show list of to-dos -->
-<ng-repeat></ng-repeat>
+<ul class="list-group row">
+  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="water in water.listActiveIssues | orderBy: water.listActiveIssues.assigndate">
+    <div class="row">
+      <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{water.title}}</a></h4>
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="{{water.id}}" name="{{water.id}}" type="checkbox" ng-click="water.completeIssue(water.id)" />
+        <label for="{{water.id}}" class="label-success"></label>
+      </div>
+    </div>
+    <div class="row" ng-show="showDetails">
+      <p class="col-xs-6 col-md-8">{{issue.comments}}</p>
+      <div class="col-xs-2 col-md-2">
+        <a href="#" ng-click="water.editIssue()" role="button" class="btn btn-default">Edit</a>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <a href="#" ng-click="water.deleteIssue()" role="button" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </li>
+</ul>
 
 <!-- button to add a new task -->
 <a href="/waterForm" role="button" class="btn btn-default">Add Seed to be Watered</a>
