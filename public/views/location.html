@@ -14,6 +14,7 @@
     <th>Field</th>
     <th>Section</th>
     <th>Row</th>
+    <th>Delete</th>
 
 
     </tr>
@@ -43,6 +44,8 @@
         <td>{{locvar.field}}</td>
         <td>{{locvar.section}}</td>
         <td>{{locvar.row}}</td>
+        <td>         <button ng-click="location.deleteLocation(locvar.id)" class="btn btn-danger">delete</button>
+ </td>
 
     </tr>
   </table>

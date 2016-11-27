@@ -18,10 +18,20 @@ function LocationController(locationService) {
         loc.updateLocation = function(id, field, section, row) {
           console.log('field', field);
           loc.data = {id:id, field:field, section:section, row:row};
+          console.log(loc.data);
                 locationService.updateLocation(loc.data).then(function(response) {
                   console.log('response', response);
                     // empty form after clicking 'submit'
                     //location.location = '';
                 });
-            } //location get controller
+            } //location put
+
+            loc.deleteLocation = function(id) {
+              console.log("id", id);
+
+                    locationService.deleteLocation(id).then(function(response) {
+                      console.log('response', response);
+
+                    });
+                } //location delete controller
 } //end location controller
