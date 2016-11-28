@@ -79,7 +79,9 @@ function activityService($http) {
 
   // deletes activity in the DB
   activity.deleteActivity = function (activityId, joinsId) {
-    return $http.delete('/activity/' + activityId, joinsId).then(function (response) {
+
+    return $http.delete('/activity/' + activityId, { params: { joinsID: joinsId } })
+    .then(function (response) {
       console.log('response', response);
       activity.getActivities();
       return;
