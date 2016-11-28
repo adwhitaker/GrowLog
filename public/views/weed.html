@@ -1,26 +1,61 @@
-<h1>Weed</h1>
+<div class="container">
+  <div class="row">
+    <h1 class="col-xs-12 col-md-12">Weed</h1>
+  </div>
 
 <h3>Activities:</h3>
+
 <!-- to show list of to-dos -->
 <ul class="list-group row">
-  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="weedvar in weed.listActiveIssues | orderBy: weed.listActiveIssues.assigndate">
+  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="weedvar in weed.listActiveIssues | orderBy: weedvar.listActiveIssues.assigndate">
     <div class="row">
-      <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{weedvar.weedtype}}</a></h4>
-      <div class="material-switch pull-right col-xs-4 col-md-2">
-        <input id="{{weedvar.id}}" name="{{weedvar.id}}" type="checkbox" ng-click="weed.completeIssue(weedvar.id)">
-        <label for="{{weedvar.id}}" class="label-success"></label>
+      <div class="col-xs-8 col-md-10">
+      <h4><a href="#" ng-click="showDetails = !showDetails">{{weedvar.weedtype}}</a></h4>
+      <p>Field: {{weedvar.field}} | Section: {{weedvar.section}} | Row: {{weedvar.row}}</p>
+</div>
+<div class="material-switch pull-right col-xs-4 col-md-2">
+  <input id="{{weedvar.act_id}}" name="{{weedvar.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
+  <label for="{{weedvar.act_id}}" class="label-success"></label>
+      </div>
+</div>
+<div class="row" ng-show="showDetails">
+  <div ng-hide="editing">
+    <div class="col-xs-6 col-md-8">
+      <p>{{weedvar.comments}}</p>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
+    </div>
+      <div class="col-xs-2 col-md-2">
+        <a href="#" ng-click="weed.deleteIssue(weedvar.act_id, weedvar.id)" role="button" class="btn btn-danger">delete</a>
       </div>
     </div>
-    <div class="row" ng-show="showDetails">
-      <p class="col-xs-6 col-md-8">{{weedvar.comments}}</p>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="weed.editIssue()" role="button" class="btn btn-default">edit</a>
+
+    <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
+      <div class="form-group has-float-label">
+        <textarea class="form-control" id="{{weedvar.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{weedvar.act_id}} placeholder="e.g. cabbage moths" ng-model="weedvar.comments"></textarea>
+        <label for="{{weedvar.act_id}}">Comments</label>
       </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="weed.deleteActivity(weedvar.act_id, weedvar.id)" role="button" class="btn btn-danger">delete</a>
+
+      <div class="form-group">
+        <button class="btn btn-success" ng-click="issues.updateIssue(issue.act_id, issue)">Save</button>
+        <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="form-horizontal" ng-show="completeDetails">
+    <div class="form-group row">
+      <div class="col-xs-10 col-md-10">
+        <label for="{{weedvar.act_id}}">Comments</label>
+        <textarea class="form-control" id="{{weedvar.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{weedvar.act_id}} ng-model="weedvar.comments"></textarea>
       </div>
     </div>
-  </li>
+    <div class="col-xs-2 col-md-2">
+      <a href="#" ng-click="weed.completeIssue(weedvar.act_id, weedvar)" role="button" class="btn btn-success">Complete</a>
+    </div>
+  </div>
+</li>
 </ul>
 
     <!-- button to add a new task -->
