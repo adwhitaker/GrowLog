@@ -10,7 +10,7 @@ function IssuesController(activityService, $route) {
 
   //delete issue
   issues.deleteIssue = function (activityId, joinsId) {
-    activityService.deleteActivity(activityId, joinsId)
+    activityService.deleteActivity(activityId, joinsId);
   };
 
   issues.completeIssue = function(id, issueObject) {
