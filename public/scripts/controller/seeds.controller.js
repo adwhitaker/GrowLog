@@ -3,41 +3,48 @@ angular.module('growLogApp')
 
 
 function SeedsController(seedsService, locationService) {
-    console.log('SeedsController loaded');
-    var ctrl = this;
-    ctrl.seedArray = [];
+  console.log('SeedsController loaded');
+  var seeds = this;
 
-    locationService.getLocations().then(function (response) {
-      ctrl.locations = response;
+  seeds.allTheSeeds = seedsService;
+
+  locationService.getLocations().then(function (response) {
+      seeds.locations = response;
       console.log(response);
     });
 
-    ctrl.getSeeds = function() {
+  seeds.getSeeds = function() {
         console.log('get seeds');
         seedsService.getSeeds().then(function(response) {
             console.log("response", response);
-            ctrl.seedArray = response.data;
-            console.log('get seed array', ctrl.seedArray);
+            seeds.seedArray = response.data;
+            console.log('get seed array', seeds.seedArray);
 
 
         });
         // empty form after clicking 'submit'
         // seeds.seed = '';
-    }
+      };
 
-    ctrl.addUsedSeed = function(seedsId, transfer, quantity, location) {
+  seeds.addUsedSeed = function(seedsId, transfer, quantity, location) {
       var seedsdata = {
         seedsId: seedsId,
         transfer: transfer,
         quantity: quantity,
         location: location
-      }
-      console.log("seedsdata", seedsdata);
-        seedsService.addUsedSeed(seedsdata).then(function(response) {
-            console.log("response", response);
-        })
-    }
+      };
 
+      seedsService.addUsedSeed(seedsdata).then(function(response) {
+          console.log('response', response);
+        });
+    };
 
+  seeds.updateSeed = function () {
+    //
+  };
+
+  seeds.deleteSeed = function () {
+    //
+  };
 
 }

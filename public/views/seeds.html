@@ -1,101 +1,79 @@
 <h1>Seeds</h1>
-<!-- ng init to show all results from seeds table -->
-<div data-ng-init="seeds.getSeeds()">
-</div>
+
+<!-- search bar for finding seeds -->
+<form>
+  <input type="text" class="seedSearch" ng-model="main.seedSearch" placeholder="Seed name, family, location or item code" />
+  <button type="submit" class="btn btn-default">Search</button>
+</form>
 
 <!-- area for displaying search results -->
 <div>
 
-<table>
-    <tr>
-      <th>Put Into Use</th>
-        <th>Id</th>
-        <th>Variety</th>
-        <th>Family</th>
-        <th>Order Date</th>
-        <th>Quantity</th>
-        <th>Units Per Pack</th>
-        <th>Quantity Units</th>
-        <th>Seeds Per Unit</th>
-        <th>Manufacturer</th>
-        <th>Supplier</th>
-        <th>
-          Days To Harvest
-        </th>
-        <th>
-          Receive Date
-        </th>
-        <th>
-          Lot Number
-        </th>
-        <th>
-          Donation
-        </th>
-        <th>
-          Put to Use
-        </th>
-    </tr>
-    <tr ng-repeat="seedvar in seeds.seedArray track by $index">
-      <!-- checkbox with ng show/hide to input location etc. -->
-      <td>
-        <input type="checkbox" name="seeduse" value="seeduse" ng-model="seedvar.seeduse"  ng-click="seeduse=!seeduse">
-{{seedvar.seeduse?'Yes':'No'}}
-<!-- start of modal -->
-<form ng-show="seeduse">
-<label>Will Seed Be Transferred?</label>
-<input type="checkbox" name="transfer" value="transfer" ng-model="seedvar.transfer">
-{{seedvar.transfer?'Yes':'No'}}
-<label>Quantity</label>
-<input type="number" class="form-control" ng-model="seedvar.quan" /> {{seedvar.quan}}
-<label>Location</label>
-  <select class="form-control" ng-model="seeds.location"
-  ng-options="'Field: ' + location.field + ' Section: ' + location.section +
-  ' Row: ' + location.row for location in seeds.locations">
-  </select>
-<button type="button" class="btn btn-default" ng-click="seeds.addUsedSeed(seedvar.id, seedvar.transfer, seedvar.quan, seedvar.location.id)">Submit</button>
-</form>
-<!-- end of modal -->
-      </td>
-        <td>{{seedvar.id}}</td>
-        <td>{{seedvar.variety}}</td>
-        <td>{{seedvar.family}}</td>
-        <td>{{seedvar.orderdate | date:'yyyy-MM-dd'}}</td>
-        <td>{{seedvar.quantity}}</td>
-        <td>{{seedvar.unitsperpack}}</td>
-        <td>{{seedvar.quantityunits}}</td>
-        <td>{{seedvar.seedsperunit}}</td>
-        <td>{{seedvar.manufacturer}}</td>
-        <td>{{seedvar.supplier}}</td>
-        <td>{{seedvar.daystoharvest}}</td>
-        <td>{{seedvar.receivedate | date:'yyyy-MM-dd'}}</td>
-        <td>{{seedvar.lotnumber}}</td>
-        <td>{{seedvar.donation?'Yes':'No'}}</td>
-        <td>{{seedvar.plantouse?'Yes':'No'}}</td>
-        <td>
-            <button type="button" class="btn btn-default" ng-model="editSeedBtn">Edit</button>
-        </td>
-        <td>
-            <button type="button" class="btn btn-default" ng-model="trackSeedBtn">Tracking</button>
-        </td>
-    </tr>
+  <div class="container">
 
+    <ul class="list-group row">
+      <li class="list-group-item col-xs-12 col-md-12" ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds">
+        <div class="row">
+          <div class="col-xs-8 col-md-10">
+            <h4><a href="#" ng-click="showDetails = !showDetails">
+              Generic Name: {{ seedvar.generic }} | Plant Family: {{ seedvar.family }} | Plant Variety: {{ seedvar.variety }}</a></h4>
+              <p>Manufacturer: {{ seedvar.manufacturer }} | Supplier: {{ seedvar.supplier }} | Lot Number: {{ seedvar.lotnumber }}</p>
+            </div>
+          </div>
+          <div class="row" ng-show="showDetails">
 
-  </table>
+            <div class="form-horizontal  col-xs-4 col-md-4">
+              <!-- <form> -->
+              <div class="form-group">
+                <label for="orderdate">Order Date:</label>
+                <input type="text" class="form-control" id="item" ng-model="seedvar.orderdate">
+              </div>
+              <div class="form-group">
+                <label for="receivedate">Receive Date:</label>
+                <input type="text" ng-model="seedvar.receivedate" class="form-control" placeholder="mm/dd/yyyy">
+              </div>
+              <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" ng-model="seedvar.quantity" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="quantityunits">Quantity Units:</label>
+                <input type="text" ng-model="seedvar.quantityunits" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="seedsperunit">Seeds Per Units:</label>
+                <input type="number" ng-model="seedvar.seedsperunit" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="unitsperpack">Units Per Pack:</label>
+                <input type="number" ng-model="seedvar.unitsperpack" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="daystoharvest">Days Until Harvest:</label>
+                <input type="number" ng-model="seedvar.unitsperpack" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="lotnumber">Lot Number:</label>
+                <input type="text" ng-model="seedvar.lotnumber" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Donation: <input type="checkbox" ng-model="seedvar.donation"></label>
+              </div>
+              <div class="form-group">
+                <label>Plant to Use: <input type="checkbox" ng-model="seedvar.plantouse"></label>
+              </div>
 
+              <a href="#" ng-click="seedvar.updateSeed()" role="button" class="btn btn-default">edit</a>
+              <a href="#" ng-click="seedvar.deleteSeed()" role="button" class="btn btn-danger">delete</a>
+            </div>
+          </div>
+      </li>
+    </ul>
+  </div>
 </div>
 
-    <!-- search bar for finding seeds -->
-    <form>
-        <input type="text" class="seedSearch" ng-model="main.seedSearch" placeholder="Seed name, family, location or item code" />
-        <button type="submit" class="btn btn-default">Search</button>
-    </form>
-
-
-
-
-    <!-- home button -->
-    <a href="/home" class="btn btn-default" role="button" ng-model="homeBtn">Home</button>
-
+<!-- home button -->
+<a href="/home" class="btn btn-default" role="button" ng-model="homeBtn">Home</button>
 
 <!-- add seed button, modal form pops up when clicked -->
 <a href="/newSeedForm" class="btn btn-default" role="button">Add Seed</button>

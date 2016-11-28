@@ -4,11 +4,19 @@ angular.module('growLogApp')
 function locationService($http) {
     var location = this;
 
-    location.getLocations = function() {
-        return $http.get('/location').then(function(response) {
-            return response.data;
-        });
-    };
+
+  var locations = {
+    allLocations: []
+  };
+
+  location.locations = locations;
+
+  location.getLocations = function () {
+    return $http.get('/location').then(function (response) {
+      location.locations = response.data;
+      return response.data;
+    });
+  };
 
     location.updateLocation = function(id, data) {
         return $http.put('/location/' + id, data).then(function(response) {
