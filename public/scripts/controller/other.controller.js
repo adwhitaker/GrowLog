@@ -1,27 +1,28 @@
 angular.module('growLogApp')
-       .controller('OtherController', OtherController);
+       .controller('OthersController', OthersController);
 
-function OtherController(activityService, $route) {
-  var other = this;
-  console.log('OtherController loaded');
+function OthersController(activityService, $route) {
+  var others = this;
+  console.log('OthersController loaded');
 
-  activityService.getActivities().then(function(response) {
-    other.listActiveTasks = activityService.activitiesObject.other;
-  });
-  other.refresh = function() {
-    $route.reload();
-  };
+  others.activities = activityService;
+  console.log(others.activities);
+
+  activityService.getActivities();
+
   // delete
-  other.deleteOther = function(activityId, joinsId) {
-    activityService.deleteActivity(activityId, joinsId).then(other.refresh());
+  others.deleteOther = function(activityId, joinsId) {
+    console.log('activityID', activityId);
+    console.log('joinsId', joinsId);
+    console.log('Delete button clicked');
+    activityService.deleteActivity(activityId, joinsId);
   };
-  other.completeOther = function(id, otherObject) {
+
+  // mark as complete
+  others.completeOther = function(id, otherObject) {
     var id = id;
     var completeDate = new Date();
-    var yyyy = completeDate.getFullYear();
-    var mm = completeDate.getMonth() + 1;
-    var dd = completeDate.getDate();
-    var completeDate = yyyy + '-' + mm + '-' + dd;
+    var completeDate = moment(completeDate).format('L');
 
     var activity = {
       location_id: otherObject.location_id,
@@ -30,9 +31,23 @@ function OtherController(activityService, $route) {
       completedate: completeDate,
       title: otherObject.title,
       comments: otherObject.comments,
+      joins_id: otherObject.id,
+      users_id: otherObject.users_id,
+    };
+    activityService.updateActivity(id, activity);
+  };
+
+  others.updateOther = function(id, otherObject) {
+    var id = id;
+    var activity = {
+      location_id: otherObject.location_id,
+      type: 'other',
+      assigndate: otherObject.assigndate,
+      title: otherObject.title,
+      comments: otherObject.comments,
       joins_id: otherObject.joins_id,
       users_id: otherObject.users_id,
     };
-    activityService.updateActivity(id, activity).then(other.refresh());
+    activityService.updateActivity(id, activity);
   };
 }
