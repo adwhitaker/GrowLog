@@ -22,6 +22,8 @@ function WaterController(activityService, $scope) {
       assigndate: waterObject.assigndate,
       completedate: completeDate,
       title: waterObject.title,
+      duration: waterObject.duration,
+      amount: waterObject.amount,
       comments: waterObject.comments,
       joins_id: waterObject.id,
       users_id: waterObject.users_id,
