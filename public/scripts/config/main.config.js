@@ -8,10 +8,10 @@ function configVeggies($routeProvider, $locationProvider) {
   }).when('/seeds', {
     templateUrl: 'views/seeds.html',
     controller: 'SeedsController as seeds',
-  }).when('/activity', {
+  }).when('/activities', {
     templateUrl: 'views/activity.html',
     controller: 'ActivityController as activity',
-  }).when('/location', {
+  }).when('/locations', {
     templateUrl: 'views/location.html',
     controller: 'LocationController as location',
   }).when('/plant', {
