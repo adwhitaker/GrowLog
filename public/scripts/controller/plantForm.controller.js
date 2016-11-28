@@ -22,9 +22,10 @@ function PlantFormController($http, locationService, seedsService) {
     var transfer = plant.transfer;
     var location_id = plant.location.id;
     console.log(location_id);
-    var data = { seedsId: seedsId, transfer: transfer, plantedassigndate: plantedassigndate,
+    var data = {seedsId: seedsId, transfer: transfer,
+                plantedassigndate: plantedassigndate,
                 projectedharvestdate: projectedharvestdate, quantity: quantity,
-                location_id: location_id, };
+                location_id: location_id};
     $http.post('/seedsInUse', data);
 
     plantForm.plant = '';
