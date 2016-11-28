@@ -4,18 +4,13 @@ angular.module('growLogApp')
 function IssuesController(activityService, $route) {
   var issues = this;
 
-  activityService.getActivities().then(function (response) {
-    issues.listActiveIssues = activityService.activitiesObject.issues;
-    console.log(issues.listActiveIssues);
-  });
+  issues.activities = activityService;
 
-  issues.refresh = function () {
-    $route.reload();
-  };
+  activityService.getActivities();
 
   //delete issue
   issues.deleteIssue = function (activityId, joinsId) {
-    activityService.deleteActivity(activityId, joinsId).then(issues.refresh());
+    activityService.deleteActivity(activityId, joinsId)
   };
 
   issues.completeIssue = function(id, issueObject) {
@@ -35,7 +30,8 @@ function IssuesController(activityService, $route) {
     };
     console.log(activity);
 
-    activityService.updateActivity(id, activity).then(issues.refresh());
+    activityService.updateActivity(id, activity);
+
   };
 
   issues.updateIssue = function(id, issueObject) {
@@ -51,7 +47,7 @@ function IssuesController(activityService, $route) {
     };
     console.log(activity);
 
-    activityService.updateActivity(id, activity).then(issues.refresh());
+    activityService.updateActivity(id, activity);
   };
 
   console.log('IssuesController loaded');
