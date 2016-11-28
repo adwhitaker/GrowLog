@@ -69,12 +69,12 @@ function addUsedSeed(req, res) {
 };
 
 function updateUsedSeed(req, res) {
+  console.log('req.body seeds', req.body);
   var id = req.params.id;
 
   var updateUsedSeed = {
     seed: {
-      id: req.body.id,
-      seeds_id: req.body.seedsId,
+      seeds_id: req.body.seeds_id,
       transfer: req.body.transfer,
       quantity: req.body.quantity,
       plantedassigndate: req.body.plantedassigndate,
@@ -86,12 +86,13 @@ function updateUsedSeed(req, res) {
       amountharvestedunits: req.body.amountharvestedunits,
       harvestduration: req.body.harvestduration
     },
+    seedsinuse_id: req.body.seedsinuse_id,
     location_id: req.body.location_id,
-    join_id: req.body.join_id
+    join_id: req.body.joins_id
   };
 
   knex('seedsinuse').where('id', id)
-                    .update(updateUsedSeed)
+                    .update(updateUsedSeed.seed)
                     .returning('*')
                     .then(function (result) {
                       return updateUsedSeed;
