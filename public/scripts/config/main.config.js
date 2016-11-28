@@ -16,7 +16,7 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'LocationController as location',
   }).when('/plant', {
     templateUrl: 'views/plant.html',
-    controller: 'PlantController as plant',
+    controller: 'PlantController as planting',
   }).when('/water', {
     templateUrl: 'views/water.html',
     controller: 'WaterController as watering',
@@ -31,7 +31,7 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'IssuesController as issues',
   }).when('/other', {
     templateUrl: 'views/other.html',
-    controller: 'OthersController as others',
+    controller: 'OtherController as other',
   }).when('/', {
     templateUrl: 'views/login.html',
     controller: 'LoginController as login',
