@@ -15,7 +15,8 @@ function WaterFormController($http, locationService) {
     var data = {
       location_id: activity.location.id,
       type: 'water',
-      assigndate: moment(activity.date).format('L')
+      assigndate: moment(activity.date).format('L'),
+      comments: activity.comments
     };
     $http.post('/activity', data);
     waterForm.task = '';

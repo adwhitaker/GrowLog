@@ -14,6 +14,11 @@
       <input type="date" class="form-control" id="assigndate" ng-model="waterForm.activity.date">
     </div>
 
+    <div class="form-group">
+      <label for="comments">Comments:</label>
+      <input type="textarea" class="form-control" ng-model="waterForm.activity.comments" id="comments">
+    </div>
+
     <div class="form-group row">
       <div class="col-xs-12 col-md-12">
         <button type="button" ng-click="waterForm.addActivity(waterForm.activity)" class="btn btn-primary">Submit</button>
