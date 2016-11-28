@@ -7,7 +7,7 @@
 
   <!-- to show list of to-dos -->
   <ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="issue in issues.listActiveIssues">
+    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="issue in issues.listActiveIssues | orderBy: 'assigndate'">
       <div class="row">
         <div class="col-xs-8 col-md-10">
           <h4><a href="#" ng-click="showDetails = !showDetails">{{issue.title}}</a></h4>
@@ -33,11 +33,13 @@
 
         <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
           <div class="form-group has-float-label">
-            <input class="form-control" type="comments" ng-model="issue.comments" placeholder="e.g. cabbage moths spotted">
-            <label for="comments">Comments</label>
+            <textarea class="form-control" id="{{issue.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{issue.act_id}} placeholder="e.g. cabbage moths" ng-model="issue.comments"></textarea>
+            <label for="{{issue.act_id}}">Comments</label>
           </div>
-          <button class="btn btn-success" type="issues.update(issue)">Save</button>
-          <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+          <div class="form-group">
+            <button class="btn btn-success" ng-click="issues.updateIssue(issue.act_id, issue)">Save</button>
+            <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+          </div>
         </form>
       </div>
 
