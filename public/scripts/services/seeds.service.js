@@ -26,6 +26,7 @@ function seedsService($http) {
     });
   }; //end of addUsedSeeds
 
+  // get used seeds fom DB
   this.getUsedSeed = function () {
     return $http.get('/seedsInUse').then(function (response) {
       seeds.usedSeeds = response.data;
@@ -39,6 +40,15 @@ function seedsService($http) {
       console.log('err', err);
     });
   };
+
+  // update used seed in DB
+  ctrl.updateUsedSeed = function (usedSeedUpdate) {
+    let id = usedSeedUpdate.seedsinuse_id;
+
+    return $http.put('/seedsInUse/' + id, usedSeedUpdate).then(function (response) {
+      ctrl.getUsedSeed();
+    });
+  }
 
   // initial get used seeds from DB
   ctrl.getUsedSeed();
