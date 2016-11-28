@@ -19,7 +19,7 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'PlantController as plant',
   }).when('/water', {
     templateUrl: 'views/water.html',
-    controller: 'WaterController as water',
+    controller: 'WaterController as watering',
   }).when('/weed', {
     templateUrl: 'views/weed.html',
     controller: 'WeedController as weed',
