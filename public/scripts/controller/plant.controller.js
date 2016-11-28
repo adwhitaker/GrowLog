@@ -6,5 +6,5 @@ function PlantController($http, seedsService) {
   console.log('PlantController loaded');
 
   plant.usedSeeds = seedsService;
-
+  console.log('plant.usedSeeds', plant.usedSeeds);
 }
