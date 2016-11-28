@@ -1,32 +1,35 @@
 angular.module('growLogApp')
        .controller('HarvestFormController', HarvestFormController);
 
-function HarvestFormController(seedsService) {
+function HarvestFormController(seedsService, activityService) {
   console.log('HarvestFormController loaded');
 
   var harvestForm = this;
 
   harvestForm.usedSeeds = seedsService;
 
-  harvestForm.submitHarvest = function (harvest) {
-    console.log(harvest);
-    // seeds in used id needed
-    // location id needed
-    // joins table id needed
+  harvestForm.activity = activityService;
+
+  harvestForm.submitHarvest = function (choice, harvest) {
 
     var newHarvest = {
-      // seeds_id
-      // transfer
-      // quantity
-      // plantedassigndate
-      // plantdate
-      // plantduration
-      // projectedharvestdate
-      actualharvestdate: moment(harvest.harvestDate).format('L'),
+      seeds_id: choice.seeds_id,
+      transfer: choice.transfer,
+      quantity: choice.quantity,
+      plantedassigndate: moment(harvest.plantedassigndate).format('L'),
+      plantdate: moment(harvest.plantdate).format('L'),
+      plantduration: choice.plantduration,
+      projectedharvestdate: moment(harvest.projectedharvestdate).format('L'),
+      actualharvestdate: moment(harvest.actualharvestdate).format('L'),
       amountharvested: harvest.amount,
       amountharvestedunits: harvest.units,
-      harvestduration: harvest.duration
+      joins_id: choice.id,
+      location_id: choice.location_id,
+      seedsinuse_id: choice.seedsinuse_id,
+
     };
-    console.log('newHarvest', newHarvest);
+
+    seedsService.updateUsedSeed(newHarvest);
+
   };
 }
