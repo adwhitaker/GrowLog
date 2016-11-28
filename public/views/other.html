@@ -8,19 +8,35 @@
   <ul class="list-group row">
     <li class="list-group-item col-xs-12 col-md-12" ng-repeat="other in other.listActiveTasks | orderBy: other.listActiveTasks.assigndate">
       <div class="row">
-        <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{other.title}}</a></h4>
+        <div class="col-xs-8 col-md-10">
+          <h4><a href="#" ng-click="showDetails = !showDetails">{{other.title}}</a></h4>
+          <p>Field: {{other.field}} | Section: {{other.section}} | Row: {{other.row}}</p>
+        </div>
         <div class="material-switch pull-right col-xs-4 col-md-2">
-          <input id="{{other.id}}" name="{{other.id}}" type="checkbox" ng-click="other.completeOther(other.id)" />
-          <label for="{{other.id}}" class="label-success"></label>
+          <input id="{{other.act_id}}" name="{{other.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails" />
+          <label for="{{other.act_id}}" class="label-success"></label>
         </div>
       </div>
       <div class="row" ng-show="showDetails">
-        <p class="col-xs-6 col-md-8">{{other.comments}}</p>
+        <div class="col-xs-6 col-md-8">
+          <p>{{other.comments}}</p>
+        </div>
         <div class="col-xs-2 col-md-2">
           <a href="#" ng-click="other.editOther()" role="button" class="btn btn-default">Edit</a>
         </div>
         <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="other.deleteOther()" role="button" class="btn btn-danger">Delete</a>
+          <a href="#" ng-click="other.deleteOther(other.act_id, other.id)" role="button" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+      <div class="form-horizontal" ng-show="completeDetails">
+        <div class="form-group row">
+          <div class="col-xs-10 col-md-10">
+            <label for="{{other.act_id}}">Comments</label>
+            <textarea class="form-control" id="{{other.act_id}}" rows="2" minlength="5" maxlength="100" ng-value="{{other.act_id}}" ng-model="other.comments"></textarea>
+          </div>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="other.completeOther(other.act_id, other)" role="button" class="btn btn-success">Complete</a>
         </div>
       </div>
     </li>
