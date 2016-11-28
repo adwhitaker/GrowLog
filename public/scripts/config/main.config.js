@@ -31,7 +31,7 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'IssuesController as issues',
   }).when('/other', {
     templateUrl: 'views/other.html',
-    controller: 'OtherController as other',
+    controller: 'OthersController as others',
   }).when('/', {
     templateUrl: 'views/login.html',
     controller: 'LoginController as login',
