@@ -1,55 +1,71 @@
 <div class="container">
   <div class="row">
-    <h1 class="col-xs-12 col-md-12">Water</h1>
+    <h1 class="col-xs-12 col-md-12">Watering</h1>
   </div>
 
-<h3>Activities:</h3>
+  <h3>Activities:</h3>
 
-<!-- to show list of to-dos -->
-<ul class="list-group row">
-  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="water in water.listActiveIssues | orderBy: water.listActiveIssues.assigndate">
-    <div class="row">
-      <div class="col-xs-8 col-md-10">
-        <h4><a href="#" ng-click="showDetails = !showDetails">{{water.title}}</a></h4>
-        <p>Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</p>
-      </div>
-      <div class="material-switch pull-right col-xs-4 col-md-2">
-        <input id="{{water.act_id}}" name="{{water.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails" />
-        <label for="{{water.act_id}}" class="label-success"></label>
-      </div>
-    </div>
-    <div class="row" ng-show="showDetails">
-      <div class="col-xs-6 col-md-8">
-        <p>{{water.comments}}</p>
-      </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="water.editIssue()" role="button" class="btn btn-default">Edit</a>
-      </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="water.deleteWater(water.act_id, water.id)" role="button" class="btn btn-danger">Delete</a>
-      </div>
-    </div>
-    <div class="form-horizontal" ng-show="completeDetails">
-      <div class="form-group row">
-        <div class="col-xs-10 col-md-10">
-          <label for="{{water.act_id}}">Comments</label>
-          <textarea class="form-control" id="{{water.act_id}}" rows="2" minlength="5" maxlength="100" ng-value="{{water.act_id}}" ng-model="water.comments"></textarea>
+  <!-- to show list of to-dos -->
+  <ul class="list-group row">
+    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="water in watering.activities.activitiesObject.water | orderBy: 'assigndate'">
+      <div class="row">
+        <div class="col-xs-8 col-md-10">
+          <h4><a href="#" ng-click="showDetails = !showDetails">{{water.assigndate | date: "MM-dd-yyyy"}} - Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</a></h4>
+        </div>
+        <div class="material-switch pull-right col-xs-4 col-md-2">
+          <input id="complete {{water.act_id}}" name="complete {{water.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
+          <label for="complete {{water.act_id}}" class="label-success"></label>
         </div>
       </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="water.completeWater(water.act_id, water)" role="button" class="btn btn-success">Success</a>
+      <div class="row" ng-show="showDetails">
+        <div ng-hide="editing">
+          <div class="col-xs-6 col-md-8">
+            <p>{{water.comments}}</p>
+          </div>
+          <div class="col-xs-2 col-md-2">
+            <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
+          </div>
+          <div class="col-xs-2 col-md-2">
+            <a href="#" ng-click="watering.deleteWater(water.act_id, water.id)" role="button" class="btn btn-danger">delete</a>
+          </div>
+        </div>
+
+        <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
+          <div class="form-group has-float-label">
+            <input class="form-control" id="assigndate {{water.act_id}}" type="date" ng-model="water.newAssignDate"></input>
+            <label for="assigndate {{water.act_id}}">Update Assign Date</label>
+          </div>
+          <div class="form-group has-float-label">
+            <textarea class="form-control" id="comments {{water.act_id}}" rows="2" minlength="5" maxlength="100" placeholder="e.g. 10 minutes of water on sprinkler setting" ng-model="water.comments"></textarea>
+            <label for="comments {{water.act_id}}">Comments</label>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-success" ng-click="watering.updateWater(water.act_id, water)">Save</button>
+            <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+          </div>
+        </form>
       </div>
-    </div>
-  </li>
-</ul>
 
-<!-- button to add a new task -->
-<a href="/waterForm" role="button" class="btn btn-default">Add Seed to be Watered</a>
+      <div class="form-horizontal" ng-show="completeDetails">
+        <div class="form-group row">
+          <div class="col-xs-10 col-md-10">
+            <label for="comments complete {{water.act_id}}">Comments</label>
+            <textarea class="form-control" id="comments complete {{water.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{water.act_id}} ng-model="water.comments"></textarea>
+          </div>
+        </div>
+        <div class="col-xs-2 col-md-2">
+          <a href="#" ng-click="watering.completeWssue(water.act_id, water)" role="button" class="btn btn-success">Complete</a>
+        </div>
+      </div>
+    </li>
+  </ul>
 
-<!-- button to go back to activities page -->
-<a href="/activities" role="button" class="btn btn-default">Back</a>
+  <!-- button to add a new task -->
+  <a href="/waterForm" role="button" class="btn btn-default">Add Issue</a>
 
-<!-- button to go home -->
-<a href="/home" role="button" class="btn btn-default">Home</a>
+  <!-- button to go back to activities page -->
+  <a href="/activities" role="button" class="btn btn-default">Back</a>
 
+  <!-- button to go home -->
+  <a href="/home" role="button" class="btn btn-default">Home</a>
 </div>
