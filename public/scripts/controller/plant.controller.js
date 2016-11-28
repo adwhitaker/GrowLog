@@ -26,8 +26,6 @@ function PlantController($http, seedsService) {
       location_id: plantObject.location_id,
       seedsinuse_id: plantObject.seedsinuse_id,
     };
-    seedsService.updateUsedSeed(completedPlant).then(function () {
-      seedsService.getUsedSeed();
-    });
+    seedsService.updateUsedSeed(completedPlant);
   };
 }
