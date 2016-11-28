@@ -21,11 +21,7 @@ function IssuesController(activityService, $route) {
   issues.completeIssue = function(id, issueObject) {
     var id = id;
     var completeDate = new Date();
-    var dd = completeDate.getDate();
-    var mm = completeDate.getMonth() + 1;
-    var yyyy = completeDate.getFullYear();
-    var completeDate = yyyy + '-' + mm + '-' + dd;
-
+    var completeDate = moment(completeDate).format('L');
 
     var activity = {
       location_id: issueObject.location_id,
