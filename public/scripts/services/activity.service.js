@@ -38,9 +38,16 @@ function activityService($http) {
       allActivities.forEach(function (newActivity) {
         if (newActivity.completedate) {
           activitiesObject[newActivity.type + 'Complete'].push(newActivity);
+          activitiesObject[newActivity.type + 'Complete'].forEach(function (currentActivity) {
+            currentActivity.assigndate = moment(currentActivity.assigndate).format('L');
+            currentActivity.completedate = moment(currentActivity.completedate).format('L');
+          });
         } else {
           activitiesObject[newActivity.type].push(newActivity);
-        };
+          activitiesObject[newActivity.type].forEach(function (currentActivity) {
+            currentActivity.assigndate = moment(currentActivity.assigndate).format('L');
+          });
+        }
       });
 
       return;
