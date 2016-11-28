@@ -9,7 +9,7 @@
 
         <ul class="list-group row">
             <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
-            plant.usedSeeds.seeds.usedSeeds">
+            planting.usedSeeds.seeds.usedSeeds">
                 <div class="row">
                     <div class="col-xs-8 col-md-10">
                         <h4><a href="#" ng-click="showDetails = !showDetails">
@@ -25,18 +25,15 @@
                 </div>
                 <div class="row" ng-show="showDetails">
                     <div class="col-xs-2 col-md-2">
-                        <p class="col-xs-6 col-md-8">{{ plant.comments }}</p>
+                        <a href="#" ng-click="planting.editPlant()" role="button" class="btn btn-default">edit</a>
                     </div>
                     <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="plant.editPlant()" role="button" class="btn btn-default">edit</a>
-                    </div>
-                    <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="plant.deletePlant(plant.seedsinuse_id)" role="button" class="btn btn-danger">delete</a>
+                        <a href="#" ng-click="planting.deletePlant(plant.seedsinuse_id)" role="button" class="btn btn-danger">delete</a>
                     </div>
                 </div>
-                <div class="form-horizontal" ng-show="completeDetails">
+                <div class="row" ng-show="completeDetails">
                     <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="plant.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
+                        <a href="#" ng-click="planting.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
                     </div>
                 </div>
             </li>
