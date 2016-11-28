@@ -44,7 +44,6 @@ function seedsService($http) {
   // update used seed in DB
   ctrl.updateUsedSeed = function (usedSeedUpdate) {
     let id = usedSeedUpdate.seedsinuse_id;
-
     return $http.put('/seedsInUse/' + id, usedSeedUpdate).then(function (response) {
       ctrl.getUsedSeed();
     });
