@@ -2,41 +2,56 @@
   <div class="row">
     <h1 class="col-xs-12 col-md-12">Other</h1>
   </div>
+
   <h3>Activities:</h3>
 
   <!-- to show list of to-dos -->
   <ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="other in other.listActiveTasks | orderBy: other.listActiveTasks.assigndate">
+    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="other in others.activities.activitiesObject.other | orderBy: 'assigndate'">
       <div class="row">
         <div class="col-xs-8 col-md-10">
           <h4><a href="#" ng-click="showDetails = !showDetails">{{other.title}}</a></h4>
           <p>Field: {{other.field}} | Section: {{other.section}} | Row: {{other.row}}</p>
         </div>
         <div class="material-switch pull-right col-xs-4 col-md-2">
-          <input id="{{other.act_id}}" name="{{other.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails" />
+          <input id="{{other.act_id}}" name="{{other.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
           <label for="{{other.act_id}}" class="label-success"></label>
         </div>
       </div>
       <div class="row" ng-show="showDetails">
-        <div class="col-xs-6 col-md-8">
-          <p>{{other.comments}}</p>
+        <div ng-hide="editing">
+          <div class="col-xs-6 col-md-8">
+            <p>{{other.comments}}</p>
+          </div>
+          <div class="col-xs-2 col-md-2">
+            <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
+          </div>
+          <div class="col-xs-2 col-md-2">
+            <a href="#" ng-click="others.deleteOther(other.act_id, other.id)" role="button" class="btn btn-danger">delete</a>
+          </div>
         </div>
-        <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="other.editOther()" role="button" class="btn btn-default">Edit</a>
-        </div>
-        <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="other.deleteOther(other.act_id, other.id)" role="button" class="btn btn-danger">Delete</a>
-        </div>
+
+        <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
+          <div class="form-group has-float-label">
+            <textarea class="form-control" id="{{other.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{other.act_id}} placeholder="e.g. fix hose" ng-model="other.comments"></textarea>
+            <label for="{{other.act_id}}">Comments</label>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-success" ng-click="others.updateOther(other.act_id, other)">Save</button>
+            <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+          </div>
+        </form>
       </div>
+
       <div class="form-horizontal" ng-show="completeDetails">
         <div class="form-group row">
           <div class="col-xs-10 col-md-10">
             <label for="{{other.act_id}}">Comments</label>
-            <textarea class="form-control" id="{{other.act_id}}" rows="2" minlength="5" maxlength="100" ng-value="{{other.act_id}}" ng-model="other.comments"></textarea>
+            <textarea class="form-control" id="{{other.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{other.act_id}} ng-model="other.comments"></textarea>
           </div>
         </div>
         <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="other.completeOther(other.act_id, other)" role="button" class="btn btn-success">Complete</a>
+          <a href="#" ng-click="others.completeOther(other.act_id, other)" role="button" class="btn btn-success">Complete</a>
         </div>
       </div>
     </li>
