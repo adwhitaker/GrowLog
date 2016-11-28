@@ -5,10 +5,9 @@ function PlantFormController($http, locationService, seedsService) {
   var plantForm = this;
   console.log('PlantFormController loaded');
 
-  seedsService.getSeeds().then(function (response) {
-    plantForm.allSeeds = response;
-    console.log(response);
-  });
+  plantForm.allSeeds = seedsService;
+
+  // seedsService.getSeeds();
 
   locationService.getLocations().then(function (response) {
     plantForm.locations = response;
@@ -26,9 +25,11 @@ function PlantFormController($http, locationService, seedsService) {
                 plantedassigndate: plantedassigndate,
                 projectedharvestdate: projectedharvestdate, quantity: quantity,
                 location_id: location_id};
-    $http.post('/seedsInUse', data);
+    $http.post('/seedsInUse', data).then(function() {
+      plantForm.plant = '';
+      seedsService.getUsedSeed;
+    });
 
-    plantForm.plant = '';
   }, function(error) {
     console.log('Error posting request', error);
   };
