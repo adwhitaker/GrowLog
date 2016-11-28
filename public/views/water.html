@@ -9,19 +9,35 @@
 <ul class="list-group row">
   <li class="list-group-item col-xs-12 col-md-12" ng-repeat="water in water.listActiveIssues | orderBy: water.listActiveIssues.assigndate">
     <div class="row">
-      <h4 class="col-xs-8 col-md-10"><a href="#" ng-click="showDetails = !showDetails">{{water.title}}</a></h4>
+      <div class="col-xs-8 col-md-10">
+        <h4><a href="#" ng-click="showDetails = !showDetails">{{water.title}}</a></h4>
+        <p>Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</p>
+      </div>
       <div class="material-switch pull-right col-xs-4 col-md-2">
-        <input id="{{water.id}}" name="{{water.id}}" type="checkbox" ng-click="water.completeIssue(water.id)" />
-        <label for="{{water.id}}" class="label-success"></label>
+        <input id="{{water.act_id}}" name="{{water.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails" />
+        <label for="{{water.act_id}}" class="label-success"></label>
       </div>
     </div>
     <div class="row" ng-show="showDetails">
-      <p class="col-xs-6 col-md-8">{{issue.comments}}</p>
+      <div class="col-xs-6 col-md-8">
+        <p>{{water.comments}}</p>
+      </div>
       <div class="col-xs-2 col-md-2">
         <a href="#" ng-click="water.editIssue()" role="button" class="btn btn-default">Edit</a>
       </div>
       <div class="col-xs-2 col-md-2">
-        <a href="#" ng-click="water.deleteIssue()" role="button" class="btn btn-danger">Delete</a>
+        <a href="#" ng-click="water.deleteWater(water.act_id, water.id)" role="button" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+    <div class="form-horizontal" ng-show="completeDetails">
+      <div class="form-group row">
+        <div class="col-xs-10 col-md-10">
+          <label for="{{water.act_id}}">Comments</label>
+          <textarea class="form-control" id="{{water.act_id}}" rows="2" minlength="5" maxlength="100" ng-value="{{water.act_id}}" ng-model="water.comments"></textarea>
+        </div>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <a href="#" ng-click="water.completeWater(water.act_id, water)" role="button" class="btn btn-success">Success</a>
       </div>
     </div>
   </li>
