@@ -14,6 +14,7 @@ function seedsService($http) {
 
   ctrl.getSeeds = function () {
     return $http.get('/addSeed').then(function (response) {
+      ctrl.seeds.allSeeds = [];
       seeds.allSeeds = response.data;
 
       seeds.allSeeds.forEach(function (currentSeed){
@@ -37,7 +38,11 @@ function seedsService($http) {
   // get used seeds fom DB
   this.getUsedSeed = function () {
     return $http.get('/seedsInUse').then(function (response) {
+      ctrl.seeds.usedSeeds = [];
+      ctrl.seeds.usedSeedsPlanted = [];
+
       let allTheSeeds = response.data
+
 
       allTheSeeds.forEach(function (currentSeed){
         currentSeed.plantedassigndate = moment(currentSeed.plantedassigndate).format('L');
@@ -45,7 +50,6 @@ function seedsService($http) {
       });
 
       allTheSeeds.forEach(function (singleSeed) {
-        console.log('singleseed.plantdate', singleSeed.plantdate);
         if (!singleSeed.plantdate) {
           seeds.usedSeeds.push(singleSeed);
         } else {
@@ -53,7 +57,6 @@ function seedsService($http) {
         }
 
       });
-      console.log('seeds', seeds);
 
       return;
     }).catch(function (err) {
@@ -67,7 +70,7 @@ function seedsService($http) {
     return $http.put('/seedsInUse/' + id, usedSeedUpdate).then(function (response) {
       ctrl.getUsedSeed();
     });
-  }
+  };
 
   // initial get used seeds from DB
   ctrl.getUsedSeed();
