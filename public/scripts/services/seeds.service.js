@@ -29,6 +29,7 @@ function seedsService($http) {
   this.getUsedSeed = function () {
     return $http.get('/seedsInUse').then(function (response) {
       seeds.usedSeeds = response.data;
+
       seeds.usedSeeds.forEach(function (currentSeed){
         currentSeed.plantedassigndate = moment(currentSeed.plantedassigndate).format('L');
         currentSeed.projectedharvestdate = moment(currentSeed.projectedharvestdate).format('L');
