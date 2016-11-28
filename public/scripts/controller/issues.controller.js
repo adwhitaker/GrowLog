@@ -38,6 +38,22 @@ function IssuesController(activityService, $route) {
     activityService.updateActivity(id, activity).then(issues.refresh());
   };
 
+  issues.updateIssue = function(id, issueObject) {
+    var id = id;
+    var activity = {
+      location_id: issueObject.location_id,
+      type: 'issues',
+      assigndate: issueObject.assigndate,
+      title: issueObject.title,
+      comments: issueObject.comments,
+      joins_id: issueObject.id,
+      users_id: issueObject.users_id,
+    };
+    console.log(activity);
+
+    activityService.updateActivity(id, activity).then(issues.refresh());
+  };
+
   console.log('IssuesController loaded');
 
 }
