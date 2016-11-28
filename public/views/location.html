@@ -25,18 +25,19 @@
           <input type="checkbox" name="locedit" value="locedit" ng-model="locvar.locedit"  ng-click="locedit=!locedit">
           <!-- start of modal -->
           <form ng-show="locedit">
+            <div class="col-xs-2">
 
-            <label>Field</label>
 
-          <input type="text" name="info" class="form-control" ng-model="locvar.field" />
+            <label for="ex1">Field</label>
+          <input type="text" name="info" class="form-control" ng-model="locvar.field" id="ex1"/>
           <label>Section</label>
 
           <input type="text" name="info" class="form-control" ng-model="locvar.section" />
           <label>Row</label>
 
           <input type="text" name="info" class="form-control" ng-model="locvar.row" />
-          <button type="button" class="btn btn-default" ng-click="location.updateLocation(locvar.id, locvar.field, locvar.section, locvar.row)">Submit</button>
-
+          <button type="button" class="btn btn-default" ng-click="location.updateLocation(locvar.id, locvar.field, locvar.section, locvar.row)">Save Changes</button>
+</div>
           </form>
           <!-- end of modal -->
         </td>
@@ -44,7 +45,7 @@
         <td>{{locvar.field}}</td>
         <td>{{locvar.section}}</td>
         <td>{{locvar.row}}</td>
-        <td>         <button ng-click="location.deleteLocation(locvar.id)" class="btn btn-danger">delete</button>
+        <td>         <button ng-click="location.deleteLocation(locvar.id)" class="btn btn-danger">Delete</button>
  </td>
 
     </tr>

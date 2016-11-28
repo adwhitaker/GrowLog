@@ -3,10 +3,13 @@ angular.module('growLogApp')
 
 
 
-function LocationController(locationService) {
+function LocationController(locationService, $route) {
     var loc = this;
     loc.locationArray = [];
-    console.log('LocationController loaded');
+
+    loc.refresh = function () {
+      $route.reload();
+    };
             locationService.getLocations().then(function(response) {
               console.log('response', response);
                 loc.locationArray = response;
@@ -16,10 +19,9 @@ function LocationController(locationService) {
             });
 
         loc.updateLocation = function(id, field, section, row) {
-          console.log('field', field);
-          loc.data = {id:id, field:field, section:section, row:row};
-          console.log(loc.data);
-                locationService.updateLocation(loc.data).then(function(response) {
+          data = {field:field, section:section, row:row};
+          console.log(data);
+                locationService.updateLocation(id, data).then(function(response) {
                   console.log('response', response);
                     // empty form after clicking 'submit'
                     //location.location = '';
