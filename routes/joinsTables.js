@@ -22,13 +22,13 @@ function seedLocationJoinTable(newUsedSeed) {
 function updateSeedLocationJoinTable(updateUsedSeed) {
 
   var joinID = updateUsedSeed.join_id;
-  var updateUsedSeed = {
-    seedsinuse_id: updateUsedSeed.seed.id,
+  var updateLocationSeed = {
+    seedsinuse_id: updateUsedSeed.seedsinuse_id,
     location_id: updateUsedSeed.location_id,
   };
 
   return knex('seeds_in_use_loc').where('id', joinID)
-                                 .update(updateUsedSeed)
+                                 .update(updateLocationSeed)
                                  .then(function (result) {
                                     return;
                                   });
