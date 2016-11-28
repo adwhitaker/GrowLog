@@ -59,7 +59,7 @@ function addActivityLocationUserTable(newActivity) {
 // update activity, location, and user to act_loc_users joins table
 function updateActivityLocationUserTable(updateActivity) {
 
-  return knex('act_loc_users').where('id', updateActivity.ids.joins_id)
+  return knex('act_loc_users').where('id', updateActivity.joins_id)
                               .update(updateActivity.ids)
                               .then(function (result) {
                                 return;
