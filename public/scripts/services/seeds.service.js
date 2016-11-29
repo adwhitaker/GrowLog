@@ -12,7 +12,9 @@ function seedsService($http) {
 
   this.seeds = seeds;
 
-  // get seeds from DB
+  /* All Seeds */
+
+  // get all seeds from DB
   ctrl.getSeeds = function () {
     return $http.get('/addSeed')
       .then(function (response) {
@@ -36,29 +38,46 @@ function seedsService($http) {
     return $http.post('/addSeed', data)
       .then(function () {
         ctrl.getSeeds();
+        return;
       }).catch(function (err) {
         console.log('err', err);
       });
   };
 
-  ctrl.addUsedSeed = function (seedsdata) {
-    return $http.post('/seedsInUse', seedsdata)
-      .then(function (response) {
-        ctrl.getUsedSeed();
-        return response;
+  // update seed in the DB, then get all seeds from DB
+  ctrl.updateSeed = function (id, data) {
+    return $http.put('/addSeed/' + id, data)
+      .then(function () {
+        ctrl.getSeeds();
+        return;
+      }).catch(function (err) {
+        console.log('err', err);
       });
-  }; //end of addUsedSeeds
+  };
 
-  // get used seeds fom DB
+  // delete seed in DB, then get all seeds from DB
+  ctrl.deleteSeed = function (seedID) {
+    return $http.delete('addSeed/' + seedID)
+      .then(function () {
+        ctrl.getSeeds();
+        return;
+      }).catch(function (err) {
+        console.log('err', err);
+        return 'error';
+      });
+  };
+
+  /* Seeds Currently in Use (Planted) */
+
+  // get all used seeds (Planted) fom DB
   this.getUsedSeed = function () {
     return $http.get('/seedsInUse').then(function (response) {
       ctrl.seeds.usedSeeds = [];
       ctrl.seeds.usedSeedsPlanted = [];
 
-      let allTheSeeds = response.data
+      let allTheSeeds = response.data;
 
-
-      allTheSeeds.forEach(function (currentSeed){
+      allTheSeeds.forEach(function (currentSeed) {
         currentSeed.plantedassigndate = moment(currentSeed.plantedassigndate).format('L');
         currentSeed.projectedharvestdate = moment(currentSeed.projectedharvestdate).format('L');
       });
@@ -78,6 +97,15 @@ function seedsService($http) {
     });
   };
 
+  // add seed to be planted (seed in use)
+  ctrl.addUsedSeed = function (seedsdata) {
+    return $http.post('/seedsInUse', seedsdata)
+      .then(function (response) {
+        ctrl.getUsedSeed();
+        return response;
+      });
+  };
+
   // update used seed in DB
   ctrl.updateUsedSeed = function (usedSeedUpdate) {
     let id = usedSeedUpdate.seedsinuse_id;
@@ -87,7 +115,7 @@ function seedsService($http) {
   };
 
   // initial get used seeds from DB
-  ctrl.getUsedSeed();
   ctrl.getSeeds();
+  ctrl.getUsedSeed();
 
-} //end of seedsService
+};

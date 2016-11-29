@@ -15,6 +15,7 @@ function getSeeds(req, res) {
 
   knex.select()
       .from('seeds')
+      .orderBy('id')
       .then(function (response) {
         console.log('response', response);
         res.send(response);
@@ -68,7 +69,7 @@ function updateSeed(req, res) {
     orderdate: req.body.orderdate,
     quantity: req.body.quantity,
     unitsperpack: req.body.unitsperpack,
-    quantity: req.body.quantityunits,
+    quantityunits: req.body.quantityunits,
     seedsperunit: req.body.seedsperunit,
     manufacturer: req.body.manufacturer,
     supplier: req.body.supplier,
@@ -98,6 +99,7 @@ function deleteSeed(req, res) {
                   res.sendStatus(204);
                 }).catch(function (err) {
                   console.log('Error Querying the DB', err);
+                  res.sendStatus(500);
                 });
 };
 
