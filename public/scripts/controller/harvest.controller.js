@@ -8,6 +8,23 @@ function HarvestController(seedsService) {
   harvest.plantedSeeds = seedsService;
 
   harvest.completeHarvest = function (harvestedPlant) {
-    console.log('harvest', harvestedPlant);
+
+    var newHarvestedPlant = {
+      seeds_id: harvestedPlant.seeds_id,
+      transfer: harvestedPlant.transfer,
+      usedquantity: harvestedPlant.usedquantity,
+      plantedassigndate: harvestedPlant.plantedassigndate,
+      plantdate: harvestedPlant.plantdate,
+      plantduration: harvestedPlant.plantduration,
+      projectedharvestdate: harvestedPlant.projectedharvestdate,
+      actualharvestdate: harvestedPlant.actualharvestdate,
+      amountharvested: harvestedPlant.amountharvested,
+      amountharvestedunits: harvestedPlant.amountharvestedunits,
+      joins_id: harvestedPlant.id,
+      location_id: harvestedPlant.location_id,
+      seedsinuse_id: harvestedPlant.seedsinuse_id,
+    };
+
+    seedsService.updateUsedSeed(newHarvestedPlant);
   };
 };
