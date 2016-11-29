@@ -29,10 +29,11 @@ console.log("comments", comments);
 
 var weedtype = activity.weedtype;
 
+var duration = activity.duration;
 
 var assigndate = moment(activity.date).format('L');
 
-var data = {location_id: location_id, type: 'weed',  assigndate: assigndate, weedtype:weedtype, comments: comments}
+var data = {location_id: activity.location.id, type: 'weed',  assigndate: assigndate, weedtype:weedtype, duration:duration, comments: comments}
       $http.post('/activity', data);
 
       weedForm.activity = '';

@@ -9,11 +9,11 @@ function WeedController($http, activityService, $route) {
       $route.reload();
     };
 
-    console.log('WeedController loaded');
-    activityService.getActivities().then(function(response) {
-        weed.listActiveIssues = activityService.activitiesObject.weed;
-    });
+    weed.activities = activityService;
 
+    activityService.getActivities();
+
+//weed.issues object = activitiesService
     weed.deleteActivity = function(activityId, joinsId) {
 
       activityService.deleteActivity(activityId, joinsId).then(weed.refresh());
@@ -29,6 +29,7 @@ function WeedController($http, activityService, $route) {
         type: 'weed',
         assigndate: weedObject.assigndate,
         completedate: completeDate,
+        duration: weedObject.duration,
         comments: weedObject.comments,
         joins_id: weedObject.id,
         users_id: weedObject.users_id,

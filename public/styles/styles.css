@@ -1,3 +1,26 @@
+.center-block {
+  float: none;
+}
+
+#logo {
+  margin: 20% 0% 5% 0%;
+}
+
+#copyright {
+  margin-bottom: 10%;
+}
+
+#loginbutton {
+  margin-top: 15%;
+}
+
+.homebutton {
+  margin-top: 15%;
+}
+
+.nav {
+  margin: 20% 0 5% 0;
+}
 .material-switch > input[type="checkbox"] {
     display: none;
 }
