@@ -7,7 +7,8 @@ function seedsService($http) {
   var seeds = {
     allSeeds: [],
     usedSeeds: [],
-    usedSeedsPlanted:[]
+    usedSeedsPlanted:[],
+    usedSeedsHarvested: []
   };
 
   this.seeds = seeds;
@@ -74,23 +75,32 @@ function seedsService($http) {
     return $http.get('/seedsInUse').then(function (response) {
       ctrl.seeds.usedSeeds = [];
       ctrl.seeds.usedSeedsPlanted = [];
+      ctrl.seeds.usedSeedsHarvested = [];
 
       let allTheSeeds = response.data;
 
       allTheSeeds.forEach(function (currentSeed) {
+        // convert with moment
+        // currentSeed.orderdate = moment(currentSeed.orderdate).format('L');
+        // currentSeed.plantdate = moment(currentSeed.orderdate).format('L');
+        // currentSeed.receivedate = moment(currentSeed.receivedate).format('L');
+        // currentSeed.actualharvestdate = moment(currentSeed.actualharvestdate).format('L');
         currentSeed.plantedassigndate = moment(currentSeed.plantedassigndate).format('L');
         currentSeed.projectedharvestdate = moment(currentSeed.projectedharvestdate).format('L');
       });
 
       allTheSeeds.forEach(function (singleSeed) {
-        if (!singleSeed.plantdate) {
-          seeds.usedSeeds.push(singleSeed);
-        } else {
+        if (singleSeed.actualharvestdate) {
+          seeds.usedSeedsHarvested.push(singleSeed);
+        } else if (singleSeed.plantdate) {
           seeds.usedSeedsPlanted.push(singleSeed);
+        } else {
+          seeds.usedSeeds.push(singleSeed);
         }
 
       });
 
+      console.log('all seeds',seeds);
       return;
     }).catch(function (err) {
       console.log('err', err);
