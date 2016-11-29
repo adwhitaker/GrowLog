@@ -14,7 +14,7 @@ function PlantController(seedsService) {
     var completedPlant = {
       seeds_id: plantObject.seeds_id,
       transfer: plantObject.transfer,
-      quantity: plantObject.quantity,
+      usedquantity: plantObject.usedquantity,
       plantedassigndate: plantObject.plantedassigndate,
       plantdate: completeDate,
       plantduration: plantObject.plantduration,
