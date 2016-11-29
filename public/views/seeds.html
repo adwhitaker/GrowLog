@@ -12,7 +12,7 @@
     <div class="container">
 
         <ul class="list-group row | filter:search:strict">
-            <li class="list-group-item col-xs-12 col-md-12" ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | filter:search">
+            <li class="list-group-item col-xs-12 col-md-12" ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | orderBy: 'seedvar.id' | filter:search">
                 <div class="row">
                     <div class="col-xs-8 col-md-10">
                         <h4><a href="#" ng-click="showDetails = !showDetails">
@@ -24,6 +24,30 @@
 
                     <div class="form-horizontal  col-xs-4 col-md-4">
                         <!-- <form> -->
+                        <div class="form-group">
+                            <label for="generic">Generic:</label>
+                            <input type="text" class="form-control" id="item" ng-model="seedvar.generic">
+                        </div>
+                        <div class="form-group">
+                            <label for="family">Plant Family:</label>
+                            <input type="text" class="form-control" id="item" ng-model="seedvar.family">
+                        </div>
+                        <div class="form-group">
+                            <label for="variety">Variety:</label>
+                            <input type="text" class="form-control" id="item" ng-model="seedvar.variety">
+                        </div>
+                        <div class="form-group">
+                            <label for="manufacturer">Manufacturer:</label>
+                            <input type="text" class="form-control" id="item" ng-model="seedvar.manufacturer">
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier">Supplier:</label>
+                            <input type="text" class="form-control" id="item" ng-model="seedvar.supplier">
+                        </div>
+                        <div class="form-group">
+                            <label for="lotnumber">Lot Number:</label>
+                            <input type="text" class="form-control" id="item" ng-model="seedvar.lotnumber">
+                        </div>
                         <div class="form-group">
                             <label for="orderdate">Order Date:</label>
                             <input type="text" class="form-control" id="item" ng-model="seedvar.orderdate">
@@ -53,18 +77,14 @@
                             <input type="number" ng-model="seedvar.unitsperpack" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="lotnumber">Lot Number:</label>
-                            <input type="text" ng-model="seedvar.lotnumber" class="form-control">
-                        </div>
-                        <div class="form-group">
                             <label>Donation: <input type="checkbox" ng-model="seedvar.donation"></label>
                         </div>
                         <div class="form-group">
                             <label>Plant to Use: <input type="checkbox" ng-model="seedvar.plantouse"></label>
                         </div>
 
-                        <a href="#" ng-click="seedvar.updateSeed()" role="button" class="btn btn-default">edit</a>
-                        <a href="#" ng-click="seedvar.deleteSeed()" role="button" class="btn btn-danger">delete</a>
+                        <a href="#" ng-click="seeds.updateSeed(seedvar)" role="button" class="btn btn-default">edit</a>
+                        <a href="#" ng-click="seeds.deleteSeed(seedvar.id)" role="button" class="btn btn-danger">delete</a>
                     </div>
                 </div>
             </li>
