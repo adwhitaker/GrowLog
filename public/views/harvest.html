@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-xs-8 col-md-10">
                     <h4><a href="#" ng-click="showDetails = !showDetails">
-                  Projected Harvest Date: {{ plant.projectedharvestdate }} | Quantity Planted: {{ plant.quantity}}</a></h4>
+                  Projected Harvest Date: {{ plant.projectedharvestdate | date:'MMM d, yyyy' }} | Quantity Planted: {{ plant.quantity}}</a></h4>
                     <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
                     <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
                     <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
@@ -24,7 +24,7 @@
             <div class="row" ng-show="showDetails">
               <div class="form-group "col-xs-2 col-md-2"">
                   <label for="projectedharvestdate">Projected Harvest Date:</label>
-                  <input type="text" class="form-control" id="item" ng-model="plant.projectedharvestdate">
+                  <input type="text" class="form-control" id="item" ng-model="plant.projectedharvestdate | date: 'MM/dd/yyyy'">
               </div>
                 <div class="col-xs-2 col-md-2">
                     <a href="#" ng-click="planting.editPlant(plant)" role="button" class="btn btn-default">edit</a>
