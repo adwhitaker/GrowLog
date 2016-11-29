@@ -13,6 +13,7 @@ const addSeed = require('./routes/addSeed');
 const seedsInUse = require('./routes/seedsInUse');
 const activity = require('./routes/activity');
 const location = require('./routes/location');
+const reports = require('./routes/reports');
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/seedsInUse', seedsInUse);
 app.use('/activity', activity);
 app.use('/location', location);
 app.use('/logout', logout);
+app.use('/reports', reports);
 
 // sets index.html as main file
 // check if user is authenticated
