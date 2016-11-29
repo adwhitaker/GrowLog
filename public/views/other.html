@@ -1,7 +1,3 @@
-<div class="container">
-  <div class="row">
-    <h1 class="col-xs-12 col-md-12">Other</h1>
-  </div>
 
   <h3>Activities:</h3>
 
@@ -57,12 +53,31 @@
     </li>
   </ul>
 
-  <!-- button to add a new task -->
-  <a href="/otherForm" role="button" class="btn btn-default">Add Task</a>
+<md-content layout="row" id="navigationbar">
+  <md-toolbar class="row navbar one">
+    <md-button class="md-mini col-xs-2" href="/activities">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+      <md-icon class="material-icons">arrow_back</md-icon>
+    </md-button>
+    <md-button class="md-mini col-xs-2" href="/home">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
+      <md-icon class="material-icons">home</md-icon>
+    </md-button>
+  </md-toolbar>
 
-  <!-- button to go back to activities page -->
-  <a href="/activities" role="button" class="btn btn-default">Back</a>
+  <md-fab-speed-dial ng-hide="hidden" md-direction="up" md-open="isOpen" class="md-scale md-fab-top-right options" ng-class="md-hover-full">
+    <md-fab-trigger>
+      <md-button aria-label="seed menu" class="md-fab md-warn md-mini">
+        <md-tooltip md-direction="left" md-visible="tooltipVisible">Other Menu</md-tooltip>
+        <md-icon class="material-icons" aria-label="menu">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
 
-  <!-- button to go home -->
-  <a href="/home" role="button" class="btn btn-default">Home</a>
-</div>
+    <md-fab-actions class="row">
+      <md-button href="/otherForm" aria-label="add location" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Activity</md-tooltip>
+        <md-icon class="material-icons">add_circle_outline</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</md-content>
