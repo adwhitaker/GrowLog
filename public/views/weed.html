@@ -4,14 +4,16 @@
   </div>
 
 <h3>Activities:</h3>
-
+<!-- ng repeat replace weed.listActiveIssues with weed.issueobject.activitiesobject.weed -->
 <!-- to show list of to-dos -->
 <ul class="list-group row">
-  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="weedvar in weed.listActiveIssues | orderBy: weedvar.listActiveIssues.assigndate">
+  <li class="list-group-item col-xs-12 col-md-12" ng-repeat="weedvar in weed.activities.activitiesObject.weed | orderBy: 'assigndate'">
     <div class="row">
       <div class="col-xs-8 col-md-10">
-      <h4><a href="#" ng-click="showDetails = !showDetails">{{weedvar.weedtype}}</a></h4>
+      <h4><a href="#" ng-click="showDetails = !showDetails">Weed Type: {{weedvar.weedtype}}</a></h4>
       <p>Field: {{weedvar.field}} | Section: {{weedvar.section}} | Row: {{weedvar.row}}</p>
+      <p>Minutes: {{weedvar.duration}}</p>
+
 </div>
 <div class="material-switch pull-right col-xs-4 col-md-2">
   <input id="{{weedvar.act_id}}" name="{{weedvar.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
@@ -38,7 +40,7 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-success" ng-click="issues.updateIssue(issue.act_id, issue)">Save</button>
+        <button class="btn btn-success" ng-click="weed.updateIssue(weedvar.act_id, weedvar)">Save</button>
         <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
       </div>
     </form>
