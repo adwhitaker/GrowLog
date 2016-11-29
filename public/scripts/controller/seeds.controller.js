@@ -3,48 +3,36 @@ angular.module('growLogApp')
 
 
 function SeedsController(seedsService, locationService) {
-  console.log('SeedsController loaded');
   var seeds = this;
 
   seeds.allTheSeeds = seedsService;
 
-  locationService.getLocations().then(function (response) {
-      seeds.locations = response;
-      console.log(response);
-    });
+  // update seed in DB
+  seeds.updateSeed = function (updatedSeedInfo) {
 
-  seeds.getSeeds = function() {
-        console.log('get seeds');
-        seedsService.getSeeds().then(function(response) {
-            console.log("response", response);
-            seeds.seedArray = response.data;
-            console.log('get seed array', seeds.seedArray);
-
-
-        });
-        // empty form after clicking 'submit'
-        // seeds.seed = '';
-      };
-
-  seeds.addUsedSeed = function(seedsId, transfer, quantity, location) {
-      var seedsdata = {
-        seedsId: seedsId,
-        transfer: transfer,
-        quantity: quantity,
-        location: location
-      };
-
-      seedsService.addUsedSeed(seedsdata).then(function(response) {
-          console.log('response', response);
-        });
+    let data = {
+      generic: updatedSeedInfo.generic,
+      variety: updatedSeedInfo.variety,
+      family: updatedSeedInfo.family,
+      orderdate: moment(updatedSeedInfo.orderdate).format('L'),
+      quantity: updatedSeedInfo.quantity,
+      unitsperpack: updatedSeedInfo.unitsperpack,
+      quantityunits: updatedSeedInfo.quantityunits,
+      seedsperunit: updatedSeedInfo.seedsperunit,
+      manufacturer: updatedSeedInfo.manufacturer,
+      supplier: updatedSeedInfo.supplier,
+      daystoharvest: updatedSeedInfo.daystoharvest,
+      receivedate: moment(updatedSeedInfo.receivedate).format('L'),
+      lotnumber: updatedSeedInfo.lotnumber,
+      donation: updatedSeedInfo.donation,
+      plantouse: updatedSeedInfo.plantouse
     };
 
-  seeds.updateSeed = function () {
-    //
   };
 
-  seeds.deleteSeed = function () {
-    //
+  // delete seed from DB
+  seeds.deleteSeed = function (seedID) {
+    seedsService.deleteSeed(seedID);
   };
 
-}
+};
