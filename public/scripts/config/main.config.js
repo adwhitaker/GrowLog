@@ -37,7 +37,7 @@ function configVeggies($routeProvider, $locationProvider) {
     controller: 'LoginController as login',
   }).when('/generatereport', {
     templateUrl: 'views/generatereport.html',
-    controller: 'ReportController as report',
+    controller: 'ReportController as reportCtrl',
   }).when('/newSeedForm', {
     templateUrl: 'views/newSeedForm.html',
     controller: 'NewSeedFormController as newSeed',
