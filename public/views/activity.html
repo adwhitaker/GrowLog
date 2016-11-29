@@ -1,25 +1,20 @@
-<h1>Activity</h1>
-
-<!-- for plant to-dos -->
-<a href="/plant" role="button" class="btn btn-default" ng-model="plantBtn">Plant</a>
-
-<!-- for input to-dos -->
-<a href="/water" role="button" class="btn btn-default" ng-model="inputsBtn">Water</a>
-
-<!-- for weeding to-dos -->
-<a href="/weed" role="button" class="btn btn-default" ng-model="weedBtn">Weed</a>
-
-<!-- for harvesting to-dos -->
-<a href="/harvest" role="button" class="btn btn-default" ng-model="harvestBtn">Harvest</a>
-
-<!-- for issue reporting -->
-<a href="/issues" role="button" class="btn btn-default" ng-model="issueBtn">Issues</a>
-
-<!-- for other to-dos or reporting -->
-<a href="/other" role="button" class="btn btn-default" ng-model="otherBtn">Other</a>
-
-<!-- to go home -->
-<a href="/home" role="button" class="btn btn-default" ng-model="homeBtn">Home</a>
-
-<!-- to generate report -->
-<a href="/generatereport" role="button" class="btn btn-default" ng-model="reportBtn">Generate Report</a>
+<div class="row homebutton">
+  <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+    <md-button href="/plant" class="md-raised md-cornered md-primary btn-block">Planting</md-button>
+  </div>
+  <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+    <md-button href="/water" class="md-raised md-cornered md-primary btn-block">Watering</md-button>
+  </div>
+  <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+    <md-button href="/weed" class="md-raised md-cornered md-primary btn-block">Weeding</md-button>
+  </div>
+  <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+    <md-button href="/harvest" class="md-raised md-cornered md-primary btn-block">Harvesting</md-button>
+  </div>
+  <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+    <md-button href="/other" class="md-raised md-cornered btn-block">Other Activities</md-button>
+  </div>
+  <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
+    <md-button href="/issues" class="md-raised md-cornered md-warn btn-block">Report Issues</md-button>
+  </div>
+</div>
