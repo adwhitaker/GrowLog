@@ -36,7 +36,7 @@ function addUsedSeed(req, res) {
     seed: {
       seeds_id: req.body.seedsId,
       transfer: req.body.transfer,
-      quantity: req.body.quantity,
+      usedquantity: req.body.usedquantity,
       plantedassigndate: req.body.plantedassigndate,
       plantdate: req.body.plantdate,
       plantduration: req.body.plantduration,
@@ -76,7 +76,7 @@ function updateUsedSeed(req, res) {
     seed: {
       seeds_id: req.body.seeds_id,
       transfer: req.body.transfer,
-      quantity: req.body.quantity,
+      usedquantity: req.body.usedquantity,
       plantedassigndate: req.body.plantedassigndate,
       plantdate: req.body.plantdate,
       plantduration: req.body.plantduration,
