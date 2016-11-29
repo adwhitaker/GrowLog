@@ -1,3 +1,31 @@
+.center-block {
+  float: none;
+}
+
+#logo {
+  margin: 20% 0% 5% 0%;
+}
+
+#copyright {
+  margin-top: 20%;
+}
+
+#loginbutton {
+  margin-top: 15%;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display: inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
 .material-switch > input[type="checkbox"] {
     display: none;
 }
