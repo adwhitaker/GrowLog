@@ -1,5 +1,4 @@
-<div class="container">
-    <form class="form-horizontal col-xs-12 col-md-6 col-md-offset-3">
+    <form class="form-horizontal">
       <h1>Add Location</h1>
         <div class="form-group">
             <label for="field">Field:</label>
@@ -23,4 +22,16 @@
             </div>
         </div>
     </form>
-</div>
+
+<md-content layout="row" id="navigationbar">
+  <md-toolbar class="row navbar one">
+    <md-button class="md-mini col-xs-2" href="/locations">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+      <md-icon class="material-icons">arrow_back</md-icon>
+    </md-button>
+    <md-button class="md-mini col-xs-2" href="/home">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
+      <md-icon class="material-icons">home</md-icon>
+    </md-button>
+  </md-toolbar>
+</md-content>

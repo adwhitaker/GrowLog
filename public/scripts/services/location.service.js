@@ -11,6 +11,12 @@ function locationService($http) {
 
   location.locations = locations;
 
+  var locations = {
+    allLocations: []
+  };
+
+  location.locations = locations;
+
   location.getLocations = function () {
     return $http.get('/location').then(function (response) {
       location.locations = response.data;

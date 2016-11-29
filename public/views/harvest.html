@@ -3,7 +3,54 @@
 <h3>Activities:</h3>
 
 <!-- to show list of to-dos -->
-<ng-repeat></ng-repeat>
+<div class="container">
+
+    <ul class="list-group row">
+        <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
+        harvest.plantedSeeds.seeds.usedSeedsPlanted">
+            <div class="row">
+                <div class="col-xs-8 col-md-10">
+                    <h4><a href="#" ng-click="showDetails = !showDetails">
+                  Projected Harvest Date: {{ plant.projectedharvestdate | date:'MMM d, yyyy' }} | Quantity Planted: {{ plant.quantity}}</a></h4>
+                    <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
+                    <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
+                    <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
+                </div>
+                <div class="material-switch pull-right col-xs-4 col-md-2">
+                    <input id="{{ plant.seedsinuse_id }}" name="{{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails" />
+                    <label for="{{ plant.seedsinuse_id }}" class="label-success"></label>
+                </div>
+            </div>
+            <div class="row" ng-show="showDetails">
+              <div class="form-group "col-xs-2 col-md-2"">
+                  <label for="projectedharvestdate">Projected Harvest Date:</label>
+                  <input type="text" class="form-control" id="item" ng-model="plant.projectedharvestdate | date: 'MM/dd/yyyy'">
+              </div>
+                <div class="col-xs-2 col-md-2">
+                    <a href="#" ng-click="planting.editPlant(plant)" role="button" class="btn btn-default">edit</a>
+                </div>
+            </div>
+            <div class="row" ng-show="completeDetails">
+              <div class="col-xs-2 col-md-2">
+              <div class="form-group">
+                  <label for="actualharvestdate">Harvest Date:</label>
+                  <input type="text" class="form-control" id="item" ng-model="plant.actualharvestdate">
+              </div>
+              <div class="form-group">
+                  <label for="amountharvested">Amount Harvested:</label>
+                  <input type="number" class="form-control" id="item" ng-model="plant.amountharvested">
+              </div>
+              <div class="form-group">
+                  <label for="amountharvestedunits">Harvested Units:</label>
+                  <input type="text" class="form-control" id="item" ng-model="plant.amountharvestedunits">
+              </div>
+
+                    <a href="#" ng-click="harvest.completeHarvest(plant)" role="button" class="btn btn-success">Complete</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
 
 <!-- button to add a new task -->
 <a href="/harvestForm" role="button" class="btn btn-default">Add Task</a>
