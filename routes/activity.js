@@ -119,4 +119,8 @@ function deleteActivity(req, res) {
                   });
 };
 
+router.activitiesFunctions = {
+  getActivities
+};
+
 module.exports = router;
