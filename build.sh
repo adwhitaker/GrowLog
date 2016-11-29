@@ -28,3 +28,9 @@ cp node_modules/jquery/dist/jquery.min.js public/vendors;
 
 # moment.js
 cp node_modules/moment/moment.js public/vendors;
+
+# angular-sanitize
+cp node_modules/angular-sanitize/angular-sanitize.min.js public/vendors;
+
+# ng-csv
+cp node_modules/ng-csv/build/ng-csv.min.js public/vendors;
