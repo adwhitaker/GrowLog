@@ -103,4 +103,8 @@ function deleteSeed(req, res) {
                 });
 };
 
+router.seedsFunctions = {
+  getSeeds
+};
+
 module.exports = router;
