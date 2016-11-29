@@ -92,10 +92,36 @@
     </div>
 </div>
 
-<!-- home button -->
-<a href="/home" class="btn btn-default" role="button" ng-model="homeBtn">Home</button>
+<md-content layout="row" id="navigationbar">
+  <md-toolbar class="row navbar">
+    <md-button class="md-mini col-xs-2" href="/home">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+      <md-icon class="material-icons">arrow_back</md-icon>
+    </md-button>
+    <md-button class="md-mini col-xs-2" href="/home">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
+      <md-icon class="material-icons">home</md-icon>
+    </md-button>
+  </md-toolbar>
 
-<!-- add seed button, modal form pops up when clicked -->
-<a href="/newSeedForm" class="btn btn-default" role="button">Add Seed</button>
+  <md-fab-speed-dial ng-hide="hidden" md-direction="up" md-open="isOpen" class="md-scale md-fab-top-right options" ng-class="md-hover-full">
+    <md-fab-trigger>
+      <md-button aria-label="seed menu" class="md-fab md-warn md-mini">
+        <md-tooltip md-direction="left" md-visible="tooltipVisible">Seed Menu</md-tooltip>
+        <md-icon class="material-icons" aria-label="menu">menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
 
-<a href="/locations" class="btn btn-default" role="button">Location</button>
+    <md-fab-actions class="row">
+      <md-button href="/newSeedForm" aria-label="add location" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Seed</md-tooltip>
+        <md-icon class="material-icons">add_circle_outline</md-icon>
+      </md-button>
+
+      <md-button href="/locations" aria-label="add location" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Locations</md-tooltip>
+        <md-icon class="material-icons">add_location</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</md-content>
