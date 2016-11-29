@@ -34,6 +34,7 @@
     "knex": "^0.12.6",
     "moment": "^2.16.0",
     "ng-csv": "^0.3.6",
+    "ng-svg": "^1.0.1",
     "passport": "^0.3.2",
     "passport-google-oauth2": "^0.1.6",
     "path": "^0.12.7",
