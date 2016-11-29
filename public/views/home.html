@@ -1,10 +1,31 @@
-<h1>Home</h1>
+<div class="row homebutton">
+  <div class="col-xs-8 col-md-8 col-xs-offset-2">
+    <md-button href="/seeds" class="md-raised md-cornered md-primary btn-block">Seeds</md-button>
+  </div>
+  <div class="col-xs-8 col-md-8 col-xs-offset-2">
+    <md-button href="/activities" class="md-raised md-cornered md-primary btn-block">Activities</md-button>
+  </div>
+</div>
 
-<!-- seed button -->
-<a href="/seeds" class="btn btn-default" role="button" ng-model="seedBtn">Seeds</a>
-
-<!-- activities button -->
-<a href="/activities" class="btn btn-default" role="button" ng-model="activityBtn">Activities</a>
-
-<!-- log out button -->
-<a href="/logout" type="button" class="btn btn-default"  role="button" ng-model="logoutBtn" target="_self">Log Out</a>
+<div class="nav" layout="row" layout-align="start end">
+  <md-fab-toolbar class="col-xs-12 col-md-12" md-open="isOpen" count="0" md-direction="right">
+      <md-fab-trigger class="align-with-text">
+       <md-button aria-label="home" class="md-fab md-primary">
+         <md-icon class="material-icons">home</md-icon>
+       </md-button>
+      </md-fab-trigger>
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button href="/seeds" aria-label="seeds page" class="md-icon-button">
+          <md-icon class="material-icons">local_florist</md-icon>
+        </md-button>
+        <md-button href="/activities" aria-label="activities page" class="md-icon-button">
+          <md-icon class="material-icons">assignment</md-icon>
+        </md-button>
+        <md-button href="/logout" aria-label="logout" class="md-icon-button">
+          <md-icon class="material-icons">exit_to_app</md-icon>
+        </md-button>
+       </md-fab-actions>
+     </md-toolbar>
+   </md-fab-toolbar>
+</div>
