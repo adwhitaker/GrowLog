@@ -5,15 +5,15 @@ angular.module('growLogApp')
 
 function LocationController(locationService, $route) {
     var loc = this;
-    loc.locationArray = [];
+    loc.locations = [];
 
     loc.refresh = function () {
       $route.reload();
     };
             locationService.getLocations().then(function(response) {
               console.log('response', response);
-                loc.locationArray = response;
-                console.log("loc.locationarray", loc.locationArray);
+                loc.locations = response;
+                console.log("loc.locations", loc.locations);
                 // empty form after clicking 'submit'
                 //location.location = '';
             });
