@@ -7,7 +7,6 @@ function SeedsController(seedsService, locationService) {
 
   seeds.allTheSeeds = seedsService;
 
-<<<<<<< Updated upstream
   // update seed in DB
   seeds.updateSeed = function (updatedSeedInfo) {
 
