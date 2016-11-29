@@ -12,27 +12,41 @@ function seedsService($http) {
 
   this.seeds = seeds;
 
+  // get seeds from DB
   ctrl.getSeeds = function () {
-    return $http.get('/addSeed').then(function (response) {
-      ctrl.seeds.allSeeds = [];
-      seeds.allSeeds = response.data;
+    return $http.get('/addSeed')
+      .then(function (response) {
+        ctrl.seeds.allSeeds = [];
 
-      seeds.allSeeds.forEach(function (currentSeed){
-        currentSeed.orderdate = moment(currentSeed.orderdate).format('L');
-        currentSeed.receivedate = moment(currentSeed.receivedate).format('L');
+        seeds.allSeeds = response.data;
+
+        seeds.allSeeds.forEach(function (currentSeed) {
+          currentSeed.orderdate = moment(currentSeed.orderdate).format('L');
+          currentSeed.receivedate = moment(currentSeed.receivedate).format('L');
+        });
+
+        return;
+      }).catch(function (err) {
+        console.log('err', err);
       });
+  };
 
-      return;
-    }).catch(function (err) {
-      console.log('err', err);
-    });
+  // add new seed to the DB, then get seeds from DB
+  ctrl.addSeed = function (data) {
+    return $http.post('/addSeed', data)
+      .then(function () {
+        ctrl.getSeeds();
+      }).catch(function (err) {
+        console.log('err', err);
+      });
   };
 
   ctrl.addUsedSeed = function (seedsdata) {
-    return $http.post('/seedsInUse', seedsdata).then(function (response) {
-      console.log('response', response);
-      return response;
-    });
+    return $http.post('/seedsInUse', seedsdata)
+      .then(function (response) {
+        ctrl.getUsedSeed();
+        return response;
+      });
   }; //end of addUsedSeeds
 
   // get used seeds fom DB
