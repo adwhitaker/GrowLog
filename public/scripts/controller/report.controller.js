@@ -2,6 +2,6 @@ angular.module('growLogApp')
        .controller('ReportController', ReportController);
 
 function ReportController() {
-  var report = this;
+  var reportCtrl = this;
   console.log('ReportController loaded');
 }
