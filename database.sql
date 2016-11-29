@@ -32,7 +32,7 @@ CREATE TABLE seedsinuse (
   id SERIAL PRIMARY KEY,
   seeds_id integer REFERENCES seeds,
   transfer boolean DEFAULT false,
-  quantity integer,
+  usedquantity integer,
   plantedassigndate date,
   plantdate date,
   plantduration integer,
