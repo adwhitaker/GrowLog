@@ -1,7 +1,7 @@
 angular.module('growLogApp')
        .config(configVeggies);
 
-function configVeggies($routeProvider, $locationProvider) {
+function configVeggies($routeProvider, $locationProvider, $mdThemingProvider) {
   $routeProvider.when('/home', {
     templateUrl: 'views/home.html',
     controller: 'HomeController as home',
@@ -65,4 +65,13 @@ function configVeggies($routeProvider, $locationProvider) {
   });
 
   $locationProvider.html5Mode(true);
+
+  $mdThemingProvider
+    .theme('default')
+    .primaryPalette('brown')
+    .accentPalette('light-green')
+    .warnPalette('deep-orange')
+    .backgroundPalette('brown');
+
+  $mdThemingProvider.setDefaultTheme('default');
 }
