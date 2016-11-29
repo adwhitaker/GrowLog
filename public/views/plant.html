@@ -1,66 +1,84 @@
+<h3>Activities:</h3>
+<!-- to show list of to-dos -->
+<div class="container">
 
-    <h3>Activities:</h3>
-    <!-- to show list of to-dos -->
-    <div class="container">
-
-        <ul class="list-group row">
-            <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
+    <ul class="list-group row">
+        <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
             planting.usedSeeds.seeds.usedSeeds">
-                <div class="row">
-                    <div class="col-xs-8 col-md-10">
-                        <h4><a href="#" ng-click="showDetails = !showDetails">
-                      Assigned Date: {{ plant.plantedassigndate }} | Quantity to Plant: {{ plant.usedquantity}}</a></h4>
-                        <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
-                        <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
-                        <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
+            <div class="row">
+                <div class="col-xs-8 col-md-10">
+                    <h4><a href="#" ng-click="showDetails = !showDetails">
+                          Assigned Date: {{ plant.plantedassigndate }} | Quantity to Plant: {{ plant.usedquantity}}</a></h4>
+                    <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
+                    <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
+                    <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
+                </div>
+                <div class="material-switch pull-right col-xs-4 col-md-2">
+                    <input id="complete {{ plant.seedsinuse_id }}" name="complete {{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails" />
+                    <label for="complete {{ plant.seedsinuse_id }}" class="label-success"></label>
+                </div>
+            </div>
+            <div class="row" ng-show="showDetails">
+                <div ng-hide="editing">
+                    <div class="col-xs-2 col-md-2">
+                        <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
                     </div>
-                    <div class="material-switch pull-right col-xs-4 col-md-2">
-                        <input id="{{ plant.seedsinuse_id }}" name="{{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails" />
-                        <label for="{{ plant.seedsinuse_id }}" class="label-success"></label>
+                    <div class="col-xs-2 col-md-2">
+                        <a href="#" ng-click="planting.deletePlant(plant.seedsinuse_id, plant.id)" role="button" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
-                <div class="row" ng-show="showDetails">
-                    <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="planting.editPlant()" role="button" class="btn btn-default">edit</a>
+
+                <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
+                    <div class="form-group has-float-label">
+                        <input class="form-control" id="assigndate {{ plant.seedsinuse_id }}" type="date" ng-model="plant.newAssignDate" />
+                        <label for="assigndate {{ plant.seedsinuse_id }}">Update Assign Date</label>
                     </div>
-                    <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="planting.deletePlant(plant.seedsinuse_id)" role="button" class="btn btn-danger">delete</a>
+                    <div class="form-group has-float-label">
+                        <label for="quantity complete {{ plant.seedsinuse_id }}">Update Quantity</label>
+                        <input type="number" class="form-control" id="quantity complete {{ plant.seedsinuse_id }}" ng-model="plant.updatedQuantity" />
                     </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" ng-click="planting.updatePlant(plant.seedsinuse_id, plant)">Save</button>
+                        <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-horizontal" ng-show="completeDetails">
+                <div class="col-xs-2 col-md-2">
+                    <a href="#" ng-click="planting.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
                 </div>
-                <div class="row" ng-show="completeDetails">
-                    <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="planting.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+            </div>
+</div>
+</li>
+</ul>
+</div>
 
 <md-content layout="row" id="navigationbar">
-  <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/activities">
-      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
-      <md-icon class="material-icons">arrow_back</md-icon>
-    </md-button>
-    <md-button class="md-mini col-xs-2" href="/home">
-      <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
-      <md-icon class="material-icons">home</md-icon>
-    </md-button>
-  </md-toolbar>
+    <md-toolbar class="row navbar one">
+        <md-button class="md-mini col-xs-2" href="/activities">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+            <md-icon class="material-icons">arrow_back</md-icon>
+        </md-button>
+        <md-button class="md-mini col-xs-2" href="/home">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
+            <md-icon class="material-icons">home</md-icon>
+        </md-button>
+    </md-toolbar>
 
-  <md-fab-speed-dial ng-hide="hidden" md-direction="up" md-open="isOpen" class="md-scale md-fab-top-right options" ng-class="md-hover-full">
-    <md-fab-trigger>
-      <md-button aria-label="seed menu" class="md-fab md-warn md-mini">
-        <md-tooltip md-direction="left" md-visible="tooltipVisible">Planting Menu</md-tooltip>
-        <md-icon class="material-icons" aria-label="menu">menu</md-icon>
-      </md-button>
-    </md-fab-trigger>
+    <md-fab-speed-dial ng-hide="hidden" md-direction="up" md-open="isOpen" class="md-scale md-fab-top-right options" ng-class="md-hover-full">
+        <md-fab-trigger>
+            <md-button aria-label="seed menu" class="md-fab md-warn md-mini">
+                <md-tooltip md-direction="left" md-visible="tooltipVisible">Planting Menu</md-tooltip>
+                <md-icon class="material-icons" aria-label="menu">menu</md-icon>
+            </md-button>
+        </md-fab-trigger>
 
-    <md-fab-actions class="row">
-      <md-button href="/plantForm" aria-label="add location" class="md-fab md-raised md-mini">
-        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Activity</md-tooltip>
-        <md-icon class="material-icons">add_circle_outline</md-icon>
-      </md-button>
-    </md-fab-actions>
-  </md-fab-speed-dial>
+        <md-fab-actions class="row">
+            <md-button href="/plantForm" aria-label="add location" class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Activity</md-tooltip>
+                <md-icon class="material-icons">add_circle_outline</md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
 </md-content>
