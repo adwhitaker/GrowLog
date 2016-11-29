@@ -23,10 +23,16 @@
   margin: 5% 0 5% 0;
 }
 
-.row.navbar {
+.row.navbar.two {
   display: inline-block;
   bottom: -140px;
-  width: 500px;
+  width: 1500px;
+}
+
+.row.navbar.one {
+  display: inline-block;
+  bottom: -95px;
+  width: 1500px;
 }
 
 .material-switch > label {
