@@ -1,19 +1,30 @@
-    <form class="form-horizontal">
+    <form class="form-horizontal" name="nlForm">
       <h1>Add Location</h1>
         <div class="form-group">
             <label for="field">Field:</label>
-            <input type="text" class="form-control" id="field" ng-model="locationForm.location.field">
+            <input type="text" class="form-control" id="field" ng-model="locationForm.location.field" ng-maxlength="10" name="field" required>
+            <div ng-messages="nlForm.field.$error" style="color:maroon" role="alert" >
+            <div ng-message="required">You did not enter a field</div>
+            <div ng-message="maxlength">Your field is too long</div>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="section">Section:</label>
-            <input type="text" class="form-control" id="section" ng-model="locationForm.location.section">
+            <input type="text" class="form-control" id="section" ng-model="locationForm.location.section" ng-maxlength="10" name="section" required>
+            <div ng-messages="nlForm.section.$error" style="color:maroon" role="alert" >
+            <div ng-message="required">You did not enter a section.</div>
+            <div ng-message="maxlength">Your entry is too long.</div>
         </div>
-
+</div>
         <div class="form-group">
             <label for="row">Row:</label>
-            <input type="text" class="form-control" id="row" ng-model="locationForm.location.row">
+            <input type="text" class="form-control" id="row" ng-model="locationForm.location.row"  ng-maxlength="10" name="row" required>
+            <div ng-messages="nlForm.field.$error" style="color:maroon" role="alert" >
+            <div ng-message="required">You did not enter a row.</div>
+            <div ng-message="maxlength">Your entry is too long.</div>
         </div>
+      </div>
 
         <div class="form-group row">
             <div class="col-xs-12 col-md-12">
