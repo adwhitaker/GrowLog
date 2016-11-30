@@ -23,10 +23,10 @@ function seedsService($http) {
 
         seeds.allSeeds = response.data;
 
-        // seeds.allSeeds.forEach(function (currentSeed) {
-        //   currentSeed.orderdate = moment(currentSeed.orderdate).format('L');
-        //   currentSeed.receivedate = moment(currentSeed.receivedate).format('L');
-        // });
+        seeds.allSeeds.forEach(function (currentSeed) {
+          currentSeed.orderdate = currentSeed.orderdate === null ? null : new Date(currentSeed.orderdate);
+          currentSeed.receivedate = currentSeed.receivedate === null ? null : new Date(currentSeed.receivedate);
+        });
 
         return;
       }).catch(function (err) {
@@ -79,15 +79,14 @@ function seedsService($http) {
 
       let allTheSeeds = response.data;
 
-      // allTheSeeds.forEach(function (currentSeed) {
-        // convert with moment
-        // currentSeed.orderdate = moment(currentSeed.orderdate).format('L');
-        // currentSeed.plantdate = moment(currentSeed.orderdate).format('L');
-        // currentSeed.receivedate = moment(currentSeed.receivedate).format('L');
-        // currentSeed.actualharvestdate = moment(currentSeed.actualharvestdate).format('L');
-        // currentSeed.plantedassigndate = moment(currentSeed.plantedassigndate).format('L');
-        // currentSeed.projectedharvestdate = moment(currentSeed.projectedharvestdate).format('L');
-      // });
+      allTheSeeds.forEach(function (currentSeed) {
+        currentSeed.orderdate = currentSeed.orderdate === null ? null : new Date(currentSeed.orderdate);
+        currentSeed.plantdate = currentSeed.plantdate === null ? null : new Date(currentSeed.orderdate);
+        currentSeed.receivedate = currentSeed.receivedate === null ? null : new Date(currentSeed.receivedate);
+        currentSeed.actualharvestdate = currentSeed.actualharvestdate === null ? null : new Date(currentSeed.actualharvestdate);
+        currentSeed.plantedassigndate = currentSeed.plantedassigndate === null ? null : new Date(currentSeed.plantedassigndate);
+        currentSeed.projectedharvestdate = currentSeed.projectedharvestdate === null ? null : new Date(currentSeed.projectedharvestdate);
+      });
 
       allTheSeeds.forEach(function (singleSeed) {
         if (singleSeed.actualharvestdate) {
@@ -100,7 +99,6 @@ function seedsService($http) {
 
       });
 
-      console.log('all seeds', seeds);
       return;
     }).catch(function (err) {
       console.log('err', err);
