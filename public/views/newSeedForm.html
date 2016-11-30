@@ -1,10 +1,13 @@
 <div class="container">
     <h1>Add Seed</h1>
 
-<form>
+<form name="nsForm">
   <div class="form-group">
   <label for="genericName">Generic Name</label>
-  <input type="text" class="form-control" ng-model="newSeed.seed.generic" placeholder="e.g. bean, carrot">
+  <input type="text" class="form-control" ng-model="newSeed.seed.generic" placeholder="e.g. bean, carrot" name="generic" id="generic" ng-maxlength="40" required >
+  <div ng-messages="nsForm.generic.$error" style="color:maroon" role="alert" >
+<div ng-message="required">Please complete.</div>
+<div ng-message="maxlength">Your entry is too long.</div>
 </div>
 <div class="form-group">
   <label for="seedVariety">Variety</label>
