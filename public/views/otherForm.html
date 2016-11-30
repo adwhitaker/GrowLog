@@ -1,4 +1,4 @@
-  <form class="form-horizontal">
+  <form class="form-horizontal" name="oForm">
     <h1>Other Tasks:</h1>
     <div class="form-group row">
       <label for="location">Location:</label>
@@ -13,12 +13,16 @@
 
     <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" class="form-control" ng-model="otherForm.task.title" id="title" placeholder="Title">
+        <input type="text" name="title" class="form-control" ng-model="otherForm.task.title" id="title" placeholder="Title" ng-maxlength="100" required>
+        <div ng-messages="oForm.title.$error" style="color:maroon" role="alert" >
+      <div ng-message="required">Please complete.</div>
+      <div ng-message="maxlength">Your entry is too long.</div>
       </div>
+    </div>
 
       <div class="form-group">
         <label for="comments">Comments:</label>
-        <input type="textarea" class="form-control" ng-model="otherForm.task.comments" id="comments">
+        <input type="textarea" class="form-control" ng-model="otherForm.task.comments" id="comments" placeholder="comments">
       </div>
 
       <div class="form-group row">
