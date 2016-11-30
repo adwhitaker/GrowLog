@@ -14,7 +14,12 @@ router.route('/:id')
 // get currently in use seeds in DB
 function getUsedSeeds(req, res) {
 
-  knex.select()
+  knex.select('actualharvestdate', 'amountharvested', 'amountharvestedunits', 'daystoharvest',
+      'donation', 'family', 'field', 'generic', 'harvestduration', 'seeds_in_use_loc.id',
+      'location_id', 'lotnumber', 'manufacturer', 'orderdate', 'plantdate', 'plantduration',
+      'plantedassigndate', 'plantouse', 'projectedharvestdate', 'quantity', 'quantityunits',
+       'receivedate', 'row', 'section', 'seeds_id', 'seedsinuse_id', 'seedsperunit',
+       'supplier', 'transfer', 'unitsperpack', 'usedquantity', 'variety')
       .from('seedsinuse')
       .leftJoin('seeds', 'seedsinuse.seeds_id', 'seeds.id')
       .join('seeds_in_use_loc', 'seedsinuse.id', 'seeds_in_use_loc.seedsinuse_id')
