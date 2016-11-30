@@ -7,6 +7,30 @@ function HarvestController(seedsService) {
 
   harvest.plantedSeeds = seedsService;
 
+  harvest.editedPlant = function (plant) {
+    harvest.editPlantInProgress = Object.assign({}, plant);
+  };
+
+  harvest.editPlant = function (plant) {
+    var updatedPlant = {
+      seeds_id: plant.seeds_id,
+      transfer: plant.transfer,
+      usedquantity: plant.usedquantity,
+      plantedassigndate: plant.plantedassigndate,
+      plantdate: plant.plantdate,
+      plantduration: plant.plantduration,
+      projectedharvestdate: plant.projectedharvestdate,
+      actualharvestdate: plant.actualharvestdate,
+      amountharvested: plant.amountharvested,
+      amountharvestedunits: plant.amountharvestedunits,
+      joins_id: plant.id,
+      location_id: plant.location_id,
+      seedsinuse_id: plant.seedsinuse_id,
+    };
+
+    seedsService.updateUsedSeed(updatedPlant);
+  };
+
   harvest.completeHarvest = function (harvestedPlant) {
 
     var newHarvestedPlant = {
