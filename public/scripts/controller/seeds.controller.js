@@ -7,8 +7,13 @@ function SeedsController(seedsService, locationService) {
 
   seeds.allTheSeeds = seedsService;
 
+  seeds.editedSeed = function (plant) {
+    seeds.editPlantInProgress = Object.assign({}, plant);
+  };
+
   // update seed in DB
   seeds.updateSeed = function (updatedSeedInfo) {
+    let id = updatedSeedInfo.id;
 
     let data = {
       generic: updatedSeedInfo.generic,
@@ -28,10 +33,12 @@ function SeedsController(seedsService, locationService) {
       plantouse: updatedSeedInfo.plantouse
     };
 
+    seedsService.updateSeed(id, data);
   };
 
   // delete seed from DB
   seeds.deleteSeed = function (seedID) {
+    console.log(seedID);
     seedsService.deleteSeed(seedID);
   };
 
