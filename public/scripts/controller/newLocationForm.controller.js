@@ -1,7 +1,7 @@
 angular.module('growLogApp')
        .controller('NewLocationFormController', NewLocationFormController);
 
-function NewLocationFormController($http) {
+function NewLocationFormController($http, locationService) {
   var locationForm = this;
 
   // add new location to the DB
@@ -13,13 +13,12 @@ function NewLocationFormController($http) {
       row: location.row
     };
 
-    $http.post('/location', data)
-         .then(function () {
-            locationForm.location = '';
-          })
-         .catch(function () {
-            console.log('error posting request', error);
-          });
+    locationService.addLocation(data)
+                   .then(function () {
+                      locationForm.location = '';
+                    })
+                   .catch(function () {
+                      console.log('error posting request', error);
+                    });
   };
-
 };
