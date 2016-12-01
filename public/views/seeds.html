@@ -71,21 +71,19 @@
           <input type="number" ng-model="seedvar.daystoharvest" placeholder="seedvar.daystoharvest"></input>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Donation</label>
-          <input type="checkbox" ng-model="seedvar.donation" placeholder="seedvar.donation"></input>
+          <md-checkbox ng-model="seedvar.donation">Donation</md-datepicker>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Plan to Use</label>
-          <input type="checkbox" ng-model="seedvar.plantouse" placeholder="seedvar.plantouse"></input>
+          <md-checkbox ng-model="seedvar.plantouse">Plan to Use</md-datepicker>
         </md-input-container>
       </div>
     </div>
 
     <div class="col-xs-2 col-md-2">
       <div ng-show="seeds.details{{seedvar.id}}">
-        <md-button aria-label="edit" class="btn1 md-accent" ng-click="seeds.editDetails(seedvar.id)">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="seeds.editDetails(seedvar.id)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Seed</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">create</md-icon>
+          <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
         </md-button>
         <md-button aria-label="delete" class="btn1 md-warn" ng-click="seeds.deleteSeed(seedvar.id)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Seed</md-tooltip>
@@ -93,7 +91,7 @@
         </md-button>
       </div>
       <div ng-show="seeds.edits{{seedvar.id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent" ng-click="seeds.updateSeed(seedvar)">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="seeds.updateSeed(seedvar)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
           <md-icon class="material-icons" aria-label="menu">done</md-icon>
         </md-button>
