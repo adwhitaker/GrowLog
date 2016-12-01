@@ -4,9 +4,7 @@ angular.module('growLogApp')
 function IssueFormController($http, locationService) {
   var issueForm = this;
 
-  locationService.getLocations().then(function (response) {
-    issueForm.locations = response;
-  });
+  issueForm.locations = locationService;
 
   issueForm.addTask = function (task) {
     var location_id = task.location.id;
