@@ -15,7 +15,7 @@
             <li class="list-group-item col-xs-12 col-md-12" ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | orderBy: 'seedvar.id' | filter:search">
                 <div class="row">
                     <div class="col-xs-8 col-md-10">
-                        <h4><a href="#" ng-click="showDetails = !showDetails">
+                        <h4><a href="#" ng-click="showDetails = !showDetails; seeds.editedSeed(seedvar)">
               Generic Name: {{ seedvar.generic }} | Plant Family: {{ seedvar.family }} | Plant Variety: {{ seedvar.variety }}</a></h4>
                         <p>Manufacturer: {{ seedvar.manufacturer }} | Supplier: {{ seedvar.supplier }} | Lot Number: {{ seedvar.lotnumber }}</p>
                     </div>
@@ -26,64 +26,64 @@
                         <!-- <form> -->
                         <div class="form-group">
                             <label for="generic">Generic:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.generic">
+                            <input type="text" class="form-control" id="item" ng-model="seeds.editPlantInProgress.generic">
                         </div>
                         <div class="form-group">
                             <label for="family">Plant Family:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.family">
+                            <input type="text" class="form-control" id="item" ng-model="seeds.editPlantInProgress.family">
                         </div>
                         <div class="form-group">
                             <label for="variety">Variety:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.variety">
+                            <input type="text" class="form-control" id="item" ng-model="seeds.editPlantInProgress.variety">
                         </div>
                         <div class="form-group">
                             <label for="manufacturer">Manufacturer:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.manufacturer">
+                            <input type="text" class="form-control" id="item" ng-model="seeds.editPlantInProgress.manufacturer">
                         </div>
                         <div class="form-group">
                             <label for="supplier">Supplier:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.supplier">
+                            <input type="text" class="form-control" id="item" ng-model="seeds.editPlantInProgress.supplier">
                         </div>
                         <div class="form-group">
                             <label for="lotnumber">Lot Number:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.lotnumber">
+                            <input type="text" class="form-control" id="item" ng-model="seeds.editPlantInProgress.lotnumber">
                         </div>
                         <div class="form-group">
                             <label for="orderdate">Order Date:</label>
-                            <input type="text" class="form-control" id="item" ng-model="seedvar.orderdate">
+                            <input type="date" class="form-control" id="item" ng-model="seeds.editPlantInProgress.orderdate">
                         </div>
                         <div class="form-group">
                             <label for="receivedate">Receive Date:</label>
-                            <input type="text" ng-model="seedvar.receivedate" class="form-control" placeholder="mm/dd/yyyy">
+                            <input type="date" ng-model="seeds.editPlantInProgress.receivedate" class="form-control" placeholder="mm/dd/yyyy">
                         </div>
                         <div class="form-group">
                             <label for="quantity">Quantity:</label>
-                            <input type="number" ng-model="seedvar.quantity" class="form-control">
+                            <input type="number" ng-model="seeds.editPlantInProgress.quantity" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="quantityunits">Quantity Units:</label>
-                            <input type="text" ng-model="seedvar.quantityunits" class="form-control">
+                            <input type="text" ng-model="seeds.editPlantInProgress.quantityunits" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="seedsperunit">Seeds Per Units:</label>
-                            <input type="number" ng-model="seedvar.seedsperunit" class="form-control">
+                            <input type="number" ng-model="seeds.editPlantInProgress.seedsperunit" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="unitsperpack">Units Per Pack:</label>
-                            <input type="number" ng-model="seedvar.unitsperpack" class="form-control">
+                            <input type="number" ng-model="seeds.editPlantInProgress.unitsperpack" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="daystoharvest">Days Until Harvest:</label>
-                            <input type="number" ng-model="seedvar.unitsperpack" class="form-control">
+                            <input type="number" ng-model="seeds.editPlantInProgress.daystoharvest" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Donation: <input type="checkbox" ng-model="seedvar.donation"></label>
+                            <label>Donation: <input type="checkbox" ng-model="seeds.editPlantInProgress.donation"></label>
                         </div>
                         <div class="form-group">
-                            <label>Plant to Use: <input type="checkbox" ng-model="seedvar.plantouse"></label>
+                            <label>Plant to Use: <input type="checkbox" ng-model="seeds.editPlantInProgress.plantouse"></label>
                         </div>
 
-                        <a href="#" ng-click="seeds.updateSeed(seedvar)" role="button" class="btn btn-default">edit</a>
+                        <a href="#" ng-click="seeds.updateSeed(seeds.editPlantInProgress)" role="button" class="btn btn-default">edit</a>
                         <a href="#" ng-click="seeds.deleteSeed(seedvar.id)" role="button" class="btn btn-danger">delete</a>
                     </div>
                 </div>
