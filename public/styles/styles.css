@@ -23,12 +23,6 @@
   margin: 5% 0 5% 0;
 }
 
-.row.navbar.two {
-  display: inline-block;
-  bottom: -140px;
-  width: 1500px;
-}
-
 .row.navbar.one {
   display: inline-block;
   bottom: -95px;
@@ -56,6 +50,24 @@
   text-align: center;
 }
 
-.display {
+.display.well {
   margin-top: 5%;
+  overflow: auto !important;
+  max-height: 400px !important;
+}
+
+.line {
+  border-bottom-width: 1px;
+  border-bottom-color: white;
+  border-bottom-style: solid;
+}
+
+.titleheader {
+  text-align: center;
+  color: rgb(90, 60, 50);
+}
+
+p.indisplay {
+  font-size: 13px;
+  margin-bottom: 1px;
 }
