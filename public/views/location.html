@@ -1,24 +1,21 @@
-
 <h1>location </h1>
 
-
 <div class="row">
-    <div class="col-md-10">
-        <div class="table-responsive">
-<table class="table table-hover">
-<th>
-  Edit
-</th>
-    <th>Id</th>
+  <div class="col-md-10">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <th>
+          Edit
+        </th>
+        <!-- <th>Id</th> -->
 
-    <th>Field</th>
-    <th>Section</th>
-    <th>Row</th>
-    <th>Delete</th>
+        <th>Field</th>
+        <th>Section</th>
+        <th>Row</th>
+        <th>Delete</th>
 
-
-    </tr>
-    <tr ng-repeat="locvar in location.locations track by $index">
+      </tr>
+      <tr ng-repeat="locvar in location.locationsFromService.locations.allLocations | orderBy: ['field', 'section', 'row']" >
         <!-- checkbox with ng show/hide to input location etc. -->
 
         <td>
@@ -28,29 +25,30 @@
             <div class="col-xs-2">
 
 
-            <label for="ex1">Field</label>
-          <input type="text" name="info" class="form-control" ng-model="locvar.field" id="ex1"/>
-          <label>Section</label>
+              <label for="ex1">Field</label>
+              <input type="text" name="info" class="form-control" ng-model="locvar.field" id="ex1"/>
+              <label>Section</label>
 
-          <input type="text" name="info" class="form-control" ng-model="locvar.section" />
-          <label>Row</label>
+              <input type="text" name="info" class="form-control" ng-model="locvar.section" />
+              <label>Row</label>
 
-          <input type="text" name="info" class="form-control" ng-model="locvar.row" />
-          <button type="button" class="btn btn-default" ng-click="location.updateLocation(locvar.id, locvar.field, locvar.section, locvar.row)">Save Changes</button>
-</div>
+              <input type="text" name="info" class="form-control" ng-model="locvar.row" />
+              <button type="button" class="btn btn-default" ng-click="location.updateLocation(locvar.id, locvar.field, locvar.section, locvar.row)">Save Changes</button>
+            </div>
           </form>
           <!-- end of modal -->
         </td>
-        <td>{{locvar.id}}</td>
+        <!-- <td>{{locvar.id}}</td> -->
         <td>{{locvar.field}}</td>
         <td>{{locvar.section}}</td>
         <td>{{locvar.row}}</td>
-        <td>         <button ng-click="location.deleteLocation(locvar.id)" class="btn btn-danger">Delete</button>
- </td>
+        <td>
+          <button ng-click="location.deleteLocation(locvar.id)" class="btn btn-danger">Delete</button>
+        </td>
 
-    </tr>
-  </table>
-</div>
+      </tr>
+    </table>
+  </div>
 </div>
 </div>
 
