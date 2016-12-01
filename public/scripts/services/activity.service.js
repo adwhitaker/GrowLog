@@ -46,6 +46,7 @@ function activityService($http) {
           activitiesObject[newActivity.type].push(newActivity);
           activitiesObject[newActivity.type].forEach(function (currentActivity) {
             currentActivity.assigndate = moment(currentActivity.assigndate).format('L');
+            currentActivity.checkstatus = 'check_box_outline_blank';
           });
         }
       });
