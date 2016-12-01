@@ -48,18 +48,15 @@ function PlantController(seedsService) {
       location_id: plantObject.location_id,
       seedsinuse_id: plantObject.seedsinuse_id,
     };
-    console.log('updatedPlant:', updatedPlant);
     seedsService.updateUsedSeed(updatedPlant);
   };
 
   plant.deletePlant = function(id, plantObject) {
-    console.log('deletePlant id:', id, 'deletePlant plantObject:', plantObject);
     var deletedPlantTask = {
       join_id: plantObject.id,
       location_id: plantObject.location_id,
       seedsinuse_id: plantObject.seedsinuse_id
     };
-    console.log('deletedPlantTask:', deletedPlantTask);
     seedsService.deleteUsedSeed(deletedPlantTask);
   };
 }
