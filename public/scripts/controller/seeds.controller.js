@@ -7,6 +7,16 @@ function SeedsController(seedsService, locationService) {
 
   seeds.allTheSeeds = seedsService;
 
+  seeds.showDetails = function (id) {
+    seeds['details' + id] = !seeds['details' + id];
+    seeds['edits' + id] = false;
+  };
+
+  seeds.editDetails = function (id) {
+    seeds['edits' + id] = !seeds['edits' + id];
+    seeds['details' + id] = false;
+  };
+
   seeds.editedSeed = function (plant) {
     seeds.editPlantInProgress = Object.assign({}, plant);
   };
@@ -14,6 +24,19 @@ function SeedsController(seedsService, locationService) {
   // update seed in DB
   seeds.updateSeed = function (updatedSeedInfo) {
     let id = updatedSeedInfo.id;
+    seeds.showDetails(id);
+
+    if (updatedSeedInfo.genericUpdated === null) {
+      return;
+    } else {
+      updatedSeedInfo.generic = updatedSeedInfo.genericUpdated;
+    }
+
+    if (updatedSeedInfo.varietyUpdated === null) {
+      return;
+    } else {
+      updatedSeedInfo.variety = updatedSeedInfo.varietyUpdated;
+    }
 
     let data = {
       generic: updatedSeedInfo.generic,
