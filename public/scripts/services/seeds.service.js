@@ -58,7 +58,7 @@ function seedsService($http) {
 
   // delete seed in DB, then get all seeds from DB
   ctrl.deleteSeed = function (seedID) {
-    return $http.delete('addSeed/' + seedID)
+    return $http.delete('/addSeed/' + seedID)
       .then(function () {
         ctrl.getSeeds();
         return;
