@@ -1,58 +1,69 @@
-
-
-  <h3>Activities:</h3>
-
-  <!-- to show list of to-dos -->
-  <ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="issue in issues.activities.activitiesObject.issues | orderBy: 'assigndate'">
-      <div class="row">
-        <div class="col-xs-8 col-md-10">
-          <h4><a href="#" ng-click="showDetails = !showDetails">{{issue.title}}</a></h4>
-          <p>Field: {{issue.field}} | Section: {{issue.section}} | Row: {{issue.row}}</p>
-        </div>
-        <div class="material-switch pull-right col-xs-4 col-md-2">
-          <input id="{{issue.act_id}}" name="{{issue.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
-          <label for="{{issue.act_id}}" class="label-success"></label>
-        </div>
+<md-content class="display">
+  <div class="row well" ng-repeat="issue in issues.activities.activitiesObject.issues | orderBy: ['assigndate' ,'act_id'] ">
+    <div class="col-xs-8 col-md-9">
+      <h5>ISSUE: <a href="#" ng-click="issues.showDetails(issue.act_id)">{{issue.title}}</a></h5>
+      <div ng-show="issues.details{{issue.act_id}}">
+        <p class="indisplay"><strong>Field:</strong> {{issue.field}} <strong>Section:</strong> {{issue.section}} <strong>Row:</strong> {{issue.row}}</p>
+        <p class="indisplay"><strong>Reported On: </strong>{{issue.assigndate}}</p>
+        <p class="indisplay"><strong>Comments: </strong>{{issue.comments}}</p>
       </div>
-      <div class="row" ng-show="showDetails">
-        <div ng-hide="editing">
-          <div class="col-xs-6 col-md-8">
-            <p>{{issue.comments}}</p>
-          </div>
-          <div class="col-xs-2 col-md-2">
-            <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
-          </div>
-          <div class="col-xs-2 col-md-2">
-            <a href="#" ng-click="issues.deleteIssue(issue.act_id, issue.id)" role="button" class="btn btn-danger">delete</a>
-          </div>
-        </div>
-
-        <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
-          <div class="form-group has-float-label">
-            <textarea class="form-control" id="{{issue.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{issue.act_id}} placeholder="e.g. cabbage moths" ng-model="issue.comments"></textarea>
-            <label for="{{issue.act_id}}">Comments</label>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-success" ng-click="issues.updateIssue(issue.act_id, issue)">Save</button>
-            <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
-          </div>
-        </form>
+      <div ng-show="issues.edits{{issue.act_id}}">
+        <md-input-container class="md-block">
+          <label>Update Title</label>
+          <input id="comments {{issue.act_id}}" placeholder="{{issue.title}}" ng-model="issue.updatedTitle"></input>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Update Comments</label>
+          <input id="comments {{issue.act_id}}" placeholder="{{issue.comments}}" ng-model="issue.updatedComments"></input>
+        </md-input-container>
       </div>
-
-      <div class="form-horizontal" ng-show="completeDetails">
-        <div class="form-group row">
-          <div class="col-xs-10 col-md-10">
-            <label for="{{issue.act_id}}">Comments</label>
-            <textarea class="form-control" id="{{issue.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{issue.act_id}} ng-model="issue.comments"></textarea>
-          </div>
-        </div>
-        <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="issues.completeIssue(issue.act_id, issue)" role="button" class="btn btn-success">Complete</a>
-        </div>
+      <div ng-show="issues.complete{{issue.act_id}}">
+        <md-input-container class="md-block">
+          <label>Additional Comments</label>
+          <input id="comments {{issue.act_id}}" placeholder="{{issue.comments}}" ng-model="issue.comments"></input>
+        </md-input-container>
       </div>
-    </li>
-</ul>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <div ng-hide="issues.details{{issue.act_id}} || issues.edits{{issue.act_id}} || issues.complete{{issue.act_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent" ng-click="issues.markComplete(issue.act_id, issue.checkstatus)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">{{issue.checkstatus}}</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="issues.details{{issue.act_id}}">
+        <md-button aria-label="edit" class="btn1 md-accent" ng-click="issues.editDetails(issue.act_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Issue</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">create</md-icon>
+        </md-button>
+        <md-button aria-label="delete" class="btn1 md-warn" ng-click="issues.deleteIssue(issue.act_id, issue.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Issue</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="issues.edits{{issue.act_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent" ng-click="issues.updateIssue(issue.act_id, issue)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="issues.editDetails(issue.act_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="issues.complete{{issue.act_id}}">
+        <md-button aria-label="finish issue" class="btn1 md-accent" ng-click="issues.completeIssue(issue.act_id, issue)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="issues.markComplete(issue.act_id, issue.checkstatus)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+    </div>
+  </div>
+</md-content>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
