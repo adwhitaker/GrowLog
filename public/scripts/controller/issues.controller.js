@@ -4,6 +4,29 @@ angular.module('growLogApp')
 function IssuesController(activityService, $route) {
   var issues = this;
 
+  issues.showDetails = function (id) {
+    issues['details' + id] = !issues['details' + id];
+    issues['edits' + id] = false;
+    issues['complete' + id] = false;
+  };
+
+  issues.editDetails = function (id) {
+    issues['edits' + id] = !issues['edits' + id];
+    issues['details' + id] = false;
+    issues['complete' + id] = false;
+  };
+
+  issues.markComplete = function (id, check) {
+    issues['complete' + id] = !issues['complete' + id];
+    issues['edits' + id] = false;
+    issues['details' + id] = false;
+    if (check === 'check_box_outline_blank') {
+      check = 'check_box';
+    } else {
+      check = 'check_box_outline_blank';
+    }
+  };
+
   issues.activities = activityService;
 
   activityService.getActivities();
@@ -13,8 +36,9 @@ function IssuesController(activityService, $route) {
     activityService.deleteActivity(activityId, joinsId);
   };
 
-  issues.completeIssue = function(id, issueObject) {
-    var id = id;
+  issues.completeIssue = function (id, issueObject) {
+    issues.markComplete(id);
+
     var completeDate = new Date();
     var completeDate = moment(completeDate).format('L');
 
@@ -28,28 +52,24 @@ function IssuesController(activityService, $route) {
       joins_id: issueObject.id,
       users_id: issueObject.users_id,
     };
-    console.log(activity);
-
     activityService.updateActivity(id, activity);
 
-  };
+  }
 
-  issues.updateIssue = function(id, issueObject) {
-    var id = id;
+  issues.updateIssue = function (id, issueObject) {
+    issues.showDetails(id);
+
     var activity = {
       location_id: issueObject.location_id,
       type: 'issues',
       assigndate: issueObject.assigndate,
-      title: issueObject.title,
-      comments: issueObject.comments,
+      title: issueObject.updatedTitle,
+      comments: issueObject.updatedComments,
       joins_id: issueObject.id,
       users_id: issueObject.users_id,
     };
     console.log(activity);
 
     activityService.updateActivity(id, activity);
-  };
-
-  console.log('IssuesController loaded');
-
+  }
 }
