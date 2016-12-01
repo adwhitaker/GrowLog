@@ -1,9 +1,13 @@
+
 <md-content layout="column" class="row well display">
   <div class="col-xs-12 col-md-12">
     <md-input-container class="md-block">
+
+
+
       <label>Location of Issue</label>
       <md-select name="type" ng-model="issueForm.task.location.id" id="location" required="">
-        <md-option ng-repeat="location in issueForm.locations" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}} </md-option>
+        <md-option ng-repeat="location in issueForm.locations.locations.allLocations | orderBy: ['field', 'section', 'row']" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}</md-option>
       </md-select>
     </md-input-container>
     <md-input-container class="md-block">
