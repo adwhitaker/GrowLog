@@ -12,7 +12,7 @@ function ReportController($http) {
 
   reportCtrl.getInfo = function() {
     return $http.get('/reports').then(function(response) {
-      console.log('resoponse', response);
+        console.log('response', response);
         return response.data;
       });
   };
