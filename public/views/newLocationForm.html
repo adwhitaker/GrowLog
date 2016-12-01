@@ -1,42 +1,26 @@
-    <form class="form-horizontal" name="nlForm">
-      <h1>Add Location</h1>
-        <div class="form-group">
-            <label for="field">Field:</label>
-            <input type="text" class="form-control" id="field" ng-model="locationForm.location.field" ng-maxlength="10" name="field" required>
-            <div ng-messages="nlForm.field.$error" style="color:maroon" role="alert" >
-            <div ng-message="required">You did not enter a field</div>
-            <div ng-message="maxlength">Your field is too long</div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="section">Section:</label>
-            <input type="text" class="form-control" id="section" ng-model="locationForm.location.section" ng-maxlength="10" name="section" required>
-            <div ng-messages="nlForm.section.$error" style="color:maroon" role="alert" >
-            <div ng-message="required">You did not enter a section.</div>
-            <div ng-message="maxlength">Your entry is too long.</div>
-        </div>
-</div>
-        <div class="form-group">
-            <label for="row">Row:</label>
-            <input type="text" class="form-control" id="row" ng-model="locationForm.location.row"  ng-maxlength="10" name="row" required>
-            <div ng-messages="nlForm.field.$error" style="color:maroon" role="alert" >
-            <div ng-message="required">You did not enter a row.</div>
-            <div ng-message="maxlength">Your entry is too long.</div>
-        </div>
-      </div>
-
-        <div class="form-group row">
-            <div class="col-xs-12 col-md-12">
-                <button type="submit" ng-click="locationForm.addLocation(locationForm.location)" class="btn btn-primary">Submit</button>
-                <a href="/locations" role="button" class="btn btn-default">Back</a>
-            </div>
-        </div>
-    </form>
+<md-content layout="column" class="row well display">
+  <div class="col-xs-12 col-md-12">
+    <md-input-container class="md-block">
+      <label>Field</label>
+      <input type="text" ng-model="locationForm.location.field" id="field" ng-maxlength="10" name="field" required="" />
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Section</label>
+      <input type="text" ng-model="locationForm.location.section" ng-maxlength="10" id="section" name="section" required="" />
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Row</label>
+      <input type="text" ng-model="locationForm.location.row" ng-maxlength="10" id="row" name="row" required="" />
+    </md-input-container>
+    <div layout="center center">
+      <md-button ng-click="locationForm.addLocation(locationForm.location)" class="md-raised md-cornered md-warn btn-block">Submit</md-button>
+    </div>
+  </div>
+</md-content>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/locations">
+    <md-button class="md-mini col-xs-2" href="/seeds">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
       <md-icon class="material-icons">arrow_back</md-icon>
     </md-button>
