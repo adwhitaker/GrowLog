@@ -1,37 +1,33 @@
-  <form class="form-horizontal" name="oForm">
-    <h1>Other Tasks:</h1>
-    <div class="form-group row">
-      <label for="location">Location:</label>
-      <select class="form-control" id="location" ng-model="otherForm.task.location" ng-options="'Field: ' + location.field + ' Section: ' + location.section + ' Row: ' + location.row for location in otherForm.locations">
-      </select>
-    </div>
+<form class="form-horizontal" name="oForm">
+  <h1>Other Tasks:</h1>
+  <div class="form-group row">
+    <label for="location">Location:</label>
+    <md-select name="type" ng-model="otherForm.task.location.id" id="location" required="">
+      <md-option ng-repeat="location in otherForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}</md-option>
+    </md-select>
+  </div>
 
-    <div class="form-group">
-      <label for="otherDate">Other Date:</label>
-      <input type="date" class="form-control" ng-model="otherForm.task.date" id="date">
-    </div>
+<div class="form-group">
+  <label for="title">Title:</label>
+  <input type="text" name="title" class="form-control" ng-model="otherForm.task.title" id="title" placeholder="Title" ng-maxlength="100" required>
+  <div ng-messages="oForm.title.$error" style="color:maroon" role="alert" >
+    <div ng-message="required">Please complete.</div>
+    <div ng-message="maxlength">Your entry is too long.</div>
+  </div>
+</div>
 
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" name="title" class="form-control" ng-model="otherForm.task.title" id="title" placeholder="Title" ng-maxlength="100" required>
-        <div ng-messages="oForm.title.$error" style="color:maroon" role="alert" >
-      <div ng-message="required">Please complete.</div>
-      <div ng-message="maxlength">Your entry is too long.</div>
-      </div>
-    </div>
+<div class="form-group">
+  <label for="comments">Comments:</label>
+  <input type="textarea" class="form-control" ng-model="otherForm.task.comments" id="comments" placeholder="comments">
+</div>
 
-      <div class="form-group">
-        <label for="comments">Comments:</label>
-        <input type="textarea" class="form-control" ng-model="otherForm.task.comments" id="comments" placeholder="comments">
-      </div>
-
-      <div class="form-group row">
-        <div class="col-xs-12 col-md-12">
-          <button type="button" ng-click="otherForm.addTask(otherForm.task)" class="btn btn-primary">Add Task</button>
-          <a href="/other" role="button" class="btn btn-default">Back</a>
-        </div>
-      </div>
-  </form>
+<div class="form-group row">
+  <div class="col-xs-12 col-md-12">
+    <button type="button" ng-click="otherForm.addTask(otherForm.task)" class="btn btn-primary">Add Task</button>
+    <a href="/other" role="button" class="btn btn-default">Back</a>
+  </div>
+</div>
+</form>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">

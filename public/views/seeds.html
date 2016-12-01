@@ -1,4 +1,5 @@
 <!-- search bar for finding seeds -->
+
 <md-content layout="column" class="row well display">
   <md-input-container class="md-block">
     <label>Seed Search</label>
@@ -42,11 +43,11 @@
           <label>Lot Number</label>
           <input ng-model="seedvar.lotnumber" placeholder="{{seedvar.lotnumber}}"></input>
         </md-input-container>
-        <md-input-container flex class="md-block">
+        <md-input-container class="md-block">
           <label>Order Date</label>
           <md-datepicker ng-model="seedvar.orderdate" md-placeholder="seedvar.orderdate"></md-datepicker>
         </md-input-container>
-        <md-input-container flex class="md-block">
+        <md-input-container class="md-block">
           <label>Receive Date</label>
           <md-datepicker ng-model="seedvar.receivedate" md-placeholder="seedvar.receivedate"></md-datepicker>
         </md-input-container>
@@ -71,10 +72,10 @@
           <input type="number" ng-model="seedvar.daystoharvest" placeholder="seedvar.daystoharvest"></input>
         </md-input-container>
         <md-input-container class="md-block">
-          <md-checkbox ng-model="seedvar.donation">Donation</md-datepicker>
+          <md-checkbox ng-model="seedvar.donation">Donation</md-checkbox>
         </md-input-container>
         <md-input-container class="md-block">
-          <md-checkbox ng-model="seedvar.plantouse">Plan to Use</md-datepicker>
+          <md-checkbox ng-model="seedvar.plantouse">Plan to Use</md-md-checkbox>
         </md-input-container>
       </div>
     </div>
