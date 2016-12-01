@@ -3,28 +3,23 @@ angular.module('growLogApp')
 
 function NewLocationFormController($http) {
   var locationForm = this;
-  console.log('NewLocationFormController loaded');
 
-  locationForm.addLocation = function(location) {
-    var field = location.field;
-    var section = location.section;
-    var row = location.row;
-    var data = {field: field, section: section, row: row};
-    $http.post('/location', data);
+  // add new location to the DB
+  locationForm.addLocation = function (location) {
 
-    // empty form after clicking 'submit'
-    locationForm.location = '';
-  }, function(error) {
-    console.log('error posting request', error);
+    let data = {
+      field: location.field,
+      section: location.section,
+      row: location.row
+    };
+
+    $http.post('/location', data)
+         .then(function () {
+            locationForm.location = '';
+          })
+         .catch(function () {
+            console.log('error posting request', error);
+          });
   };
 
-  locationForm.getLocation = function() {
-    $http.get('/location');
-    // empty form after clicking 'submit'
-    locationForm.location = '';
-  }, function(error) {
-    console.log('error posting request', error);
-  };
-//
-
-}
+};
