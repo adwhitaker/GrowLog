@@ -115,9 +115,10 @@ function deleteUsedSeed(req, res) {
   var id = req.params.id;
 
   var deleteSeed = {
-    location_id: req.body.location_id,
-    join_id: req.body.join_id
+    location_id: req.query.location_id,
+    join_id: req.query.join_id
   };
+  console.log('deleteUsedSeed deleteSeed', deleteSeed);
 
   // delete seed in use
   knex('seedsinuse').where('id', id)
