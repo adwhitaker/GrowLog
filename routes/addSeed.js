@@ -91,9 +91,9 @@ function updateSeed(req, res) {
 
 // delete seed from DB
 function deleteSeed(req, res) {
-  var seedID = req.params.id;
+  let id = req.params.id;
 
-  knex('seeds').where('id', seedID)
+  knex('seeds').where('id', id)
                .delete()
                .then(function (response) {
                   res.sendStatus(204);
