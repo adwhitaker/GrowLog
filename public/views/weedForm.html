@@ -5,17 +5,11 @@
     <div class="form-group row">
       <label for="location">Location:</label>
 
-      <select class="form-control" ng-model="weedForm.activity.location"
-      ng-options="'Field: ' + location.field + ' Section: ' + location.section +
-      ' Row: ' + location.row for location in weedForm.locations">
-      </select>
+      <md-select name="type" ng-model="weedForm.activity.location.id" id="location" required="">
+        <md-option ng-repeat="location in weedForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}</md-option>
+      </md-select>
 
 
-    </div>
-
-    <div class="form-group">
-      <label for="assigndate">Assign Date:</label>
-      <input type="date" name = "assigndate" class="form-control" id="assigndate" ng-model="weedForm.activity.date">
     </div>
 
     <div class="form-group">
@@ -25,11 +19,6 @@
     <div ng-message="required">You did not enter a weed type.</div>
     <div ng-message="maxlength">Your entry is too long.</div>
   </div>
-    </div>
-
-    <div class="form-group">
-      <label for="duration">Duration in Minutes:</label>
-      <input type='number' name="duration" class="form-control" ng-model="weedForm.activity.duration" id="duration">
     </div>
 
     <div class="form-group">
