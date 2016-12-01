@@ -69,8 +69,8 @@ function configVeggies($routeProvider, $locationProvider, $mdThemingProvider) {
   $mdThemingProvider
     .theme('default')
     .primaryPalette('brown')
-    .accentPalette('deep-orange')
-    .warnPalette('green')
+    .accentPalette('green')
+    .warnPalette('deep-orange')
     .backgroundPalette('brown');
 
   $mdThemingProvider.setDefaultTheme('default');
