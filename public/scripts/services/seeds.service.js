@@ -124,6 +124,21 @@ function seedsService($http) {
       });
   };
 
+  // delete used seed in DB, then get all seeds from DB
+  ctrl.deleteUsedSeed = function (usedSeedDelete) {
+    let id = usedSeedDelete.seedsinuse_id;
+    console.log('deleteUsedSeed id:', id);
+    console.log('deleteUsedSeed usedSeedDelete:', usedSeedDelete);
+    return $http.delete('/seedsInUse/' + id, { params: { location_id: usedSeedDelete.location_id, join_id: usedSeedDelete.join_id }} )
+      .then(function () {
+        ctrl.getSeeds();
+        return;
+      }).catch(function (err) {
+        console.log('err', err);
+        return 'error';
+      });
+  };
+
   // initial get used seeds from DB
   ctrl.getSeeds();
   ctrl.getUsedSeed();
