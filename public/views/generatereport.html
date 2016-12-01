@@ -2,81 +2,82 @@
   <div class="row">
     <h1 class="col-xs-12 col-md-12">Generate Report</h1>
   </div>
+
+  <h3>Report Options:</h3>
+
+  <ul class="list-group row">
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Seeds</p>
+      <!-- seeds in use checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="seedsInUseBox" name="seedsInUseBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="seedsInUseBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Locations</p>
+      <!-- location checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="locationBox" name="locationBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="locationBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Planting</p>
+      <!-- plant checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="plantBox" name="plantBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="plantBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Watering</p>
+      <!-- water checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="wateringBox" name="wateringBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="wateringBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Weeding</p>
+      <!-- weed checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="weedBox" name="weedBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="weedBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Harvesting</p>
+      <!-- harvest checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="harvestBox" name="harvestBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="harvestBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Issues</p>
+      <!-- issues checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="issuesBox" name="issuesBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="issuesBox" class="label-default"></label>
+      </div>
+    </li>
+    <li class="list-group-item col-xs-12 col-md-12">
+      <p>Other</p>
+      <!-- other checkbox -->
+      <div class="material-switch pull-right col-xs-4 col-md-2">
+        <input id="otherBox" name="otherBox" type="checkbox" ng-click="forReport = !forReport" />
+        <label for="otherBox" class="label-default"></label>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Export Report button -->
+  <button type="button" class="btn btn-primary" ng-model="reportCtrl.exportBtn" ng-csv="reportCtrl.getInfo()" csv-header=" ['Field', 'Section', 'Row', 'Activity Type', 'Assign Date', 'Complete Date', 'Activity Duration', 'Activity Amount', 'Weed Type', 'Activity Title', 'Comments', 'User Name', 'Transfer?', 'Used Quantity', 'Planting Assign Date', 'Planting Date', 'Grow Duration', 'Projected Harvest Date', 'Actual Harvest Date', 'Amount Harvested', 'Amount Harvested (units)', 'Harvest Duration', 'Generic Plant Name', 'Variety Name', 'Family', 'Seed Order Date', 'Seed Order Quantity', 'Seed Units per Pack', 'Quantity Units', 'Seeds per Unit', 'Manufacturer', 'Supplier', 'Days until Harvest', 'Seed Receive Date', 'Lot #', 'Donation?', 'Plan to Use?'] " filename="report.csv">Export</button>
+
+  <!-- home button -->
+  <a href="/home" class="btn btn-default" role="button" ng-model="reportCtrl.homeBtn">Home</a>
+
+  <!-- back button -->
+  <a href="/activities" class="btn btn-default" role="button" ng-model="reportCtrl.backBtn">Back</a>
 </div>
-<h3>Report Options:</h3>
-
-<ul class="list-group row">
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Seeds</p>
-    <!-- seeds in use checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="seedsInUseBox" name="seedsInUseBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="seedsInUseBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Locations</p>
-    <!-- location checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="locationBox" name="locationBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="locationBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Planting</p>
-    <!-- plant checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="plantBox" name="plantBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="plantBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Watering</p>
-    <!-- water checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="wateringBox" name="wateringBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="wateringBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Weeding</p>
-    <!-- weed checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="weedBox" name="weedBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="weedBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Harvesting</p>
-    <!-- harvest checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="harvestBox" name="harvestBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="harvestBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Issues</p>
-    <!-- issues checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="issuesBox" name="issuesBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="issuesBox" class="label-default"></label>
-    </div>
-  </li>
-  <li class="list-group-item col-xs-12 col-md-12">
-    <p>Other</p>
-    <!-- other checkbox -->
-    <div class="material-switch pull-right col-xs-4 col-md-2">
-      <input id="otherBox" name="otherBox" type="checkbox" ng-click="forReport = !forReport" />
-      <label for="otherBox" class="label-default"></label>
-    </div>
-  </li>
-</ul>
-
-<!-- Export Report button -->
-<button type="button" class="btn btn-primary" ng-model="reportCtrl.exportBtn" ng-csv="reportCtrl.getInfo()"  filename="report.csv">Export</button>
-
-<!-- home button -->
-<a href="/home" class="btn btn-default" role="button" ng-model="reportCtrl.homeBtn">Home</a>
-
-<!-- back button -->
-<a href="/activities" class="btn btn-default" role="button" ng-model="reportCtrl.backBtn">Back</a>
