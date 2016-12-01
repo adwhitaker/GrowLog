@@ -1,5 +1,4 @@
 <!-- search bar for finding seeds -->
-
 <md-content layout="column" class="row well display">
   <md-input-container class="md-block">
     <label>Seed Search</label>
@@ -12,11 +11,10 @@
   <h3 class="titleheader">Seeds in Inventory</h3>
   <div ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | orderBy: 'seedvar.id' | filter:search">
     <div class="col-xs-8 col-md-9">
-      <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }} | #: {{ seedvar.lotnumber }}</a></h5>
+      <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }} | MFR: {{ seedvar.manufacturer }}</a></h5>
       <div ng-show="seeds.details{{seedvar.id}}">
         <p class="indisplay"><strong>Family:</strong> {{ seedvar.family }}</p>
-        <p class="indisplay"><strong>Manufacturer:</strong> {{ seedvar.manufacturer }}</p>
-        <p class="indisplay"><strong>Supplier:</strong> {{ seedvar.supplier }}</p>
+        <p class="indisplay"><strong>Lot Number:</strong> {{ seedvar.lotnumber }}</p>
       </div>
       <div ng-show="seeds.edits{{seedvar.id}}">
         <md-input-container class="md-block">
