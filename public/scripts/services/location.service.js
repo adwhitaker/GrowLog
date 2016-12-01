@@ -13,8 +13,18 @@ function locationService($http) {
 
   // get all locations from the DB
   location.getLocations = function () {
-    return $http.get('/location').then(function (response) {
+    return $http.get('/location')
+    .then(function (response) {
       locations.allLocations = response.data;
+      return;
+    });
+  };
+
+  // add location to the DB
+  location.addLocation = function (data) {
+    return $http.post('/location', data)
+    .then(function (response) {
+      location.getLocations();
       return;
     });
   };
