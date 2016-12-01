@@ -1,4 +1,5 @@
 <md-content class="display well" layout="column">
+  <h3 class="titleheader">Active Issues</h3>
   <div ng-repeat="issue in issues.activities.activitiesObject.issues | orderBy: ['assigndate' ,'act_id'] ">
     <div class="col-xs-8 col-md-9">
       <h5>ISSUE: <a href="#" ng-click="issues.showDetails(issue.act_id)">{{issue.title}}</a></h5>
@@ -26,13 +27,13 @@
     </div>
     <div class="col-xs-2 col-md-2">
       <div ng-hide="issues.details{{issue.act_id}} || issues.edits{{issue.act_id}} || issues.complete{{issue.act_id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent" ng-click="issues.markComplete(issue.act_id, issue.checkstatus)">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="issues.markComplete(issue.act_id, issue.checkstatus)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
           <md-icon class="material-icons" aria-label="menu">{{issue.checkstatus}}</md-icon>
         </md-button>
       </div>
       <div ng-show="issues.details{{issue.act_id}}">
-        <md-button aria-label="edit" class="btn1 md-accent" ng-click="issues.editDetails(issue.act_id)">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="issues.editDetails(issue.act_id)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Issue</md-tooltip>
           <md-icon class="material-icons" aria-label="menu">create</md-icon>
         </md-button>
@@ -42,7 +43,7 @@
         </md-button>
       </div>
       <div ng-show="issues.edits{{issue.act_id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent" ng-click="issues.updateIssue(issue.act_id, issue)">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="issues.updateIssue(issue.act_id, issue)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
           <md-icon class="material-icons" aria-label="menu">done</md-icon>
         </md-button>
@@ -52,7 +53,7 @@
         </md-button>
       </div>
       <div ng-show="issues.complete{{issue.act_id}}">
-        <md-button aria-label="finish issue" class="btn1 md-accent" ng-click="issues.completeIssue(issue.act_id, issue)">
+        <md-button aria-label="finish issue" class="btn1 md-accent md-hue-3" ng-click="issues.completeIssue(issue.act_id, issue)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
           <md-icon class="material-icons" aria-label="menu">done</md-icon>
         </md-button>
