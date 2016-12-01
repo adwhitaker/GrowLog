@@ -4,6 +4,7 @@ angular.module('growLogApp')
 function seedsService($http) {
   var ctrl = this;
 
+  // all seeds from DB are stored here
   var seeds = {
     allSeeds: [],
     usedSeeds: [],
@@ -64,7 +65,6 @@ function seedsService($http) {
         return;
       }).catch(function (err) {
         console.log('err', err);
-        return 'error';
       });
   };
 
@@ -111,6 +111,8 @@ function seedsService($http) {
       .then(function (response) {
         ctrl.getUsedSeed();
         return response;
+      }).catch(function (err) {
+        console.log('err', err);
       });
   };
 
@@ -119,17 +121,22 @@ function seedsService($http) {
     let id = usedSeedUpdate.seedsinuse_id;
     return $http.put('/seedsInUse/' + id, usedSeedUpdate)
       .then(function (response) {
-        console.log('usedseed get');
         ctrl.getUsedSeed();
+      }).catch(function (err) {
+        console.log('err', err);
       });
   };
 
   // delete used seed in DB, then get all seeds from DB
   ctrl.deleteUsedSeed = function (usedSeedDelete) {
     let id = usedSeedDelete.seedsinuse_id;
-    console.log('deleteUsedSeed id:', id);
-    console.log('deleteUsedSeed usedSeedDelete:', usedSeedDelete);
-    return $http.delete('/seedsInUse/' + id, { params: { location_id: usedSeedDelete.location_id, join_id: usedSeedDelete.join_id }} )
+
+    let data = {
+      location_id: usedSeedDelete.location_id,
+      join_id: usedSeedDelete.join_id
+    };
+
+    return $http.delete('/seedsInUse/' + id, { params: data })
       .then(function () {
         ctrl.getSeeds();
         return;
