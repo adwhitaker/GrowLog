@@ -12,10 +12,11 @@
 
     <div class="form-group row">
       <label for="location">Location:</label>
-      <select class="form-control" ng-model="plantForm.plant.location"
-      ng-options="'Field: ' + location.field + ' Section: ' + location.section +
-      ' Row: ' + location.row for location in plantForm.locations">
-      </select>
+      <md-select name="type" ng-model="plantForm.plant.location.id" id="location" required="">
+        <md-option ng-repeat="location in plantForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']"
+          ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}
+        </md-option>
+      </md-select>
     </div>
     <div class="form-group">
       <label><input type="checkbox" id="transfer" value="transfer" ng-model="plantForm.plant.transfer">Needs to be Transferred</label>
