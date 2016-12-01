@@ -3,34 +3,29 @@ angular.module('growLogApp')
 
 function PlantFormController($http, locationService, seedsService) {
   var plantForm = this;
-  console.log('PlantFormController loaded');
 
   plantForm.allSeeds = seedsService;
+  plantForm.locationService = locationService;
 
-  // seedsService.getSeeds();
+  // put seed in use (plant)
+  plantForm.submitPlant = function (plant) {
 
-  locationService.getLocations().then(function (response) {
-    plantForm.locations = response;
-  });
+    console.log(plant);
+    let data = {
+      seedsId: plant.choice.id,
+      transfer: plant.transfer,
+      plantedassigndate: moment(plant.assignDate).format('L'),
+      projectedharvestdate: moment(plant.harvestDate).format('L'),
+      usedquantity: plant.usedquantity,
+      location_id: plant.location.id
+    };
 
-  plantForm.submitPlant = function(plant) {
-    var seedsId = plant.choice.id;
-    var plantedassigndate = moment(plant.assignDate).format('L');
-    var projectedharvestdate = moment(plant.harvestDate).format('L');
-    var quantity = plant.quantity;
-    var transfer = plant.transfer;
-    var location_id = plant.location.id;
-    console.log(location_id);
-    var data = {seedsId: seedsId, transfer: transfer,
-                plantedassigndate: plantedassigndate,
-                projectedharvestdate: projectedharvestdate, quantity: quantity,
-                location_id: location_id};
-    $http.post('/seedsInUse', data).then(function() {
+    $http.post('/seedsInUse', data)
+    .then(function () {
       plantForm.plant = '';
-      seedsService.getUsedSeed;
+      seedsService.getUsedSeed();
+    }).catch(function () {
+      console.log('Error posting request', error);
     });
-
-  }, function(error) {
-    console.log('Error posting request', error);
   };
-}
+};
