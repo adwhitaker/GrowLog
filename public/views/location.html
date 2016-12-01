@@ -1,56 +1,50 @@
-<h1>location </h1>
+<md-content class="row display well" layout="column">
+  <h3 class="titleheader">Locations</h3>
+  <div ng-repeat="locvar in location.locationsFromService.locations.allLocations | orderBy: ['field', 'section', 'row']">
+    <div class="col-xs-8 col-md-9">
+      <h5><a href="#" ng-click="location.showDetails(locvar.id)">Field: {{ locvar.field }} Section: {{ locvar.section }} Row: {{ locvar.row }}</a></h5>
+      <div ng-show="location.edits{{locvar.id}}">
+        <md-input-container class="md-block">
+          <label>Field</label>
+          <input type="text" ng-model="locvar.fieldUpdated" placeholder="{{locvar.field}}"></input>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Section</label>
+          <input type="text" ng-model="locvar.sectionUpdated" placeholder="{{locvar.section}}"></input>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Row</label>
+          <input type="text" ng-model="locvar.rowUpdated" placeholder="{{locvar.row}}"></input>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <div ng-show="location.details{{locvar.id}}">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="location.editDetails(locvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Location</md-tooltip>
+          <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
+        </md-button>
+        <md-button aria-label="delete" class="btn1 md-warn" ng-click="location.deleteLocation(locvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="location.edits{{locvar.id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="location.updateLocation(locvar)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="location.editDetails(locvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <div class="line"></div>
 
-<div class="row">
-  <div class="col-md-10">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <th>
-          Edit
-        </th>
-        <!-- <th>Id</th> -->
-
-        <th>Field</th>
-        <th>Section</th>
-        <th>Row</th>
-        <th>Delete</th>
-
-      </tr>
-      <tr ng-repeat="locvar in location.locationsFromService.locations.allLocations | orderBy: ['field', 'section', 'row']" >
-        <!-- checkbox with ng show/hide to input location etc. -->
-
-        <td>
-          <input type="checkbox" name="locedit" value="locedit" ng-model="locvar.locedit"  ng-click="locedit=!locedit">
-          <!-- start of modal -->
-          <form ng-show="locedit">
-            <div class="col-xs-2">
-
-
-              <label for="ex1">Field</label>
-              <input type="text" name="info" class="form-control" ng-model="locvar.field" id="ex1"/>
-              <label>Section</label>
-
-              <input type="text" name="info" class="form-control" ng-model="locvar.section" />
-              <label>Row</label>
-
-              <input type="text" name="info" class="form-control" ng-model="locvar.row" />
-              <button type="button" class="btn btn-default" ng-click="location.updateLocation(locvar.id, locvar.field, locvar.section, locvar.row)">Save Changes</button>
-            </div>
-          </form>
-          <!-- end of modal -->
-        </td>
-        <!-- <td>{{locvar.id}}</td> -->
-        <td>{{locvar.field}}</td>
-        <td>{{locvar.section}}</td>
-        <td>{{locvar.row}}</td>
-        <td>
-          <button ng-click="location.deleteLocation(locvar.id)" class="btn btn-danger">Delete</button>
-        </td>
-
-      </tr>
-    </table>
   </div>
-</div>
-</div>
+</md-content>
+
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
