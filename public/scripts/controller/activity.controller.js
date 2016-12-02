@@ -1,7 +1,10 @@
 angular.module('growLogApp')
        .controller('ActivityController', ActivityController);
 
-function ActivityController() {
+function ActivityController(seedsService, activityService) {
   var activity = this;
-  console.log('ActivityController loaded');
-}
+
+  activity.seedsService = seedsService;
+  activity.activityService = activityService;
+
+};
