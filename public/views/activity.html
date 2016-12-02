@@ -1,21 +1,21 @@
 <div class="row homebutton">
   <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
-    <md-button href="/plant" class="md-raised md-cornered md-primary btn-block">Planting</md-button>
+    <md-button href="/plant" class="md-raised md-cornered md-primary btn-block">Planting ({{activity.seedsService.seeds.usedSeeds.length}})</md-button>
   </div>
   <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
-    <md-button href="/water" class="md-raised md-cornered md-primary btn-block">Watering</md-button>
+    <md-button href="/water" class="md-raised md-cornered md-primary btn-block">Watering ({{activity.activityService.activitiesObject.water.length}})</md-button>
   </div>
   <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
-    <md-button href="/weed" class="md-raised md-cornered md-primary btn-block">Weeding</md-button>
+    <md-button href="/weed" class="md-raised md-cornered md-primary btn-block">Weeding ({{activity.activityService.activitiesObject.weed.length}})</md-button>
   </div>
   <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
-    <md-button href="/harvest" class="md-raised md-cornered md-primary btn-block">Harvesting</md-button>
+    <md-button href="/harvest" class="md-raised md-cornered md-primary btn-block">Harvesting ({{activity.seedsService.seeds.usedSeedsPlanted.length}})</md-button>
   </div>
   <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
-    <md-button href="/other" class="md-raised md-cornered btn-block">Other</md-button>
+    <md-button href="/other" class="md-raised md-cornered btn-block">Other ({{activity.activityService.activitiesObject.other.length}})</md-button>
   </div>
   <div class="col-xs-8 col-md-8 col-xs-offset-2 col-md-offset-2">
-    <md-button href="/issues" class="md-raised md-cornered md-accent md-hue-3 btn-block">Report Issues</md-button>
+    <md-button href="/issues" class="md-raised md-cornered md-accent md-hue-3 btn-block">Report Issues ({{activity.activityService.activitiesObject.issues.length}})</md-button>
   </div>
 </div>
 
