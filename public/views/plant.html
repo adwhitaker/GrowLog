@@ -1,14 +1,12 @@
-<h3>Planting:</h3>
+<md-content class="row display well" layout="column">
 <!-- to show list of to-dos -->
-<div class="container">
-
     <ul class="list-group row">
         <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
             planting.usedSeeds.seeds.usedSeeds | orderBy: 'field'">
             <div class="row">
                 <div class="col-xs-8 col-md-10">
                     <h4><a href="#" ng-click="showDetails = !showDetails">
-                          Assigned Date: {{ plant.plantedassigndate | date:'MMM d, yyyy' }} | Quantity to Plant: {{ plant.usedquantity}}</a></h4>
+                        {{ plant.plantedassigndate | date:'MMM d, yyyy' }} - Quantity to Plant: {{ plant.usedquantity}}</a></h4>
                     <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
                     <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
                     <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
@@ -52,7 +50,7 @@
 </div>
 </li>
 </ul>
-</div>
+</md-content>
 
 <md-content layout="row" id="navigationbar">
     <md-toolbar class="row navbar one">

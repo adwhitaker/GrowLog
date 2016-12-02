@@ -1,17 +1,12 @@
-<h1>Harvest</h1>
-
-<h3>Activities:</h3>
-
-<!-- to show list of to-dos -->
-<div class="container">
-
+<md-content layout="column" class="row well display">
+  <h3 class="titleheader">To Be Harvested</h3>
     <ul class="list-group row">
         <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
         harvest.plantedSeeds.seeds.usedSeedsPlanted | orderBy: 'projectedharvestdate'">
             <div class="row">
                 <div class="col-xs-8 col-md-10">
                     <h4><a href="#" ng-click="showDetails = !showDetails; harvest.editedPlant(plant)">
-                  Projected Harvest Date: {{ plant.projectedharvestdate | date:'MMM d, yyyy' }} | Quantity Planted: {{ plant.quantity}}</a></h4>
+                  Projected Date: {{ plant.projectedharvestdate | date:'MMM d, yyyy' }} | Quantity Planted: {{ plant.quantity}}</a></h4>
                     <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
                     <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
                     <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
@@ -50,17 +45,7 @@
             </div>
         </li>
     </ul>
-</div>
-
-<!-- button to add a new task -->
-<a href="/harvestForm" role="button" class="btn btn-default">Add Task</a>
-
-<!-- button to go back to activities page -->
-<a href="/activities" role="button" class="btn btn-default">Back</a>
-
-<!-- button to go home -->
-<a href="/home" role="button" class="btn btn-default">Home</a>
-
+</md-content>
 
   <md-content layout="row" id="navigationbar">
     <md-toolbar class="row navbar one">
