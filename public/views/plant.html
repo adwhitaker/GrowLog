@@ -1,57 +1,56 @@
-<md-content class="row display well" layout="column">
-<!-- to show list of to-dos -->
-    <ul class="list-group row">
-        <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
-            planting.usedSeeds.seeds.usedSeeds | orderBy: 'field'">
-            <div class="row">
-                <div class="col-xs-8 col-md-10">
-                    <h4><a href="#" ng-click="showDetails = !showDetails">
-                        {{ plant.plantedassigndate | date:'MMM d, yyyy' }} - Quantity to Plant: {{ plant.usedquantity}}</a></h4>
-                    <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
-                    <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
-                    <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
-                </div>
-                <div class="material-switch pull-right col-xs-4 col-md-2">
-                    <input id="complete {{ plant.seedsinuse_id }}" name="complete {{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails" />
-                    <label for="complete {{ plant.seedsinuse_id }}" class="label-success"></label>
-                </div>
-            </div>
-            <div class="row" ng-show="showDetails">
-                <div ng-hide="editing">
-                    <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
-                    </div>
-                    <div class="col-xs-2 col-md-2">
-                        <a href="#" ng-click="planting.deletePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-danger">Delete</a>
-                    </div>
-                </div>
 
-                <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
-                    <div class="form-group has-float-label">
-                        <input class="form-control" id="assigndate {{ plant.seedsinuse_id }}" type="date" ng-model="plant.newAssignDate" />
-                        <label for="assigndate {{ plant.seedsinuse_id }}">Update Assign Date</label>
-                    </div>
-                    <div class="form-group has-float-label">
-                        <label for="quantity complete {{ plant.seedsinuse_id }}">Update Quantity</label>
-                        <input type="number" class="form-control" id="quantity complete {{ plant.seedsinuse_id }}" ng-model="plant.updatedQuantity" />
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success" ng-click="planting.updatePlant(plant.seedsinuse_id, plant)">Save</button>
-                        <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="form-horizontal" ng-show="completeDetails">
+<!-- to show list of to-dos for planting seeds -->
+<md-content class="display">
+    <div class="row well" ng-repeat="plant in planting.usedSeeds.seeds.usedSeeds | orderBy: ['field', 'section', 'row']">
+        <div class="col-xs-8 col-md-10">
+            <h5>PLANT: <a href="#" ng-click="showDetails = !showDetails">{{ plant.generic }}, <strong>Field:</strong> {{ plant.field }} <strong>Section:</strong> {{ plant.section }} <strong>Row:</strong> {{ plant.row }}</a></h5>
+            <div ng-show="showDetails">
+            <p class="indisplay"></p>
+            <p class="indisplay"><strong>Family:</strong> {{ plant.family }} <strong>Variety:</strong> {{ plant.variety }} <strong>Quantity:</strong> {{ plant.usedquantity}}</p>
+            <p class="indisplay"><strong>Manufacturer:</strong> {{ plant.manufacturer }} <strong>Supplier:</strong> {{ plant.supplier }} <strong>Lot Number:</strong> {{ plant.lotnumber }}</p>
+            <p class="indisplay"><strong>Assigned Date:</strong> {{ plant.plantedassigndate | date:'MMM d, yyyy' }} </p>
+        </div>
+            <input id="complete {{ plant.seedsinuse_id }}" name="complete {{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails" />
+            <label for="complete {{ plant.seedsinuse_id }}" class="label-success"></label>
+        <div ng-show="showDetails">
+          <md-input-container class="md-block">
+            <label>Update Quantity</label>
+            <input id=""
+          </md-input-container>
+            <div ng-hide="editing">
                 <div class="col-xs-2 col-md-2">
-                    <a href="#" ng-click="planting.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
+                    <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    <a href="#" ng-click="planting.deletePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-danger">Delete</a>
                 </div>
             </div>
-</div>
-</li>
-</ul>
-</md-content>
 
+            <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
+                <div class="form-group has-float-label">
+                    <input class="form-control" id="assigndate {{ plant.seedsinuse_id }}" type="date" ng-model="plant.newAssignDate" />
+                    <label for="assigndate {{ plant.seedsinuse_id }}">Update Assign Date</label>
+                </div>
+
+                <div class="form-group has-float-label">
+                    <label for="quantity complete {{ plant.seedsinuse_id }}">Update Quantity</label>
+                    <input type="number" class="form-control" id="quantity complete {{ plant.seedsinuse_id }}" ng-model="plant.updatedQuantity" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" ng-click="planting.updatePlant(plant.seedsinuse_id, plant)">Save</button>
+                    <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-horizontal" ng-show="completeDetails">
+            <div class="col-xs-2 col-md-2">
+                <a href="#" ng-click="planting.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</md-content>
 <md-content layout="row" id="navigationbar">
     <md-toolbar class="row navbar one">
         <md-button class="md-mini col-xs-2" href="/activities">
