@@ -1,56 +1,73 @@
+<md-content class="display well" layout="column">
+  <h3 class="titleheader">To Be Planted</h3>
+  <div class="row well" ng-repeat="plant in planting.usedSeeds.seeds.usedSeeds | orderBy: ['field', 'section', 'row']">
+    <div class="col-xs-8 col-md-9">
+      <h5>PLANT: <a href="#" ng-click="planting.showDetails(plant.seedsinuse_id)">{{ plant.generic }}, <strong>Field:</strong> {{ plant.field }} <strong>Section:</strong> {{ plant.section }} <strong>Row:</strong> {{ plant.row }}</a></h5>
+      <div ng-show="planting.details{{plant.seedsinuse_id}}">
+        <p class="indisplay"><strong>Family:</strong> {{ plant.family }} <strong>Variety:</strong> {{ plant.variety }} <strong>Quantity:</strong> {{ plant.usedquantity}}</p>
+        <p class="indisplay"><strong>MFR:</strong> {{ plant.manufacturer }} <strong>Supplier:</strong> {{ plant.supplier }} <strong>Lot Number:</strong> {{ plant.lotnumber }}</p>
+        <p class="indisplay"><strong>Assigned:</strong> {{ plant.plantedassigndate | date:'MMM d, yyyy' }} </p>
+      </div>
+      <div ng-show="planting.edits{{plant.seedsinuse_id}}">
+        <md-input-container class="md-block">
+          <label>Update Quantity</label>
+          <input name="complete {{ plant.seedsinuse_id }}" ng-model="plant.usedquantity" placeholder="{{plant.usedquantity}}" type="number"/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Update Assign Date</label>
+          <md-datepicker ng-model="plant.newAssignDate" md-placeholder="{{plant.plantedassigndate}}"></md-datepicker>
+        </md-input-container>
+      </div>
+      <div ng-show="planting.complete{{plant.seedsinuse_id}}">
+        <md-input-container class="md-block">
+          <label>Quantity Used</label>
+          <input name="complete {{ plant.seedsinuse_id }}" ng-model="plant.usedquantity" placeholder="{{plant.usedquantity}}" type="number"/>
+        </md-input-container>
+      </div>
 
-<!-- to show list of to-dos for planting seeds -->
-<md-content class="display">
-    <div class="row well" ng-repeat="plant in planting.usedSeeds.seeds.usedSeeds | orderBy: ['field', 'section', 'row']">
-        <div class="col-xs-8 col-md-10">
-            <h5>PLANT: <a href="#" ng-click="showDetails = !showDetails">{{ plant.generic }}, <strong>Field:</strong> {{ plant.field }} <strong>Section:</strong> {{ plant.section }} <strong>Row:</strong> {{ plant.row }}</a></h5>
-            <div ng-show="showDetails">
-            <p class="indisplay"></p>
-            <p class="indisplay"><strong>Family:</strong> {{ plant.family }} <strong>Variety:</strong> {{ plant.variety }} <strong>Quantity:</strong> {{ plant.usedquantity}}</p>
-            <p class="indisplay"><strong>Manufacturer:</strong> {{ plant.manufacturer }} <strong>Supplier:</strong> {{ plant.supplier }} <strong>Lot Number:</strong> {{ plant.lotnumber }}</p>
-            <p class="indisplay"><strong>Assigned Date:</strong> {{ plant.plantedassigndate | date:'MMM d, yyyy' }} </p>
-        </div>
-            <input id="complete {{ plant.seedsinuse_id }}" name="complete {{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails" />
-            <label for="complete {{ plant.seedsinuse_id }}" class="label-success"></label>
-        <div ng-show="showDetails">
-          <md-input-container class="md-block">
-            <label>Update Quantity</label>
-            <input id=""
-          </md-input-container>
-            <div ng-hide="editing">
-                <div class="col-xs-2 col-md-2">
-                    <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <a href="#" ng-click="planting.deletePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-danger">Delete</a>
-                </div>
-            </div>
 
-            <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
-                <div class="form-group has-float-label">
-                    <input class="form-control" id="assigndate {{ plant.seedsinuse_id }}" type="date" ng-model="plant.newAssignDate" />
-                    <label for="assigndate {{ plant.seedsinuse_id }}">Update Assign Date</label>
-                </div>
-
-                <div class="form-group has-float-label">
-                    <label for="quantity complete {{ plant.seedsinuse_id }}">Update Quantity</label>
-                    <input type="number" class="form-control" id="quantity complete {{ plant.seedsinuse_id }}" ng-model="plant.updatedQuantity" />
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-success" ng-click="planting.updatePlant(plant.seedsinuse_id, plant)">Save</button>
-                    <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="form-horizontal" ng-show="completeDetails">
-            <div class="col-xs-2 col-md-2">
-                <a href="#" ng-click="planting.completePlant(plant.seedsinuse_id, plant)" role="button" class="btn btn-success">Complete</a>
-            </div>
-        </div>
     </div>
+    <div class="col-xs-2 col-md-2">
+      <div ng-hide="planting.details{{plant.seedsinuse_id}} || planting.edits{{plant.seedsinuse_id}} || planting.complete{{plant.seedsinuse_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="planting.markComplete(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">check_box_outline_blank</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="planting.details{{plant.seedsinuse_id}}">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="planting.editDetails(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Issue</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">create</md-icon>
+        </md-button>
+        <md-button aria-label="delete" class="btn1 md-warn" ng-click="planting.deletePlant(plant.seedsinuse_id, plant)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Issue</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="planting.edits{{plant.seedsinuse_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="planting.updatePlant(plant.seedsinuse_id, plant)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="planting.editDetails(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="planting.complete{{plant.seedsinuse_id}}">
+        <md-button aria-label="finish plant" class="btn1 md-accent md-hue-3" ng-click="planting.completePlant(plant.seedsinuse_id, plant)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="planting.markComplete(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
     </div>
+  </div>
 </md-content>
+
 <md-content layout="row" id="navigationbar">
     <md-toolbar class="row navbar one">
         <md-button class="md-mini col-xs-2" href="/activities">
