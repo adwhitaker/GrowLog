@@ -15,12 +15,13 @@ function WeedController($http, activityService, $route) {
 
 //weed.issues object = activitiesService
     weed.deleteActivity = function(activityId, joinsId) {
-
       activityService.deleteActivity(activityId, joinsId).then(weed.refresh());
     };
 
     weed.completeIssue = function(id, weedObject) {
       var id = id;
+      console.log("id", id);
+      console.log("weedobject", weedObject);
       var completeDate = new Date();
       var completeDate = moment(completeDate).format('L');
 
@@ -38,7 +39,7 @@ function WeedController($http, activityService, $route) {
 
       activityService.updateActivity(id, activity).then(weed.refresh());
 
-
+};
       weed.updateIssue = function(id, weedObject) {
         var id = id;
         var activity = {
@@ -56,5 +57,4 @@ function WeedController($http, activityService, $route) {
       };
 
 
-};
 }; //end of weedcontroller
