@@ -7,6 +7,24 @@ function PlantController(seedsService) {
 
   plant.usedSeeds = seedsService;
 
+  plant.showDetails = function (id) {
+    plant['details' + id] = !plant['details' + id];
+    plant['edits' + id] = false;
+    plant['complete' + id] = false;
+  };
+
+  plant.editDetails = function (id) {
+    plant['edits' + id] = !plant['edits' + id];
+    plant['details' + id] = false;
+    plant['complete' + id] = false;
+  };
+
+  plant.markComplete = function (id) {
+    plant['complete' + id] = !plant['complete' + id];
+    plant['edits' + id] = false;
+    plant['details' + id] = false;
+  };
+
   plant.completePlant = function(id, plantObject) {
     var id = id;
     var completeDate = moment().format('L');
@@ -32,11 +50,13 @@ function PlantController(seedsService) {
   };
 
   plant.updatePlant = function(id, plantObject) {
+    plant.showDetails(id);
+
     var newDate = moment(plantObject.newAssignDate).format('L');
     var updatedPlant = {
       seeds_id: plantObject.seeds_id,
       transfer: plantObject.transfer,
-      usedquantity:  plantObject.updatedQuantity,
+      usedquantity:  plantObject.usedquantity,
       plantedassigndate: newDate,
       plantdate: plantObject.plantdate,
       plantduration: plantObject.plantduration,
