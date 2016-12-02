@@ -1,44 +1,41 @@
-  <form class="form-horizontal">
-    <div class="form-group row">
+<md-content class="row display well" layout="column">
+  <h3 class="titleheader">Add Planting Activity</h3>
+  <div class="col-xs-12 col-md-12">
       <label for="field">Select Seed:</label>
       <select class="form-control" data-live-search="true" ng-model="plantForm.plant.choice"
-      ng-options="seed.generic + ' | ' + 'Manufacturer: ' + seed.manufacturer + ' | ' + 'Lot number: ' + seed.lotnumber for seed in plantForm.allSeeds.seeds.allSeeds">
+      ng-options="seed.generic + ' | ' + 'MFR: ' + seed.manufacturer + ' | ' + 'Lot#: ' + seed.lotnumber for seed in plantForm.allSeeds.seeds.allSeeds">
       </select>
-    </div>
-    <div class="form-group">
-      <label for="usedquantity">Quantity to Plant:</label>
-      <input type="number" class="form-control" id="quantity" ng-model="plantForm.plant.usedquantity">
-    </div>
+      <div class="form-group">
+        <label for="usedquantity">Quantity to Plant:</label>
+        <input type="number" class="form-control" id="quantity" ng-model="plantForm.plant.usedquantity">
+      </div>
 
-    <div class="form-group row">
-      <label for="location">Location:</label>
-      <md-select name="type" ng-model="plantForm.plant.location.id" id="location" required="">
-        <md-option ng-repeat="location in plantForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']"
-          ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}
-        </md-option>
-      </md-select>
-    </div>
-    <div class="form-group">
-      <label><input type="checkbox" id="transfer" value="transfer" ng-model="plantForm.plant.transfer">Needs to be Transferred</label>
-    </div>
+      <div class="form-group row">
+        <label for="location">Location:</label>
+        <md-select name="type" ng-model="plantForm.plant.location.id" id="location" required="">
+          <md-option ng-repeat="location in plantForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']"
+            ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}
+          </md-option>
+        </md-select>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" id="transfer" value="transfer" ng-model="plantForm.plant.transfer">Needs to be Transferred</label>
+      </div>
 
-    <div class="form-group">
-      <label for="assigndate">Assign Date:</label>
-      <input type="date" class="form-control" id="assigndate" ng-model="plantForm.plant.assignDate">
-    </div>
+      <div class="form-group">
+        <label for="assigndate">Assign Date:</label>
+        <input type="date" class="form-control" id="assigndate" ng-model="plantForm.plant.assignDate">
+      </div>
 
-    <div class="form-group">
-      <label for="projectedHarvestDate">Projected Harvest Date:</label>
-      <input type="date" class="form-control" id="projectedHarvestDate" ng-model="plantForm.plant.harvestDate">
-    </div>
-
-    <div class="form-group row">
-      <div class="col-xs-12 col-md-12">
-        <button type="submit" ng-click="plantForm.submitPlant(plantForm.plant)" class="btn btn-primary">Submit</button>
-        <a href="/plant" role="button" class="btn btn-default">Back</a>
+      <div class="form-group">
+        <label for="projectedHarvestDate">Projected Harvest Date:</label>
+        <input type="date" class="form-control" id="projectedHarvestDate" ng-model="plantForm.plant.harvestDate">
+      </div>
+      <div layout="center center">
+        <md-button ng-click="plantForm.submitPlant(plantForm.plant)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Submit</md-button>
       </div>
     </div>
-</form>
+</md-content>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
