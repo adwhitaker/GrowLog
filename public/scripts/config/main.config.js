@@ -59,9 +59,6 @@ function configVeggies($routeProvider, $locationProvider, $mdThemingProvider) {
   }).when('/issuesForm', {
     templateUrl: 'views/issuesForm.html',
     controller: 'IssueFormController as issueForm',
-  }).when('/harvestForm', {
-    templateUrl: 'views/harvestForm.html',
-    controller: 'HarvestFormController as harvestForm',
   });
 
   $locationProvider.html5Mode(true);
