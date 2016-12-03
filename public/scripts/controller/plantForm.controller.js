@@ -20,8 +20,16 @@ function PlantFormController($http, locationService, seedsService, $mdDialog) {
   };
 
   plantForm.updateCount = function (seed) {
-    var total = (seed.quantity) * (seed.unitsperpack) * (seed.seedsperunit);
-    plantForm.quantityHelp = 'You documented having ' + total + ' seeds.';
+    if (seed.quantity && seed.unitsperpack && seed.seedsperunit) {
+      var total = (seed.quantity) * (seed.unitsperpack) * (seed.seedsperunit);
+      plantForm.quantityHelp = 'You documented having ' + total + ' seeds.';
+    } else if (seed.quantity && seed.unitsperpack) {
+      var total = (seed.quantity) * (seed.unitsperpack);
+      plantForm.quantityHelp = 'You documented having ' + total + ' ' + seed.quantityunits + '.';
+    } else if (seed.seedsperunit) {
+      plantForm.quantityHelp = 'You documented having ' + seed.seedsperunit + ' seeds.';
+    }
+
   };
 
   plantForm.updateHarvestEst = function (date, seed) {
@@ -48,6 +56,8 @@ function PlantFormController($http, locationService, seedsService, $mdDialog) {
     .then(function () {
       plantForm.showAlert();
       plantForm.plant = '';
+      plantForm.quantityHelp = '';
+      plantForm.harvestHelp = '';
       seedsService.getUsedSeed();
     }).catch(function () {
       console.log('Error posting request', error);
