@@ -4,8 +4,8 @@
     <div class="col-xs-8 col-md-9">
       <h5><a href="#" ng-click="harvest.showDetails(plant.seedsinuse_id)">{{ plant.projectedharvestdate | date:'MMM d, yyyy' }}: {{ plant.generic }}</a></h5>
       <div ng-show="harvest.details{{plant.seedsinuse_id}}">
-        <p class="indisplay"><strong>Field:</strong> {{ plant.field }} | <strong>Section:</strong> {{ plant.section }} | <strong>Row:</strong> {{ plant.row }}</p>
-        <p class="indisplay"><strong>Quantity Planted:</strong> {{ plant.quantity}}</p>
+        <p class="indisplay"><strong>Field:</strong> {{ plant.field }}-{{ plant.section }}-{{ plant.row }}</p>
+        <p class="indisplay"><strong>Qty Planted:</strong> {{ plant.quantity}}</p>
       </div>
       <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
         <md-input-container class="md-block">
