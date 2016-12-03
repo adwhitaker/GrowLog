@@ -3,7 +3,7 @@
   <div class="col-xs-12 col-md-12">
     <md-input-container class="md-block">
       <label>Location</label>
-      <md-select name="type" ng-model="waterForm.activity.location.id" id="location" required="">
+      <md-select name="type" ng-model="waterForm.activity.location.id" id="location">
         <md-option ng-repeat="location in waterForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']"
           ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}
         </md-option>
