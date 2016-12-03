@@ -26,7 +26,7 @@ function NewSeedFormController($http, seedsService, $mdDialog) {
       quantity: seed.quantity,
       unitsperpack: '1',
       quantityunits: 'demo',
-      seedsperunit: seed.seedsperunit,
+      seedsperunit: '1',
       manufacturer: seed.manufacturer,
       supplier: 'demo',
       daystoharvest: seed.daystoharvest,
