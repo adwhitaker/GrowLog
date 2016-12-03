@@ -25,16 +25,15 @@ function PlantController(seedsService) {
     plant['details' + id] = false;
   };
 
-  plant.completePlant = function(id, plantObject) {
+  plant.completePlant = function (id, plantObject) {
     var id = id;
-    var completeDate = moment().format('L');
 
     var completedPlant = {
       seeds_id: plantObject.seeds_id,
       transfer: plantObject.transfer,
       usedquantity: plantObject.usedquantity,
       plantedassigndate: plantObject.plantedassigndate,
-      plantdate: completeDate,
+      plantdate: moment().format('L'),
       plantduration: plantObject.plantduration,
       projectedharvestdate: plantObject.projectedharvestdate,
       actualharvestdate: plantObject.actualharvestdate,
@@ -44,20 +43,18 @@ function PlantController(seedsService) {
       location_id: plantObject.location_id,
       seedsinuse_id: plantObject.seedsinuse_id,
     };
-    seedsService.updateUsedSeed(completedPlant).then(function () {
-      seedsService.getUsedSeed();
-    });
+
+    seedsService.updateUsedSeed(completedPlant);
   };
 
   plant.updatePlant = function(id, plantObject) {
     plant.showDetails(id);
 
-    var newDate = moment(plantObject.newAssignDate).format('L');
     var updatedPlant = {
       seeds_id: plantObject.seeds_id,
       transfer: plantObject.transfer,
       usedquantity:  plantObject.usedquantity,
-      plantedassigndate: newDate,
+      plantedassigndate: moment(plantObject.newAssignDate).format('L'),
       plantdate: plantObject.plantdate,
       plantduration: plantObject.plantduration,
       projectedharvestdate: plantObject.projectedharvestdate,
@@ -68,15 +65,18 @@ function PlantController(seedsService) {
       location_id: plantObject.location_id,
       seedsinuse_id: plantObject.seedsinuse_id,
     };
+
     seedsService.updateUsedSeed(updatedPlant);
   };
 
-  plant.deletePlant = function(id, plantObject) {
+  plant.deletePlant = function (id, plantObject) {
+
     var deletedPlantTask = {
       join_id: plantObject.id,
       location_id: plantObject.location_id,
       seedsinuse_id: plantObject.seedsinuse_id
     };
+
     seedsService.deleteUsedSeed(deletedPlantTask);
   };
 }
