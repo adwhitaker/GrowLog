@@ -68,7 +68,7 @@ function HarvestController(seedsService) {
       projectedharvestdate: harvestedPlant.projectedharvestdate,
       actualharvestdate: moment().format('L'),
       amountharvested: harvestedPlant.amountharvested,
-      amountharvestedunits: harvestedPlant.amountharvestedunits,
+      amountharvestedunits: 'demo',
       joins_id: harvestedPlant.id,
       location_id: harvestedPlant.location_id,
       seedsinuse_id: harvestedPlant.seedsinuse_id,
