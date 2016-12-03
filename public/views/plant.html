@@ -2,9 +2,9 @@
   <h3 class="titleheader">To Be Planted</h3>
   <div ng-repeat="plant in planting.usedSeeds.seeds.usedSeeds | orderBy: ['field', 'section', 'row']">
     <div class="col-xs-8 col-md-9">
-      <h5>PLANT: <a href="#" ng-click="planting.showDetails(plant.seedsinuse_id)">{{ plant.generic }}, <strong>Field:</strong> {{ plant.field }} <strong>Section:</strong> {{ plant.section }} <strong>Row:</strong> {{ plant.row }}</a></h5>
+      <h5><a href="#" ng-click="planting.showDetails(plant.seedsinuse_id)">{{ plant.generic }}, <strong>Field:</strong> {{ plant.field }} <strong>Section:</strong> {{ plant.section }} <strong>Row:</strong> {{ plant.row }}</a></h5>
       <div ng-show="planting.details{{plant.seedsinuse_id}}">
-        <p class="indisplay"><strong>Family:</strong> {{ plant.family }} <strong>Variety:</strong> {{ plant.variety }} <strong>Quantity:</strong> {{ plant.usedquantity}}</p>
+        <p class="indisplay"><strong>Variety:</strong> {{ plant.variety }} <strong>Quantity:</strong> {{ plant.usedquantity}}</p>
         <p class="indisplay"><strong>MFR:</strong> {{ plant.manufacturer }} <strong>Supplier:</strong> {{ plant.supplier }} <strong>Lot Number:</strong> {{ plant.lotnumber }}</p>
         <p class="indisplay"><strong>Assigned:</strong> {{ plant.plantedassigndate | date:'MMM d, yyyy' }} </p>
       </div>
