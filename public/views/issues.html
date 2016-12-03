@@ -5,7 +5,7 @@
       <h5><a href="#" ng-click="issues.showDetails(issue.act_id)">{{issue.title}}</a></h5>
       <div ng-show="issues.details{{issue.act_id}}">
         <p class="indisplay"><strong>Field:</strong> {{issue.field}} <strong>Section:</strong> {{issue.section}} <strong>Row:</strong> {{issue.row}}</p>
-        <p class="indisplay"><strong>Reported On: </strong>{{issue.assigndate}}</p>
+        <p class="indisplay"><strong>Reported On: </strong>{{issue.assigndate | date:'MMM d, yyyy'}}</p>
         <p class="indisplay"><strong>Comments: </strong>{{issue.comments}}</p>
       </div>
       <div ng-show="issues.edits{{issue.act_id}}">
