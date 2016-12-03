@@ -3,16 +3,16 @@ angular.module('growLogApp')
 
 function ReportController($http) {
   var reportCtrl = this;
-  console.log('ReportController loaded');
-  // reportCtrl.getInfo = function() {
-  //   $http.get('/reports').then(function(response) {
-  //     return response;
-  //   });
-  // };
 
-  reportCtrl.getInfo = function() {
-    return $http.get('/reports').then(function(response) {
-        console.log('response', response);
+  // get reports from DB
+  reportCtrl.getInfo = function (dates) {
+    var newDates = {
+      start: dates.start,
+      end: dates.end
+    };
+
+    return $http.get('/reports')
+    .then(function (response) {
         return response.data;
       });
   };
