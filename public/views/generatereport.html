@@ -1,14 +1,24 @@
-<div class="container">
-  <div class="row">
-    <h1 class="col-xs-12 col-md-12">Generate Report</h1>
+<md-content layout="column" class="row well display">
+  <h3 class="titleheader">Select a Date Range</h3>
+  <div class="col-xs-12 col-md-12">
+    <md-input-container>
+      <label>Start</label>
+      <md-datepicker ng-model="reportCtrl.date.start"></md-datepicker>
+    </md-input-container>
+    <md-input-container>
+      <label>End</label>
+      <md-datepicker ng-model="reportCtrl.date.end"></md-datepicker>
+    </md-input-container>
+    <div layout="center center">
+      <md-button ng-click="reportCtrl.generateReport(reportCtrl.date)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Generate Report</md-button>
+    </div>
   </div>
+</md-content>
 
-  <!-- Export Report button -->
-  <button type="button" class="btn btn-primary" ng-model="reportCtrl.exportBtn" ng-csv="reportCtrl.getInfo()" csv-header=" ['Field', 'Section', 'Row', 'Activity Type', 'Assign Date', 'Complete Date', 'Activity Duration', 'Activity Amount', 'Weed Type', 'Activity Title', 'Comments', 'User Name', 'Transfer?', 'Used Quantity', 'Planting Assign Date', 'Planting Date', 'Grow Duration', 'Projected Harvest Date', 'Actual Harvest Date', 'Amount Harvested', 'Amount Harvested (units)', 'Harvest Duration', 'Generic Plant Name', 'Variety Name', 'Family', 'Seed Order Date', 'Seed Order Quantity', 'Seed Units per Pack', 'Quantity Units', 'Seeds per Unit', 'Manufacturer', 'Supplier', 'Days until Harvest', 'Seed Receive Date', 'Lot #', 'Donation?', 'Plan to Use?'] " filename="report.csv">Export</button>
-
-  <!-- home button -->
-  <a href="/home" class="btn btn-default" role="button" ng-model="reportCtrl.homeBtn">Home</a>
-
-  <!-- back button -->
-  <a href="/activities" class="btn btn-default" role="button" ng-model="reportCtrl.backBtn">Back</a>
-</div>
+<md-content layout="row" id="navigationbar">
+  <md-toolbar class="row navbar one">
+    <md-button class="md-mini col-xs-2" href="/home">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+      <md-icon class="material-icons">arrow_back</md-icon>
+  </md-toolbar>
+</md-content>
