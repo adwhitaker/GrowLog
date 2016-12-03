@@ -7,12 +7,17 @@ function PlantFormController($http, locationService, seedsService) {
   plantForm.allSeeds = seedsService;
   plantForm.locationService = locationService;
 
+  plantForm.updateCount = function (seed) {
+    var total = (seed.quantity) * (seed.unitsperpack) * (seed.seedsperunit);
+    plantForm.quantityHelp = 'You documented having ' + total + ' seeds.';
+  };
+
   // put seed in use (plant)
   plantForm.submitPlant = function (plant) {
 
     console.log(plant);
     let data = {
-      seedsId: plant.choice.id,
+      seedsId: plant.choice['id'],
       transfer: plant.transfer,
       plantedassigndate: moment(plant.assignDate).format('L'),
       projectedharvestdate: moment(plant.harvestDate).format('L'),
