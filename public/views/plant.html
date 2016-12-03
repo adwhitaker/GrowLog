@@ -1,6 +1,6 @@
-<md-content class="display well" layout="column">
+<md-content class="row display well" layout="column">
   <h3 class="titleheader">To Be Planted</h3>
-  <div class="row well" ng-repeat="plant in planting.usedSeeds.seeds.usedSeeds | orderBy: ['field', 'section', 'row']">
+  <div ng-repeat="plant in planting.usedSeeds.seeds.usedSeeds | orderBy: ['field', 'section', 'row']">
     <div class="col-xs-8 col-md-9">
       <h5>PLANT: <a href="#" ng-click="planting.showDetails(plant.seedsinuse_id)">{{ plant.generic }}, <strong>Field:</strong> {{ plant.field }} <strong>Section:</strong> {{ plant.section }} <strong>Row:</strong> {{ plant.row }}</a></h5>
       <div ng-show="planting.details{{plant.seedsinuse_id}}">
