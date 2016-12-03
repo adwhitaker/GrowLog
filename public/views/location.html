@@ -2,7 +2,7 @@
   <h3 class="titleheader">Locations</h3>
   <div ng-repeat="locvar in location.locationsFromService.locations.allLocations | orderBy: ['field', 'section', 'row']">
     <div class="col-xs-8 col-md-9">
-      <h5><a href="#" ng-click="location.showDetails(locvar.id)">Field: {{ locvar.field }} Section: {{ locvar.section }} Row: {{ locvar.row }}</a></h5>
+      <h5><a href="#" ng-click="location.showDetails(locvar.id)">Field: {{ locvar.field }}-{{ locvar.section }}-{{ locvar.row }}</a></h5>
       <div ng-show="location.edits{{locvar.id}}">
         <md-input-container class="md-block">
           <label>Field</label>
