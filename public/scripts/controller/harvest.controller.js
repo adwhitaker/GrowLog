@@ -7,11 +7,36 @@ function HarvestController(seedsService) {
 
   harvest.plantedSeeds = seedsService;
 
+  harvest.showDetails = function (id) {
+    harvest['details' + id] = !harvest['details' + id];
+    harvest['edits' + id] = false;
+    harvest['complete' + id] = false;
+  };
+
+  harvest.editDetails = function (id) {
+    harvest['edits' + id] = !harvest['edits' + id];
+    harvest['details' + id] = false;
+    harvest['complete' + id] = false;
+  };
+
+  harvest.markComplete = function (id) {
+    harvest['complete' + id] = !harvest['complete' + id];
+    harvest['edits' + id] = false;
+    harvest['details' + id] = false;
+  };
+
   harvest.editedPlant = function (plant) {
     harvest.editPlantInProgress = Object.assign({}, plant);
   };
 
   harvest.editPlant = function (plant) {
+    console.log(plant);
+    if (plant.updatedprojectedharvestdate == null) {
+      return;
+    } else {
+      plant.projectedharvestdate = plant.updatedprojectedharvestdate;
+    }
+
     var updatedPlant = {
       seeds_id: plant.seeds_id,
       transfer: plant.transfer,
@@ -41,7 +66,7 @@ function HarvestController(seedsService) {
       plantdate: harvestedPlant.plantdate,
       plantduration: harvestedPlant.plantduration,
       projectedharvestdate: harvestedPlant.projectedharvestdate,
-      actualharvestdate: harvestedPlant.actualharvestdate,
+      actualharvestdate: moment().format('L'),
       amountharvested: harvestedPlant.amountharvested,
       amountharvestedunits: harvestedPlant.amountharvestedunits,
       joins_id: harvestedPlant.id,
