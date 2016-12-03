@@ -13,7 +13,6 @@ cp node_modules/angular-route/angular-route.min.js.map public/vendors;
 cp node_modules/angular-messages/angular-messages.min.js public/vendors;
 cp node_modules/angular-messages/angular-messages.min.js.map public/vendors;
 
-
 # angular-animate
 cp node_modules/angular-animate/angular-animate.min.js public/vendors;
 cp node_modules/angular-animate/angular-animate.min.js.map public/vendors;
@@ -36,6 +35,7 @@ cp node_modules/moment/moment.js public/vendors;
 
 # angular-sanitize
 cp node_modules/angular-sanitize/angular-sanitize.min.js public/vendors;
+cp node_modules/angular-sanitize/angular-sanitize.min.js.map public/vendors;
 
 # ng-csv
 cp node_modules/ng-csv/build/ng-csv.min.js public/vendors;
