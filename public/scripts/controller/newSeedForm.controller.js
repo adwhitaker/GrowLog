@@ -21,17 +21,17 @@ function NewSeedFormController($http, seedsService, $mdDialog) {
     var data = {
       generic: seed.generic,
       variety: seed.variety,
-      family: seed.family,
-      orderdate: seed.orderdate,
+      family: 'demo',
+      orderdate: '1/1/2016',
       quantity: seed.quantity,
-      unitsperpack: seed.unitsperpack,
-      quantityunits: seed.quantityunits,
+      unitsperpack: '1',
+      quantityunits: 'demo',
       seedsperunit: seed.seedsperunit,
       manufacturer: seed.manufacturer,
-      supplier: seed.supplier,
+      supplier: 'demo',
       daystoharvest: seed.daystoharvest,
       receivedate: seed.receivedate,
-      lotnumber: seed.lotnumber,
+      lotnumber: 'demo',
       donation: seed.donation,
       plantouse: seed.plantouse
     };

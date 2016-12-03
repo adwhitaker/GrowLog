@@ -47,17 +47,17 @@ function SeedsController(seedsService, locationService) {
     let data = {
       generic: updatedSeedInfo.generic,
       variety: updatedSeedInfo.variety,
-      family: updatedSeedInfo.family,
+      family: 'demo',
       orderdate: moment(updatedSeedInfo.orderdate).format('L'),
       quantity: updatedSeedInfo.quantity,
-      unitsperpack: updatedSeedInfo.unitsperpack,
-      quantityunits: updatedSeedInfo.quantityunits,
+      unitsperpack: '1',
+      quantityunits: 'demo',
       seedsperunit: updatedSeedInfo.seedsperunit,
       manufacturer: updatedSeedInfo.manufacturer,
-      supplier: updatedSeedInfo.supplier,
+      supplier: 'demo',
       daystoharvest: updatedSeedInfo.daystoharvest,
       receivedate: moment(updatedSeedInfo.receivedate).format('L'),
-      lotnumber: updatedSeedInfo.lotnumber,
+      lotnumber: 'demo',
       donation: updatedSeedInfo.donation,
       plantouse: updatedSeedInfo.plantouse
     };

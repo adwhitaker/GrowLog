@@ -3,7 +3,7 @@
   <h3 class="titleheader">Search Seeds</h3>
   <md-input-container class="md-block">
     <label>Seed Search</label>
-    <input type="text" class="search" ng-model="search" placeholder="name, family, lot number"></input>
+    <input type="text" class="search" ng-model="search" placeholder="carrot, tomato"></input>
   </md-input-container>
 </md-content>
 
@@ -12,60 +12,60 @@
   <h3 class="titleheader">Seeds in Inventory</h3>
   <div ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | orderBy: 'seedvar.id' | filter:search">
     <div class="col-xs-8 col-md-9">
-      <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }} | MFR: {{ seedvar.manufacturer }}</a></h5>
+      <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }}</a></h5>
       <div ng-show="seeds.details{{seedvar.id}}">
-        <p class="indisplay"><strong>Family:</strong> {{ seedvar.family }}</p>
-        <p class="indisplay"><strong>Lot Number:</strong> {{ seedvar.lotnumber }}</p>
+        <p class="indisplay"><strong>MFR:</strong> {{ seedvar.manufacturer }}</p>
+        <p class="indisplay"><strong>Qty:</strong> {{ seedvar.quantity }}</p>
       </div>
       <div ng-show="seeds.edits{{seedvar.id}}">
         <md-input-container class="md-block">
           <label>Generic Name</label>
           <input ng-model="seedvar.genericUpdated" placeholder="{{seedvar.generic}}"></input>
         </md-input-container>
-        <md-input-container class="md-block">
+        <!-- <md-input-container class="md-block">
           <label>Family Name</label>
           <input ng-model="seedvar.family" placeholder="{{seedvar.family}}"></input>
-        </md-input-container>
+        </md-input-container> -->
         <md-input-container class="md-block">
           <label>Variety</label>
           <input ng-model="seedvar.varietyUpdated" placeholder="{{seedvar.variety}}"></input>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Manufacturer</label>
+          <label>MFR</label>
           <input ng-model="seedvar.manufacturerUpdated" placeholder="{{seedvar.manufacturer}}"></input>
         </md-input-container>
-        <md-input-container class="md-block">
+        <!-- <md-input-container class="md-block">
           <label>Supplier</label>
           <input ng-model="seedvar.supplier" placeholder="{{seedvar.supplier}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
+        </md-input-container> -->
+        <!-- <md-input-container class="md-block">
           <label>Lot Number</label>
           <input ng-model="seedvar.lotnumber" placeholder="{{seedvar.lotnumber}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
+        </md-input-container> -->
+        <!-- <md-input-container class="md-block">
           <label>Ordered</label>
           <md-datepicker ng-model="seedvar.orderdate" md-placeholder="{{seedvar.orderdate}}"></md-datepicker>
-        </md-input-container>
-        <md-input-container class="md-block">
+        </md-input-container> -->
+        <!-- <md-input-container class="md-block">
           <label>Received</label>
           <md-datepicker ng-model="seedvar.receivedate" md-placeholder="{{seedvar.receivedate}}"></md-datepicker>
-        </md-input-container>
+        </md-input-container> -->
         <md-input-container class="md-block">
           <label>Quantity</label>
           <input type="number" ng-model="seedvar.quantity" placeholder="{{seedvar.quantity}}"></input>
         </md-input-container>
-        <md-input-container class="md-block">
+        <!-- <md-input-container class="md-block">
           <label>Quantity Units</label>
           <input type="text" ng-model="seedvar.quantityunits" placeholder="{{seedvar.quantityunits}}"></input>
-        </md-input-container>
+        </md-input-container> -->
         <md-input-container class="md-block">
-          <label>Seeds Per Units</label>
+          <label>Seeds Per Unit</label>
           <input type="number" ng-model="seedvar.seedsperunit" placeholder="{{seedvar.seedsperunit}}"></input>
         </md-input-container>
-        <md-input-container class="md-block">
+        <!-- <md-input-container class="md-block">
           <label>Units Per Pack</label>
           <input type="number" ng-model="seedvar.unitsperpack" placeholder="{{seedvar.unitsperpack}}"></input>
-        </md-input-container>
+        </md-input-container> -->
         <md-input-container class="md-block">
           <label>Days Until Harvest</label>
           <input type="number" ng-model="seedvar.daystoharvest" placeholder="{{seedvar.daystoharvest}}"></input>
