@@ -1,10 +1,22 @@
 angular.module('growLogApp')
        .controller('OtherFormController', OtherFormController);
 
-function OtherFormController($http, locationService, activityService) {
+function OtherFormController(locationService, activityService, $mdDialog) {
   var otherForm = this;
 
   otherForm.locationService = locationService;
+
+  otherForm.showAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Success!')
+      .textContent('You have added an activity.')
+      .ariaLabel('Alert Success')
+      .ok('Confirm')
+    );
+  };
 
   // adding new "other" activity to DB
   otherForm.addTask = function (task) {
@@ -20,6 +32,7 @@ function OtherFormController($http, locationService, activityService) {
 
     activityService.addActivity(data)
     .then(function () {
+      otherForm.showAlert();
       otherForm.task = '';
     }).catch(function (error) {
       console.log('Error posting request', error);

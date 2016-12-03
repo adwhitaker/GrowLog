@@ -1,11 +1,23 @@
 angular.module('growLogApp')
        .controller('PlantFormController', PlantFormController);
 
-function PlantFormController($http, locationService, seedsService) {
+function PlantFormController($http, locationService, seedsService, $mdDialog) {
   var plantForm = this;
 
   plantForm.allSeeds = seedsService;
   plantForm.locationService = locationService;
+
+  plantForm.showAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Success!')
+      .textContent('You have added a seed to be planted.')
+      .ariaLabel('Alert Success')
+      .ok('Confirm')
+    );
+  };
 
   plantForm.updateCount = function (seed) {
     var total = (seed.quantity) * (seed.unitsperpack) * (seed.seedsperunit);
@@ -34,6 +46,7 @@ function PlantFormController($http, locationService, seedsService) {
 
     $http.post('/seedsInUse', data)
     .then(function () {
+      plantForm.showAlert();
       plantForm.plant = '';
       seedsService.getUsedSeed();
     }).catch(function () {

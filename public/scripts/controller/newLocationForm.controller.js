@@ -1,8 +1,20 @@
 angular.module('growLogApp')
        .controller('NewLocationFormController', NewLocationFormController);
 
-function NewLocationFormController($http, locationService) {
+function NewLocationFormController($http, locationService, $mdDialog) {
   var locationForm = this;
+
+  locationForm.showAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Success!')
+      .textContent('You have added a location.')
+      .ariaLabel('Alert Success')
+      .ok('Confirm')
+    );
+  };
 
   // add new location to the DB
   locationForm.addLocation = function (location) {
@@ -15,6 +27,7 @@ function NewLocationFormController($http, locationService) {
 
     locationService.addLocation(data)
                    .then(function () {
+                      locationForm.showAlert();
                       locationForm.location = '';
                     })
                    .catch(function () {
