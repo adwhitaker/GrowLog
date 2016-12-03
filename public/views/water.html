@@ -4,9 +4,12 @@
   <h3 class="titleheader">To be Watered</h3>
   <div ng-repeat="water in watering.activities.activitiesObject.water | orderBy: 'assigndate'">
     <div class="col-xs-8 col-md-9">
-      <h5><a href="#" ng-click="watering.showDetails(water.act_id)">{{water.assigndate | date: "MM-dd-yyyy"}} - Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</a></h5>
+      <!-- <h5><a href="#" ng-click="watering.showDetails(water.act_id)">{{water.assigndate | date: "MM-dd-yyyy"}} - Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</a></h5> -->
+      <h5><a href="#" ng-click="watering.showDetails(water.act_id)"> Field: {{water.field}}-{{water.section}}-{{water.row}}</a></h5>
+
         <div ng-show="watering.details{{water.act_id}}">
           <p class="indisplay"><strong>Comments: </strong>{{water.comments}}</p>
+          <p class="indisplay"><strong>Assign Date: </strong>{{water.assigndate | date: "MM-dd-yyyy"}} </p>
         </div>
         <div ng-show="watering.edits{{water.act_id}}">
           <md-input-container class="md-block">
