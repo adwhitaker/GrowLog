@@ -1,12 +1,23 @@
 angular.module('growLogApp')
        .controller('NewSeedFormController', NewSeedFormController);
 
-function NewSeedFormController($http, seedsService) {
+function NewSeedFormController($http, seedsService, $mdDialog) {
   var newSeed = this;
   console.log('NewSeedFormController loaded');
 
-  newSeed.addSeed = function (seed) {
+  newSeed.showAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Success!')
+      .textContent('You have added a seed.')
+      .ariaLabel('Alert Success')
+      .ok('Confirm')
+    );
+  };
 
+  newSeed.addSeed = function (seed) {
     var data = {
       generic: seed.generic,
       variety: seed.variety,
@@ -27,7 +38,7 @@ function NewSeedFormController($http, seedsService) {
 
     seedsService.addSeed(data)
     .then(function () {
-      // empty form after clicking 'submit'
+      newSeed.showAlert();
       newSeed.seed = '';
     });
 
