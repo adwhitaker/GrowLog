@@ -1,57 +1,72 @@
-
-  <h3>Activities:</h3>
-
-  <!-- to show list of to-dos -->
-  <ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="other in others.activities.activitiesObject.other | orderBy: 'assigndate'">
-      <div class="row">
-        <div class="col-xs-8 col-md-10">
-          <h4><a href="#" ng-click="showDetails = !showDetails">{{other.title}}</a></h4>
-          <p>Field: {{other.field}} | Section: {{other.section}} | Row: {{other.row}}</p>
-        </div>
-        <div class="material-switch pull-right col-xs-4 col-md-2">
-          <input id="{{other.act_id}}" name="{{other.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
-          <label for="{{other.act_id}}" class="label-success"></label>
-        </div>
+<md-content class="display well" layout="column">
+  <h3 class="titleheader">Other Activities</h3>
+  <div ng-repeat="other in others.activities.activitiesObject.other | orderBy: 'assigndate'">
+    <div class="col-xs-8 col-md-9">
+    <h5><a href="#" ng-click="others.showDetails(other.act_id)">{{other.title}}</a></h5>
+      <div ng-show="others.details{{other.act_id}}">
+        <p class="indisplay"><strong>Field:</strong> {{other.field}} <strong>Section:</strong> {{other.section}} <strong>Row:</strong> {{other.row}}</p>
+        <p class="indisplay"><strong>Assigned: </strong>{{other.assigndate | date:'MMM d, yyyy'}}</p>
+        <p class="indisplay"><strong>Comments: </strong>{{other.comments}}</p>
       </div>
-      <div class="row" ng-show="showDetails">
-        <div ng-hide="editing">
-          <div class="col-xs-6 col-md-8">
-            <p>{{other.comments}}</p>
-          </div>
-          <div class="col-xs-2 col-md-2">
-            <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
-          </div>
-          <div class="col-xs-2 col-md-2">
-            <a href="#" ng-click="others.deleteOther(other.act_id, other.id)" role="button" class="btn btn-danger">delete</a>
-          </div>
-        </div>
-
-        <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
-          <div class="form-group has-float-label">
-            <textarea class="form-control" id="{{other.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{other.act_id}} placeholder="e.g. fix hose" ng-model="other.comments"></textarea>
-            <label for="{{other.act_id}}">Comments</label>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-success" ng-click="others.updateOther(other.act_id, other)">Save</button>
-            <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
-          </div>
-        </form>
+      <div ng-show="others.edits{{other.act_id}}">
+        <md-input-container class="md-block">
+          <label>Update Title</label>
+          <input placeholder="{{other.title}}" ng-model="other.updatedTitle"></input>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Update Comments</label>
+          <input placeholder="{{other.comments}}" ng-model="other.comments"></input>
+        </md-input-container>
       </div>
-
-      <div class="form-horizontal" ng-show="completeDetails">
-        <div class="form-group row">
-          <div class="col-xs-10 col-md-10">
-            <label for="{{other.act_id}}">Comments</label>
-            <textarea class="form-control" id="{{other.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{other.act_id}} ng-model="other.comments"></textarea>
-          </div>
-        </div>
-        <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="others.completeOther(other.act_id, other)" role="button" class="btn btn-success">Complete</a>
-        </div>
+      <div ng-show="others.complete{{other.act_id}}">
+        <md-input-container class="md-block">
+          <label>Additional Comments</label>
+          <input placeholder="{{other.comments}}" ng-model="other.comments"></input>
+        </md-input-container>
       </div>
-    </li>
-  </ul>
+    </div>
+
+    <div class="col-xs-2 col-md-2">
+      <div ng-hide="others.details{{other.act_id}} || others.edits{{other.act_id}} || others.complete{{other.act_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="others.markComplete(other.act_id, other.checkstatus)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">{{other.checkstatus}}</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="others.details{{other.act_id}}">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="others.editDetails(other.act_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit other</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">create</md-icon>
+        </md-button>
+        <md-button aria-label="delete" class="btn1 md-warn" ng-click="others.deleteother(other.act_id, other.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete other</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="others.edits{{other.act_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="others.updateOther(other.act_id, other)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="others.editDetails(other.act_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="others.complete{{other.act_id}}">
+        <md-button aria-label="finish other" class="btn1 md-accent md-hue-3" ng-click="others.completeOther(other.act_id, other)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="others.markComplete(other.act_id, other.checkstatus)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <div class="line"></div>
+  </div>
+</md-content>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
