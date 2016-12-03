@@ -38,6 +38,12 @@ function SeedsController(seedsService, locationService) {
       updatedSeedInfo.variety = updatedSeedInfo.varietyUpdated;
     }
 
+    if (updatedSeedInfo.manufacturerUpdated === null) {
+      return;
+    } else {
+      updatedSeedInfo.manufacturer = updatedSeedInfo.manufacturerUpdated;
+    }
+
     let data = {
       generic: updatedSeedInfo.generic,
       variety: updatedSeedInfo.variety,
