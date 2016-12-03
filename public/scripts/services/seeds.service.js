@@ -138,7 +138,7 @@ function seedsService($http) {
 
     return $http.delete('/seedsInUse/' + id, { params: data })
       .then(function () {
-        ctrl.getSeeds();
+        ctrl.getUsedSeed();
         return;
       }).catch(function (err) {
         console.log('err', err);
