@@ -19,7 +19,7 @@
       <md-select name="type" ng-model="plantForm.plant.location.id" id="location">
         <md-option ng-repeat="location in plantForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']"
           ng-value="location.id">
-          Field: {{location.field}} Section: {{location.section}} Row: {{location.row}} {{location.id}}
+          Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}
         </md-option>
       </md-select>
     </md-input-container>
