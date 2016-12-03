@@ -1,50 +1,65 @@
-<md-content layout="column" class="row well display">
+<md-content class="row display well" layout="column">
   <h3 class="titleheader">To Be Harvested</h3>
-    <ul class="list-group row">
-        <li class="list-group-item col-xs-12 col-md-12" ng-repeat="plant in
-        harvest.plantedSeeds.seeds.usedSeedsPlanted | orderBy: 'projectedharvestdate'">
-            <div class="row">
-                <div class="col-xs-8 col-md-10">
-                    <h4><a href="#" ng-click="showDetails = !showDetails; harvest.editedPlant(plant)">
-                  Projected Date: {{ plant.projectedharvestdate | date:'MMM d, yyyy' }} | Quantity Planted: {{ plant.quantity}}</a></h4>
-                    <h5>Generic Name: {{ plant.generic }} | Plant Family: {{ plant.family }} | Plant Variety: {{ plant.variety }}</h5>
-                    <p>Manufacturer: {{ plant.manufacturer }} | Supplier: {{ plant.supplier }} | Lot Number: {{ plant.lotnumber }}</p>
-                    <p>Field: {{ plant.field }} | Section: {{ plant.section }} | Row: {{ plant.row }}</p>
-                </div>
-                <div class="material-switch pull-right col-xs-4 col-md-2">
-                    <input id="{{ plant.seedsinuse_id }}" name="{{ plant.seedsinuse_id }}" type="checkbox" ng-click="completeDetails = !completeDetails; harvest.editedPlant(plant)" />
-                    <label for="{{ plant.seedsinuse_id }}" class="label-success"></label>
-                </div>
-            </div>
-            <div class="row" ng-show="showDetails">
-              <div class="form-group "col-xs-2 col-md-2"">
-                  <label for="harvest.editPlantInProgress.projectedharvestdate">Projected Harvest Date:</label>
-                  <input type="date" class="form-control" id="item" ng-model="harvest.editPlantInProgress.projectedharvestdate">
-              </div>
-                <div class="col-xs-2 col-md-2">
-                    <a href="#" ng-click="harvest.editPlant(harvest.editPlantInProgress)" role="button" class="btn btn-default">edit</a>
-                </div>
-            </div>
-            <div class="row" ng-show="completeDetails">
-              <div class="col-xs-2 col-md-2">
-              <div class="form-group">
-                  <label for="harvest.editPlantInProgress.actualharvestdate">Harvest Date:</label>
-                  <input type="date" class="form-control" id="item" ng-model="harvest.editPlantInProgress.actualharvestdate">
-              </div>
-              <div class="form-group">
-                  <label for="harvest.editPlantInProgress.amountharvested">Amount Harvested:</label>
-                  <input type="number" class="form-control" id="item" ng-model="harvest.editPlantInProgress.amountharvested">
-              </div>
-              <div class="form-group">
-                  <label for="harvest.editPlantInProgress.amountharvestedunits">Harvested Units:</label>
-                  <input type="text" class="form-control" id="item" ng-model="harvest.editPlantInProgress.amountharvestedunits">
-              </div>
-
-                    <a href="#" ng-click="harvest.completeHarvest(harvest.editPlantInProgress)" role="button" class="btn btn-success">Complete</a>
-                </div>
-            </div>
-        </li>
-    </ul>
+  <div ng-repeat="plant in harvest.plantedSeeds.seeds.usedSeedsPlanted | orderBy: 'projectedharvestdate'">
+    <div class="col-xs-8 col-md-9">
+      <h5><a href="#" ng-click="harvest.showDetails(plant.seedsinuse_id)">{{ plant.projectedharvestdate | date:'MMM d, yyyy' }}: {{ plant.generic }}</a></h5>
+      <div ng-show="harvest.details{{plant.seedsinuse_id}}">
+        <p class="indisplay"><strong>Field:</strong> {{ plant.field }} | <strong>Section:</strong> {{ plant.section }} | <strong>Row:</strong> {{ plant.row }}</p>
+        <p class="indisplay"><strong>Quantity Planted:</strong> {{ plant.quantity}}</p>
+      </div>
+      <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
+        <md-input-container class="md-block">
+          <label>New Est. Harvest</label>
+          <md-datepicker ng-model="plant.updatedprojectedharvestdate" placeholder="{{plant.projectedharvestdate | date: 'MM/dd/yyyy'}}"></md-datepicker>
+        </md-input-container>
+      </div>
+      <div ng-show="harvest.complete{{plant.seedsinuse_id}}">
+        <md-input-container class="md-block">
+          <label>Amt. Harvested</label>
+          <input type="number" ng-model="plant.amountharvested">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Harvested Units</label>
+          <input type="text" ng-model="plant.amountharvestedunits">
+        </md-input-container>
+      </div>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <div ng-hide="harvest.details{{plant.seedsinuse_id}} || harvest.edits{{plant.seedsinuse_id}} || harvest.complete{{plant.seedsinuse_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="harvest.markComplete(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">check_box_outline_blank</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="harvest.details{{plant.seedsinuse_id}}">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="harvest.editDetails(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Issue</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">create</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="harvest.editPlant(plant)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="harvest.editDetails(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="harvest.complete{{plant.seedsinuse_id}}">
+        <md-button aria-label="finish plant" class="btn1 md-accent md-hue-3" ng-click="harvest.completeHarvest(plant)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="harvest.markComplete(plant.seedsinuse_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+    </div>
+  <div class="line"></div>
+  </div>
 </md-content>
 
   <md-content layout="row" id="navigationbar">
