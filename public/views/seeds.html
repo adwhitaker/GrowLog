@@ -1,5 +1,6 @@
 <!-- search bar for finding seeds -->
 <md-content layout="column" class="row well display">
+  <h3 class="titleheader">Search Seeds</h3>
   <md-input-container class="md-block">
     <label>Seed Search</label>
     <input type="text" class="search" ng-model="search" placeholder="name, family, lot number"></input>
@@ -42,11 +43,11 @@
           <input ng-model="seedvar.lotnumber" placeholder="{{seedvar.lotnumber}}"></input>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Order Date</label>
+          <label>Ordered</label>
           <md-datepicker ng-model="seedvar.orderdate" md-placeholder="{{seedvar.orderdate}}"></md-datepicker>
         </md-input-container>
         <md-input-container class="md-block">
-          <label>Receive Date</label>
+          <label>Received</label>
           <md-datepicker ng-model="seedvar.receivedate" md-placeholder="{{seedvar.receivedate}}"></md-datepicker>
         </md-input-container>
         <md-input-container class="md-block">
