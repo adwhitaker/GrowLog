@@ -54,7 +54,7 @@ function PlantController(seedsService) {
       seeds_id: plantObject.seeds_id,
       transfer: plantObject.transfer,
       usedquantity:  plantObject.usedquantity,
-      plantedassigndate: moment(plantObject.newAssignDate).format('L'),
+      plantedassigndate: moment(plantObject.assigndate).format('L'),
       plantdate: plantObject.plantdate,
       plantduration: plantObject.plantduration,
       projectedharvestdate: plantObject.projectedharvestdate,
