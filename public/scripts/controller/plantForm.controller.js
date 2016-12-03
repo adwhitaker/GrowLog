@@ -36,18 +36,19 @@ function PlantFormController($http, locationService, seedsService, $mdDialog) {
     var days = seed.daystoharvest;
     var assigndate = moment(date).format('L');
     var estdate = moment(assigndate).add(days, 'days').format('L');
-    plantForm.harvestHelp = 'Your estimated harvest date is ' + estdate + '.';
+    plantForm.harvestHelp = 'Your est. harvest is on ' + estdate + '.';
+    plantForm.harvestHelpDate = estdate;
   };
 
   // put seed in use (plant)
-  plantForm.submitPlant = function (plant) {
+  plantForm.submitPlant = function (plant, date) {
 
     console.log(plant);
     let data = {
       seedsId: plant.choice['id'],
       transfer: plant.transfer,
       plantedassigndate: moment(plant.assignDate).format('L'),
-      projectedharvestdate: moment(plant.harvestDate).format('L'),
+      projectedharvestdate: moment(date).format('L'),
       usedquantity: plant.usedquantity,
       location_id: plant.location.id
     };

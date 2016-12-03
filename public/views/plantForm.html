@@ -32,11 +32,11 @@
     </md-input-container>
     <md-input-container class="md-block">
       <label>Est. Harvest</label>
-      <md-datepicker ng-model="plantForm.plant.harvestDate"></md-datepicker>
+      <md-datepicker ng-model="plantForm.harvestHelpDate"></md-datepicker>
       <small>{{plantForm.harvestHelp}}</small>
     </md-input-container>
     <div layout="center center">
-      <md-button ng-click="plantForm.submitPlant(plantForm.plant)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Submit</md-button>
+      <md-button ng-click="plantForm.submitPlant(plantForm.plant, plantForm.harvestHelpDate)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Submit</md-button>
     </div>
   </div>
 </md-content>
