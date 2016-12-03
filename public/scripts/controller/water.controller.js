@@ -1,9 +1,35 @@
 angular.module('growLogApp')
        .controller('WaterController', WaterController);
 
-function WaterController(activityService, $scope) {
+function WaterController(activityService, $route) {
   var water = this;
   console.log('WaterController loaded');
+
+  water.showDetails = function (id) {
+    water['details' + id] = !water['details' + id];
+    water['edits' + id] = false;
+    water['complete' + id] = false;
+  };
+
+  water.editDetails = function (id) {
+    water['edits' + id] = !water['edits' + id];
+    water['details' + id] = false;
+    water['complete' + id] = false;
+  };
+
+  water.markComplete = function (id, check) {
+    water['complete' + id] = !water['complete' + id];
+    water['edits' + id] = false;
+    water['details' + id] = false;
+    if (check === 'check_box_outline_blank') {
+      check = 'check_box';
+    } else {
+      check = 'check_box_outline_blank';
+    }
+  };
+
+
+
   water.activities = activityService;
 
   activityService.getActivities();
@@ -44,6 +70,8 @@ function WaterController(activityService, $scope) {
       comments: waterObject.comments,
       joins_id: waterObject.id,
       users_id: waterObject.users_id,
+      duration: waterObject.duration,
+      amount: waterObject.amount
     };
     console.log(activity);
 

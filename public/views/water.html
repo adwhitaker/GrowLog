@@ -1,99 +1,109 @@
 
 
-  <h3>Activities:</h3>
+<md-content class="display well" layout="column">
+    <h3 class="titleheader">To be Watered</h3>
+    <div ng-repeat="water in watering.activities.activitiesObject.water | orderBy: 'assigndate'">
+        <div class="col-xs-8 col-md-9">
+            <h5><a href="#" ng-click="watering.showDetails(water.act_id)">{{water.assigndate | date: "MM-dd-yyyy"}} - Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</a></h5>
+            <div ng-show="watering.details{{water.act_id}}">
+              <p class="indisplay"><strong>Field:</strong> {{water.field}} <strong>Section:</strong> {{water.section}} <strong>Row:</strong> {{water.row}}</p>
+              <p class="indisplay"><strong>Assigned: </strong>{{water.assigndate | date:'MMM d, yyyy'}}</p>
+              <p class="indisplay"><strong>Comments: </strong>{{water.comments}}</p>
+            </div>
+            <div ng-show="watering.edits{{water.act_id}}">
+                <md-input-container class="md-block">
+                    <label>Update Comments</label>
+                    <input id="comments {{water.act_id}}" placeholder="{{water.comments}}" ng-model="water.comments"></input>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label for="amount complete {{water.act_id}}">Estimated Amount of Water Used (in gallons)</label>
+                    <input type="text" class="form-control" id="amount complete {{water.act_id}}" ng-model="water.amount"></textarea>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label for="duration complete {{water.act_id}}">Duration (in minutes)</label>
+                    <input type="number" class="form-control" id="duration complete {{water.act_id}}" ng-model="water.duration"></textarea>
+                </md-input-container>
+              </div>
 
-  <!-- to show list of to-dos -->
-  <ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="water in watering.activities.activitiesObject.water | orderBy: 'assigndate'">
-      <div class="row">
-        <div class="col-xs-8 col-md-10">
-          <h4><a href="#" ng-click="showDetails = !showDetails">{{water.assigndate | date: "MM-dd-yyyy"}} - Field: {{water.field}} | Section: {{water.section}} | Row: {{water.row}}</a></h4>
-        </div>
-        <div class="material-switch pull-right col-xs-4 col-md-2">
-          <input id="complete {{water.act_id}}" name="complete {{water.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
-          <label for="complete {{water.act_id}}" class="label-success"></label>
-        </div>
-      </div>
-      <div class="row" ng-show="showDetails">
-        <div ng-hide="editing">
-          <div class="col-xs-6 col-md-8">
-            <p>{{water.comments}}</p>
           </div>
           <div class="col-xs-2 col-md-2">
-            <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
+            <div ng-show="watering.complete{{water.act_id}}">
+                <md-input-container class="md-block">
+                    <label>Additional Comments</label>
+                    <input id="comments {{water.act_id}}" placeholder="{{water.comments}}" ng-model="water.comments"></input>
+                </md-input-container>
+            </div>
           </div>
-          <div class="col-xs-2 col-md-2">
-            <a href="#" ng-click="watering.deleteWater(water.act_id, water.id)" role="button" class="btn btn-danger">delete</a>
-          </div>
-        </div>
+            <div class="col-xs-2 col-md-2">
+                  <div ng-hide="watering.details{{water.act_id}} || watering.edits{{water.act_id}} || watering.complete{{water.act_id}}">
+                      <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="watering.markComplete(water.act_id, water.checkstatus)">
+                          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+                          <md-icon class="material-icons" aria-label="menu">{{water.checkstatus}}</md-icon>
+                      </md-button>
+                  </div>
+              <div ng-show="watering.details{{water.act_id}}">
+                <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="watering.editDetails(water.act_id)">
+                    <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Water</md-tooltip>
+                    <md-icon class="material-icons" aria-label="menu">create</md-icon>
+                </md-button>
+                <md-button aria-label="delete" class="btn1 md-warn" ng-click="watering.deleteWater(water.act_id, water.id)">
+                    <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Water</md-tooltip>
+                    <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+                </md-button>
+              </div>
+              <div ng-show="watering.edits{{water.act_id}}">
+                  <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="watering.updateWater(water.act_id, water)">
+                      <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+                      <md-icon class="material-icons" aria-label="menu">done</md-icon>
+                  </md-button>
+                  <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="watering.editDetails(water.act_id)">
+                      <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+                      <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+                  </md-button>
+              </div>
+              <div ng-show="watering.complete{{water.act_id}}">
+                  <md-button aria-label="finish issue" class="btn1 md-accent md-hue-3" ng-click="watering.completeWater(water.act_id, water)">
+                      <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+                      <md-icon class="material-icons" aria-label="menu">done</md-icon>
+                  </md-button>
 
-        <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
-          <div class="form-group has-float-label">
-            <input class="form-control" id="assigndate {{water.act_id}}" type="date" ng-model="water.newAssignDate"></input>
-            <label for="assigndate {{water.act_id}}">Update Assign Date</label>
-          </div>
-          <div class="form-group has-float-label">
-            <textarea class="form-control" id="comments {{water.act_id}}" rows="2" minlength="5" maxlength="100" placeholder="e.g. 10 minutes of water on sprinkler setting" ng-model="water.comments"></textarea>
-            <label for="comments {{water.act_id}}">Comments</label>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-success" ng-click="watering.updateWater(water.act_id, water)">Save</button>
-            <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
-          </div>
-        </form>
-      </div>
+                  <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="watering.markComplete(water.act_id, water.checkstatus)">
+                      <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+                      <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+                  </md-button>
+              </div>
 
-      <div class="form-horizontal" ng-show="completeDetails">
-        <div class="form-group row">
-          <div class="col-xs-10 col-md-10">
-            <label for="comments complete {{water.act_id}}">Comments</label>
-            <textarea class="form-control" id="comments complete {{water.act_id}}" rows="2" minlength="5" maxlength="100" ng-model="water.comments"></textarea>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-xs-10 col-md-10">
-            <label for="duration complete {{water.act_id}}">Duration (in minutes)</label>
-            <input type="number" class="form-control" id="duration complete {{water.act_id}}" ng-model="water.duration"></textarea>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-xs-10 col-md-10">
-            <label for="amount complete {{water.act_id}}">Estimated Amount of Water Used (in gallons)</label>
-            <input type="number" class="form-control" id="duration complete {{water.act_id}}" ng-model="water.amount"></textarea>
-          </div>
-        </div>
-        <div class="col-xs-2 col-md-2">
-          <a href="#" ng-click="watering.completeWater(water.act_id, water)" role="button" class="btn btn-success">Complete</a>
-        </div>
-      </div>
-    </li>
-  </ul>
+    <div class="line"></div>
+  </div>
+</div>
 
+</md-content>
+<!-- nav bar starts here -->
 <md-content layout="row" id="navigationbar">
-  <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/activities">
-      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
-      <md-icon class="material-icons">arrow_back</md-icon>
-    </md-button>
-    <md-button class="md-mini col-xs-2" href="/home">
-      <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
-      <md-icon class="material-icons">home</md-icon>
-    </md-button>
-  </md-toolbar>
+    <md-toolbar class="row navbar one">
+        <md-button class="md-mini col-xs-2" href="/activities">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+            <md-icon class="material-icons">arrow_back</md-icon>
+        </md-button>
+        <md-button class="md-mini col-xs-2" href="/home">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
+            <md-icon class="material-icons">home</md-icon>
+        </md-button>
+    </md-toolbar>
 
-  <md-fab-speed-dial ng-hide="hidden" md-direction="up" md-open="isOpen" class="md-scale md-fab-top-right options" ng-class="md-hover-full">
-    <md-fab-trigger>
-      <md-button aria-label="seed menu" class="md-fab md-warn md-mini">
-        <md-tooltip md-direction="left" md-visible="tooltipVisible">Watering Menu</md-tooltip>
-        <md-icon class="material-icons" aria-label="menu">menu</md-icon>
-      </md-button>
-    </md-fab-trigger>
+    <md-fab-speed-dial ng-hide="hidden" md-direction="up" md-open="isOpen" class="md-scale md-fab-top-right options" ng-class="md-hover-full">
+        <md-fab-trigger>
+            <md-button aria-label="seed menu" class="md-fab md-warn md-mini">
+                <md-tooltip md-direction="left" md-visible="tooltipVisible">Watering Menu</md-tooltip>
+                <md-icon class="material-icons" aria-label="menu">menu</md-icon>
+            </md-button>
+        </md-fab-trigger>
 
-    <md-fab-actions class="row">
-      <md-button href="/waterForm" aria-label="add location" class="md-fab md-raised md-mini">
-        <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Activity</md-tooltip>
-        <md-icon class="material-icons">add_circle_outline</md-icon>
-      </md-button>
-    </md-fab-actions>
-  </md-fab-speed-dial>
+        <md-fab-actions class="row">
+            <md-button href="/waterForm" aria-label="add location" class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Activity</md-tooltip>
+                <md-icon class="material-icons">add_circle_outline</md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
 </md-content>
