@@ -60,6 +60,7 @@ function WaterController(activityService, $route) {
   };
 
   water.updateWater = function (id, waterObject) {
+    water.showDetails(id);
     var id = id;
     var newDate = moment(waterObject.newAssignDate).format('L');
     console.log(newDate);
