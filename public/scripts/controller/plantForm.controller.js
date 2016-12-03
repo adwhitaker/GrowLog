@@ -12,6 +12,13 @@ function PlantFormController($http, locationService, seedsService) {
     plantForm.quantityHelp = 'You documented having ' + total + ' seeds.';
   };
 
+  plantForm.updateHarvestEst = function (date, seed) {
+    var days = seed.daystoharvest;
+    var assigndate = moment(date).format('L');
+    var estdate = moment(assigndate).add(days, 'days').format('L');
+    plantForm.harvestHelp = 'Your estimated harvest date is ' + estdate + '.';
+  };
+
   // put seed in use (plant)
   plantForm.submitPlant = function (plant) {
 
