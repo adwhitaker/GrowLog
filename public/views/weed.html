@@ -1,67 +1,78 @@
-<h3>Activities:</h3>
-<!-- ng repeat replace weed.listActiveIssues with weed.issueobject.activitiesobject.weed -->
-<!-- to show list of to-dos -->
-<ul class="list-group row">
-    <li class="list-group-item col-xs-12 col-md-12" ng-repeat="weedvar in weed.activities.activitiesObject.weed | orderBy: 'assigndate'">
-        <div class="row">
-            <div class="col-xs-8 col-md-10">
-                <h4><a href="#" ng-click="showDetails = !showDetails">Weed Type: {{weedvar.weedtype}}</a></h4>
-                <p>Field: {{weedvar.field}} | Section: {{weedvar.section}} | Row: {{weedvar.row}}</p>
+<md-content class="display well" layout="column">
+  <h3 class="titleheader">To be Weeded</h3>
+  <div ng-repeat="weedvar in weed.activities.activitiesObject.weed | orderBy: 'assigndate'">
+    <div class="col-xs-8 col-md-9">
+      <h5><a href="#" ng-click="weed.showDetails(weedvar.act_id)">Weed Type: {{weedvar.weedtype}}</a></h4>
+      <div ng-show="weed.details{{weedvar.act_id}}">
+        <p>Field: {{weedvar.field}} | Section: {{weedvar.section}} | Row: {{weedvar.row}}</p>
+        <p>Comments: {{weedvar.comments}}</p>
 
-            </div>
-            <div class="material-switch pull-right col-xs-4 col-md-2">
-                <input id="{{weedvar.act_id}}" name="{{weedvar.act_id}}" type="checkbox" ng-click="completeDetails = !completeDetails">
-                <label for="{{weedvar.act_id}}" class="label-success"></label>
-            </div>
-        </div>
-        <div class="row" ng-show="showDetails">
-            <div ng-hide="editing">
-                <div class="col-xs-6 col-md-8">
-                    <p>{{weedvar.comments}}</p>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <a href="#" ng-click="weed.deleteActivity(weedvar.act_id, weedvar.id)" role="button" class="btn btn-danger">delete</a>
-                </div>
-            </div>
+      </div>
+      <div ng-show="weed.edits{{weedvar.act_id}}">
+        <md-input-container class="md-block">
+          <label>Update Comments</label>
+          <input placeholder="{{weedvar.comments}}" ng-model="weedvar.comments">
+        </md-input-container>
+      </div>
+      <div ng-show="weed.complete{{weedvar.act_id}}">
+        <md-input-container class="md-block">
+          <label>Duration (mins)</label>
+          <input type="number" ng-model="weedvar.duration"></input>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Additional Comments</label>
+          <input id="comments {{weedvar.act_id}}" placeholder="{{weedvar.comments}}" ng-model="weedvar.comments"></input>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="col-xs-2 col-md-2">
+                    <!-- <a href="#" ng-click="editing = !editing" role="button" class="btn btn-default">Edit</a> -->
+      <div ng-hide="weed.details{{weedvar.act_id}} || weed.edits{{weedvar.act_id}} || weed.complete{{weedvar.act_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="weed.markComplete(weedvar.act_id, weedvar.checkstatus)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">{{weedvar.checkstatus}}</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="weed.details{{weedvar.act_id}}">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="weed.editDetails(weedvar.act_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Weed</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">create</md-icon>
+        </md-button>
 
-            <form class="form-horizontal col-xs-8 col-md-8" ng-show="editing" ng-submit="editing = false">
-                <div class="form-group has-float-label">
-                    <textarea class="form-control" id="{{weedvar.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{weedvar.act_id}} placeholder="e.g. cabbage moths" ng-model="weedvar.comments"></textarea>
-                    <label for="{{weedvar.act_id}}">Comments</label>
-                </div>
-
-                <div class="form-group">
-                    <button class="btn btn-success" ng-click="weed.updateIssue(weedvar.act_id, weedvar)">Save</button>
-                    <button class="btn btn-danger" ng-click="editing = !editing">Cancel</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="form-horizontal" ng-show="completeDetails">
-            <div class="form-group row">
-                <div class="col-xs-10 col-md-10">
-                    <label for="{{weedvar.act_id}}">Comments</label>
-                    <textarea class="form-control" id="{{weedvar.act_id}}" rows="2" minlength="5" maxlength="100" ng-value={{weedvar.act_id}} ng-model="weedvar.comments"></textarea>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-xs-2 col-md-2">
-                    <label for="{{weedvar.act_id}}">Duration (in Minutes)</label>
-                    <input class="form-control" id="{{weedvar.act_id}}" ng-value={{weedvar.act_id}} ng-model="weedvar.duration">
-                </div>
-            </div>
+        <md-button aria-label="delete" class="btn1 md-warn" ng-click="weed.deleteActivity(weedvar.act_id, weedvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Weed</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
 
 
-            <div class="col-xs-2 col-md-2">
-                <a href="#" ng-click="weed.completeIssue(weedvar.act_id, weedvar)" role="button" class="btn btn-success">Complete</a>
-            </div>
-        </div>
-    </li>
-</ul>
+        </md-button>
+      </div>
+      <div ng-show="weed.edits{{weedvar.act_id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="weed.updateWeed(weedvar.act_id, weedvar)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="weed.editDetails(weedvar.act_id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+      <div ng-show="weed.complete{{weedvar.act_id}}">
+        <md-button aria-label="finish issue" class="btn1 md-accent md-hue-3" ng-click="weed.completeWeed(weedvar.act_id, weedvar)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="weed.markComplete(weedvar.act_id, weedvar.checkstatus)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
+      </div>
+    </div>
+  <div class="line"></div>
+
+  </div>
+</md-content>
+
+<!-- nav bar starts here -->
 
 <md-content layout="row" id="navigationbar">
     <md-toolbar class="row navbar one">

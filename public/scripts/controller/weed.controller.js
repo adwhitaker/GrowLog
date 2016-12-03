@@ -5,20 +5,39 @@ function WeedController($http, activityService, $route) {
     var weed = this;
     weed.weedArray;
 
-    weed.refresh = function () {
-      $route.reload();
+    weed.showDetails = function (id) {
+      console.log('showing');
+      weed['details' + id] = !weed['details' + id];
+      weed['edits' + id] = false;
+      weed['complete' + id] = false;
+    };
+
+    weed.editDetails = function (id) {
+      weed['edits' + id] = !weed['edits' + id];
+      weed['details' + id] = false;
+      weed['complete' + id] = false;
+    };
+
+    weed.markComplete = function (id, check) {
+      weed['complete' + id] = !weed['complete' + id];
+      weed['edits' + id] = false;
+      weed['details' + id] = false;
+      if (check === 'check_box_outline_blank') {
+        check = 'check_box';
+      } else {
+        check = 'check_box_outline_blank';
+      }
     };
 
     weed.activities = activityService;
 
     activityService.getActivities();
 
-//weed.issues object = activitiesService
     weed.deleteActivity = function(activityId, joinsId) {
-      activityService.deleteActivity(activityId, joinsId).then(weed.refresh());
+      activityService.deleteActivity(activityId, joinsId);
     };
 
-    weed.completeIssue = function(id, weedObject) {
+    weed.completeWeed = function(id, weedObject) {
       var id = id;
       console.log("id", id);
       console.log("weedobject", weedObject);
@@ -37,10 +56,12 @@ function WeedController($http, activityService, $route) {
       };
       console.log(activity);
 
-      activityService.updateActivity(id, activity).then(weed.refresh());
+      activityService.updateActivity(id, activity);
 
 };
-      weed.updateIssue = function(id, weedObject) {
+      weed.updateWeed = function(id, weedObject) {
+        weed.showDetails(id);
+
         var id = id;
         var activity = {
           location_id: weedObject.location_id,
@@ -53,7 +74,7 @@ function WeedController($http, activityService, $route) {
         };
         console.log(activity);
 
-        activityService.updateActivity(id, activity).then(weed.refresh());
+        activityService.updateActivity(id, activity);
       };
 
 
