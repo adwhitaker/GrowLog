@@ -58,7 +58,7 @@
 
 .line {
   border-bottom-width: 1px;
-  border-bottom-color: white;
+  border-bottom-color: lightgray;
   border-bottom-style: solid;
 }
 
@@ -70,4 +70,8 @@
 p.indisplay {
   font-size: 13px;
   margin-bottom: 1px;
+}
+
+a {
+  color: rgb(90, 60, 50);
 }
