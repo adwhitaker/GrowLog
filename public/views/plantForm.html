@@ -4,7 +4,7 @@
     <md-input-container class="md-block">
       <label>Select a Seed</label>
       <md-select ng-model="plantForm.plant.choice" ng-change="plantForm.updateCount(plantForm.plant.choice)">
-        <md-option ng-repeat="seed in plantForm.allSeeds.seeds.allSeeds | orderBy: 'seed.generic'" ng-value="seed">
+        <md-option ng-repeat="seed in plantForm.allSeeds.seeds.allSeeds | orderBy: ['generic', 'variety']" ng-value="seed">
           {{seed.generic}} - {{seed.variety}}
         </md-option>
       </md-select>
