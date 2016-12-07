@@ -1,5 +1,5 @@
 <!-- search bar for finding seeds -->
-<md-content layout="column" class="row well display">
+<md-content layout="column" class="well">
   <h3 class="titleheader">Search Seeds</h3>
   <md-input-container class="md-block">
     <label>Seed Search</label>
@@ -8,16 +8,31 @@
 </md-content>
 
 <!-- area for displaying search results -->
-<md-content class="row display well" layout="column">
+<md-content class="well" layout="column">
   <h3 class="titleheader">Seeds in Inventory</h3>
   <div ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | orderBy: 'seedvar.id' | filter:search">
-    <div class="col-xs-8 col-md-9">
       <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }} | MFR: {{ seedvar.manufacturer }}</a></h5>
       <div ng-show="seeds.details{{seedvar.id}}">
+        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="seeds.editDetails(seedvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Seed</md-tooltip>
+          <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
+        </md-button>
+        <md-button aria-label="delete" class="btn1 md-warn" ng-click="seeds.deleteSeed(seedvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Seed</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+        </md-button>
         <p class="indisplay"><strong>Family:</strong> {{ seedvar.family }}</p>
         <p class="indisplay"><strong>Lot Number:</strong> {{ seedvar.lotnumber }}</p>
       </div>
       <div ng-show="seeds.edits{{seedvar.id}}">
+        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="seeds.updateSeed(seedvar)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">done</md-icon>
+        </md-button>
+        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="seeds.editDetails(seedvar.id)">
+          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+        </md-button>
         <md-input-container class="md-block">
           <label>Generic Name</label>
           <input ng-model="seedvar.genericUpdated" placeholder="{{seedvar.generic}}"></input>
@@ -76,21 +91,6 @@
         <md-input-container class="md-block">
           <md-checkbox ng-model="seedvar.plantouse">Plan to Use</md-md-checkbox>
         </md-input-container>
-      </div>
-    </div>
-
-    <div class="col-xs-2 col-md-2">
-      <div ng-show="seeds.details{{seedvar.id}}">
-        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="seeds.editDetails(seedvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Seed</md-tooltip>
-          <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
-        </md-button>
-        <md-button aria-label="delete" class="btn1 md-warn" ng-click="seeds.deleteSeed(seedvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Seed</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="seeds.edits{{seedvar.id}}">
         <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="seeds.updateSeed(seedvar)">
           <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
           <md-icon class="material-icons" aria-label="menu">done</md-icon>
@@ -100,6 +100,8 @@
           <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
         </md-button>
       </div>
+      <div class="line">
+      </div>
     </div>
     <div class="line"></div>
   </div>
@@ -107,11 +109,11 @@
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/home">
+    <md-button class="md-mini" href="/home">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
       <md-icon class="material-icons">arrow_back</md-icon>
     </md-button>
-    <md-button class="md-mini col-xs-2" href="/locations">
+    <md-button class="md-mini" href="/locations">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Locations</md-tooltip>
       <md-icon class="material-icons">add_location</md-icon>
     </md-button>

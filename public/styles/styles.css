@@ -2,12 +2,29 @@
   float: none;
 }
 
-#logo {
-  margin-top: 20%;
+.mainbtn {
+  width: 65% !important;
+  margin: 0% auto;
 }
 
-#loginbutton {
-  margin-top: 15%;
+.buttonpage {
+  margin: 10% 0% 10% 0%;
+}
+
+.well {
+  background-color: #ffffff;
+  padding: 0% 5% 5% 5%;
+  margin: 5% 10% 0% 10%;
+}
+
+.centerbutton {
+  text-align: center;
+
+}
+
+#logo {
+  margin-top: 20%;
+  width: 50%;
 }
 
 #navigationbar {
@@ -16,7 +33,7 @@
 }
 
 .homebutton {
-  margin: 15% 0 15% 0;
+  width: 200px;
 }
 
 .nav {

@@ -1,4 +1,4 @@
-<md-content name="nsForm" class="row display well" layout="column">
+<md-content class="well" layout="column">
   <h3 class="titleheader">Add Seed</h3>
   <md-input-container class="md-block">
     <label>Generic Name</label>
@@ -58,10 +58,10 @@
   <md-input-container class="md-block">
     <md-checkbox ng-model="newSeed.seed.plantouse">Plan to Use</md-checkbox>
   </md-input-container>
-  <div layout="center center">
-    <md-button ng-click="newSeed.addSeed(newSeed.seed)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Add Seed</md-button>
+  <div class="centerbutton">
+    <md-button ng-click="newSeed.addSeed(newSeed.seed)" class="md-raised md-cornered md-accent md-hue-3 mainbtn">Add Seed</md-button>
   </div>
-</md-content>
+  </md-content>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
