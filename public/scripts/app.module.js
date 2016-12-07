@@ -1,1 +1,1 @@
-angular.module('growLogApp', ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMessages', 'ngSanitize', 'ngCsv']);
+angular.module('growLogApp', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages', 'ngSanitize', 'ngCsv']);

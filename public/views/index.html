@@ -44,16 +44,16 @@
     <script src="scripts/services/activity.service.js" charset="utf-8"></script>
 
     <!--  Bootstrap -->
-    <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
+    <!-- <script src="vendors/bootstrap.min.js" charset="utf-8"></script>
     <script src="vendors/ui-bootstrap.js" charset="utf-8"></script>
-    <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script>
+    <script src="vendors/ui-bootstrap-tpls.js" charset="utf-8"></script> -->
 
     <!--  moment.js -->
     <script src="vendors/moment.js" charset="utf-8"></script>
 
     <!--  css -->
-    <link rel="stylesheet" href="vendors/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/ui-bootstrap-csp.css">
+    <!-- <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/ui-bootstrap-csp.css"> -->
     <link rel="stylesheet" href="styles/styles.css">
 
     <!-- angular material--->
@@ -67,19 +67,12 @@
   </head>
 
   <body ng-controller="MainController as main" md-colors="{background: 'default-background-50-1'}">
-    <div class="container">
-      <!-- header -->
-      <header class="row">
-        <div class="col-xs-10 col-md-6 center-block">
-          <img class="image-responsive" id="logo" alt="GrowLogo Logo" src="assets/GrowLogLogo.svg">
-        </div>
-      </header>
 
-      <!-- main content -->
-      <main class="row">
-        <div ng-view class="col-xs-10 col-md-6 center-block"></ng-view>
-      </main>
-
+    <div layout="row" layout-align="center center">
+      <img id="logo" alt="GrowLogo Logo" src="assets/GrowLogLogo.svg">
     </div>
+
+    <div ng-view></div>
+
   </body>
 </html>
