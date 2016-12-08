@@ -1,58 +1,62 @@
-<md-content class="row display well" layout="column">
+<md-content class="well" layout="column">
   <h3 class="titleheader">Locations</h3>
   <div ng-repeat="locvar in location.locationsFromService.locations.allLocations | orderBy: ['field', 'section', 'row']">
-    <div class="col-xs-8 col-md-9">
-      <h5><a href="#" ng-click="location.showDetails(locvar.id)">Field: {{ locvar.field }} Section: {{ locvar.section }} Row: {{ locvar.row }}</a></h5>
-      <div ng-show="location.edits{{locvar.id}}">
-        <md-input-container class="md-block">
-          <label>Field</label>
-          <input type="text" ng-model="locvar.fieldUpdated" placeholder="{{locvar.field}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Section</label>
-          <input type="text" ng-model="locvar.sectionUpdated" placeholder="{{locvar.section}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Row</label>
-          <input type="text" ng-model="locvar.rowUpdated" placeholder="{{locvar.row}}"></input>
-        </md-input-container>
+    <div layout="row">
+      <div flex="75">
+        <h5><a href="#" ng-click="location.showDetails(locvar.id)">Field:
+          {{ locvar.field }} Section: {{ locvar.section }} Row: {{ locvar.row }}
+          </a>
+        </h5>
+        <div ng-show="location.edits{{locvar.id}}">
+          <md-input-container class="md-block">
+            <label>Field</label>
+            <input type="text" ng-model="locvar.fieldUpdated" placeholder="{{locvar.field}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Section</label>
+            <input type="text" ng-model="locvar.sectionUpdated" placeholder="{{locvar.section}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Row</label>
+            <input type="text" ng-model="locvar.rowUpdated" placeholder="{{locvar.row}}"></input>
+          </md-input-container>
+        </div>
       </div>
-    </div>
-    <div class="col-xs-2 col-md-2">
-      <div ng-show="location.details{{locvar.id}}">
-        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="location.editDetails(locvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Location</md-tooltip>
-          <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
-        </md-button>
-        <md-button aria-label="delete" class="btn1 md-warn" ng-click="location.deleteLocation(locvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="location.edits{{locvar.id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="location.updateLocation(locvar)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="location.editDetails(locvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
+      <div flex>
+        <div ng-show="location.edits{{locvar.id}}">
+          <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="location.updateLocation(locvar)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">done</md-icon>
+          </md-button>
+          <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="location.editDetails(locvar.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="location.details{{locvar.id}}">
+          <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="location.editDetails(locvar.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Location</md-tooltip>
+            <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
+          </md-button>
+          <md-button aria-label="delete" class="btn1 md-warn" ng-click="location.deleteLocation(locvar.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+          </md-button>
+        </div>
       </div>
     </div>
     <div class="line"></div>
-
   </div>
 </md-content>
 
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/seeds">
+    <md-button class="md-mini" href="/seeds">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
       <md-icon class="material-icons">arrow_back</md-icon>
     </md-button>
-    <md-button class="md-mini col-xs-2" href="/home">
+    <md-button class="md-mini" href="/home">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
       <md-icon class="material-icons">home</md-icon>
     </md-button>
@@ -66,7 +70,7 @@
       </md-button>
     </md-fab-trigger>
 
-    <md-fab-actions class="row">
+    <md-fab-actions>
       <md-button href="/newLocationForm" aria-label="add location" class="md-fab md-raised md-mini">
         <md-tooltip md-direction="left" md-visible="tooltipVisible" md-autohide="false">Add New Location</md-tooltip>
         <md-icon class="material-icons">add_circle_outline</md-icon>

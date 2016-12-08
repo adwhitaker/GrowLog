@@ -1,67 +1,69 @@
-<md-content class="display well" layout="column">
+<md-content class="well" layout="column">
   <h3 class="titleheader">Other Activities</h3>
   <div ng-repeat="other in others.activities.activitiesObject.other | orderBy: 'assigndate'">
-    <div class="col-xs-8 col-md-9">
-    <h5><a href="#" ng-click="others.showDetails(other.act_id)">{{other.title}}</a></h5>
-      <div ng-show="others.details{{other.act_id}}">
-        <p class="indisplay"><strong>Field:</strong> {{other.field}} <strong>Section:</strong> {{other.section}} <strong>Row:</strong> {{other.row}}</p>
-        <p class="indisplay"><strong>Assigned: </strong>{{other.assigndate | date:'MMM d, yyyy'}}</p>
-        <p class="indisplay"><strong>Comments: </strong>{{other.comments}}</p>
+    <div layout="row">
+      <div flex="75">
+        <h5><a href="#" ng-click="others.showDetails(other.act_id)">{{other.title}}</a>
+        </h5>
+        <div ng-show="others.details{{other.act_id}}">
+          <p class="indisplay"><strong>Field:</strong> {{other.field}} <strong>Section:</strong> {{other.section}} <strong>Row:</strong> {{other.row}}</p>
+          <p class="indisplay"><strong>Assigned: </strong>{{other.assigndate | date:'MMM d, yyyy'}}</p>
+          <p class="indisplay"><strong>Comments: </strong>{{other.comments}}</p>
+        </div>
+        <div ng-show="others.edits{{other.act_id}}">
+          <md-input-container class="md-block">
+            <label>Update Title</label>
+            <input placeholder="{{other.title}}" ng-model="other.updatedTitle"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Update Comments</label>
+            <input placeholder="{{other.comments}}" ng-model="other.comments"></input>
+          </md-input-container>
+        </div>
+        <div ng-show="others.complete{{other.act_id}}">
+          <md-input-container class="md-block">
+            <label>Additional Comments</label>
+            <input placeholder="{{other.comments}}" ng-model="other.comments"></input>
+          </md-input-container>
+        </div>
       </div>
-      <div ng-show="others.edits{{other.act_id}}">
-        <md-input-container class="md-block">
-          <label>Update Title</label>
-          <input placeholder="{{other.title}}" ng-model="other.updatedTitle"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Update Comments</label>
-          <input placeholder="{{other.comments}}" ng-model="other.comments"></input>
-        </md-input-container>
-      </div>
-      <div ng-show="others.complete{{other.act_id}}">
-        <md-input-container class="md-block">
-          <label>Additional Comments</label>
-          <input placeholder="{{other.comments}}" ng-model="other.comments"></input>
-        </md-input-container>
-      </div>
-    </div>
-
-    <div class="col-xs-2 col-md-2">
-      <div ng-hide="others.details{{other.act_id}} || others.edits{{other.act_id}} || others.complete{{other.act_id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="others.markComplete(other.act_id, other.checkstatus)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">{{other.checkstatus}}</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="others.details{{other.act_id}}">
-        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="others.editDetails(other.act_id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit other</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">create</md-icon>
-        </md-button>
-        <md-button aria-label="delete" class="btn1 md-warn" ng-click="others.deleteother(other.act_id, other.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete other</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="others.edits{{other.act_id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="others.updateOther(other.act_id, other)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="others.editDetails(other.act_id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="others.complete{{other.act_id}}">
-        <md-button aria-label="finish other" class="btn1 md-accent md-hue-3" ng-click="others.completeOther(other.act_id, other)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="others.markComplete(other.act_id, other.checkstatus)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
+      <div flex>
+        <div ng-hide="others.details{{other.act_id}} || others.edits{{other.act_id}} || others.complete{{other.act_id}}">
+          <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="others.markComplete(other.act_id, other.checkstatus)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">{{other.checkstatus}}</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="others.details{{other.act_id}}">
+          <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="others.editDetails(other.act_id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit other</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">create</md-icon>
+          </md-button>
+          <md-button aria-label="delete" class="btn1 md-warn" ng-click="others.deleteother(other.act_id, other.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete other</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="others.edits{{other.act_id}}">
+          <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="others.updateOther(other.act_id, other)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">done</md-icon>
+          </md-button>
+          <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="others.editDetails(other.act_id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="others.complete{{other.act_id}}">
+          <md-button aria-label="finish other" class="btn1 md-accent md-hue-3" ng-click="others.completeOther(other.act_id, other)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">done</md-icon>
+          </md-button>
+          <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="others.markComplete(other.act_id, other.checkstatus)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+          </md-button>
+        </div>
       </div>
     </div>
     <div class="line"></div>
@@ -70,11 +72,11 @@
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/activities">
+    <md-button class="md-mini" href="/activities">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
       <md-icon class="material-icons">arrow_back</md-icon>
     </md-button>
-    <md-button class="md-mini col-xs-2" href="/home">
+    <md-button class="md-mini" href="/home">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
       <md-icon class="material-icons">home</md-icon>
     </md-button>

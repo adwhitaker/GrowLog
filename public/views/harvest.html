@@ -1,76 +1,80 @@
-<md-content class="row display well" layout="column">
+<md-content class="well" layout="column">
   <h3 class="titleheader">To Be Harvested</h3>
   <div ng-repeat="plant in harvest.plantedSeeds.seeds.usedSeedsPlanted | orderBy: 'projectedharvestdate'">
-    <div class="col-xs-8 col-md-9">
-      <h5><a href="#" ng-click="harvest.showDetails(plant.seedsinuse_id)">{{ plant.projectedharvestdate | date:'MMM d, yyyy' }}: {{ plant.generic }}</a></h5>
-      <div ng-show="harvest.details{{plant.seedsinuse_id}}">
-        <p class="indisplay"><strong>Field:</strong> {{ plant.field }} | <strong>Section:</strong> {{ plant.section }} | <strong>Row:</strong> {{ plant.row }}</p>
-        <p class="indisplay"><strong>Quantity Planted:</strong> {{ plant.quantity}}</p>
+    <div layout="row">
+      <div flex="75">
+        <h5><a href="#" ng-click="harvest.showDetails(plant.seedsinuse_id)">
+          {{ plant.projectedharvestdate | date:'MMM d, yyyy' }}: {{ plant.generic }}</a>
+        </h5>
+        <div ng-show="harvest.details{{plant.seedsinuse_id}}">
+          <p class="indisplay"><strong>Field:</strong> {{ plant.field }} | <strong>Section:</strong> {{ plant.section }} | <strong>Row:</strong> {{ plant.row }}</p>
+          <p class="indisplay"><strong>Quantity Planted:</strong> {{ plant.quantity}}</p>
+        </div>
+        <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
+          <md-input-container class="md-block">
+            <label>New Est. Harvest</label>
+            <md-datepicker ng-model="plant.updatedprojectedharvestdate" placeholder="{{plant.projectedharvestdate | date: 'MM/dd/yyyy'}}"></md-datepicker>
+          </md-input-container>
+        </div>
+        <div ng-show="harvest.complete{{plant.seedsinuse_id}}">
+          <md-input-container class="md-block">
+            <label>Amt. Harvested</label>
+            <input type="number" ng-model="plant.amountharvested">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Harvested Units</label>
+            <input type="text" ng-model="plant.amountharvestedunits">
+          </md-input-container>
+        </div>
       </div>
-      <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
-        <md-input-container class="md-block">
-          <label>New Est. Harvest</label>
-          <md-datepicker ng-model="plant.updatedprojectedharvestdate" placeholder="{{plant.projectedharvestdate | date: 'MM/dd/yyyy'}}"></md-datepicker>
-        </md-input-container>
-      </div>
-      <div ng-show="harvest.complete{{plant.seedsinuse_id}}">
-        <md-input-container class="md-block">
-          <label>Amt. Harvested</label>
-          <input type="number" ng-model="plant.amountharvested">
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Harvested Units</label>
-          <input type="text" ng-model="plant.amountharvestedunits">
-        </md-input-container>
-      </div>
-    </div>
-    <div class="col-xs-2 col-md-2">
-      <div ng-hide="harvest.details{{plant.seedsinuse_id}} || harvest.edits{{plant.seedsinuse_id}} || harvest.complete{{plant.seedsinuse_id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="harvest.markComplete(plant.seedsinuse_id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">check_box_outline_blank</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="harvest.details{{plant.seedsinuse_id}}">
-        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="harvest.editDetails(plant.seedsinuse_id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Issue</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">create</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="harvest.editPlant(plant)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="harvest.editDetails(plant.seedsinuse_id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
-      </div>
-      <div ng-show="harvest.complete{{plant.seedsinuse_id}}">
-        <md-button aria-label="finish plant" class="btn1 md-accent md-hue-3" ng-click="harvest.completeHarvest(plant)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="harvest.markComplete(plant.seedsinuse_id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
+      <div flex>
+        <div ng-hide="harvest.details{{plant.seedsinuse_id}} || harvest.edits{{plant.seedsinuse_id}} || harvest.complete{{plant.seedsinuse_id}}">
+          <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="harvest.markComplete(plant.seedsinuse_id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Mark as Complete</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">check_box_outline_blank</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="harvest.details{{plant.seedsinuse_id}}">
+          <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="harvest.editDetails(plant.seedsinuse_id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Issue</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">create</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="harvest.edits{{plant.seedsinuse_id}}">
+          <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="harvest.editPlant(plant)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">done</md-icon>
+          </md-button>
+          <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="harvest.editDetails(plant.seedsinuse_id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="harvest.complete{{plant.seedsinuse_id}}">
+          <md-button aria-label="finish plant" class="btn1 md-accent md-hue-3" ng-click="harvest.completeHarvest(plant)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">done</md-icon>
+          </md-button>
+          <md-button aria-label="cancel finish" class="btn1 md-warn" ng-click="harvest.markComplete(plant.seedsinuse_id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+          </md-button>
+        </div>
       </div>
     </div>
   <div class="line"></div>
   </div>
 </md-content>
 
-  <md-content layout="row" id="navigationbar">
-    <md-toolbar class="row navbar one">
-      <md-button class="md-mini col-xs-2" href="/activities">
-        <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
-        <md-icon class="material-icons">arrow_back</md-icon>
-      </md-button>
-      <md-button class="md-mini col-xs-2" href="/home">
-        <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
-        <md-icon class="material-icons">home</md-icon>
-      </md-button>
-    </md-toolbar>
-  </md-content>
+<md-content layout="row" id="navigationbar">
+  <md-toolbar class="row navbar one">
+    <md-button class="md-mini" href="/activities">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
+      <md-icon class="material-icons">arrow_back</md-icon>
+    </md-button>
+    <md-button class="md-mini" href="/home">
+      <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
+      <md-icon class="material-icons">home</md-icon>
+    </md-button>
+  </md-toolbar>
+</md-content>

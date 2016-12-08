@@ -1,33 +1,31 @@
-<md-content layout="column" class="row well display">
+<md-content layout="column" class="well">
   <h3 class="titleheader">Add Weeding Activity</h3>
-  <div class="col-xs-12 col-md-12">
-    <md-input-container class="md-block">
-      <label>Location</label>
-      <md-select ng-model="weedForm.activity.location.id" id="location" aria-label="location">
-        <md-option ng-repeat="location in weedForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}</md-option>
-      </md-select>
-    </md-input-container>
-    <md-input-container class="md-block">
-      <label>Weed Type</label>
-      <input type="text" ng-model="weedForm.activity.weedtype" placeholder="Quackgrass">
-    </md-input-container>
-    <md-input-container class="md-block">
-      <label>Comments</label>
-      <input type="text" ng-model="weedForm.activity.comments">
-    </md-input-container>
-    <div layout="center center">
-      <md-button ng-click="weedForm.addActivity(weedForm.activity)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Submit</md-button>
-    </div>
+  <md-input-container class="md-block">
+    <label>Location</label>
+    <md-select ng-model="weedForm.activity.location.id" id="location" aria-label="location">
+      <md-option ng-repeat="location in weedForm.locationService.locations.allLocations | orderBy: ['field', 'section', 'row']" ng-value="location.id">Field: {{location.field}} Section: {{location.section}} Row: {{location.row}}</md-option>
+    </md-select>
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>Weed Type</label>
+    <input type="text" ng-model="weedForm.activity.weedtype" placeholder="Quackgrass">
+  </md-input-container>
+  <md-input-container class="md-block">
+    <label>Comments</label>
+    <input type="text" ng-model="weedForm.activity.comments">
+  </md-input-container>
+  <div class="centerbutton">
+    <md-button ng-click="weedForm.addActivity(weedForm.activity)" class="md-raised md-cornered md-accent md-hue-3 mainbtn">Submit</md-button>
   </div>
 </md-content>
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
-    <md-button class="md-mini col-xs-2" href="/weed">
+    <md-button class="md-mini" href="/weed">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Back</md-tooltip>
       <md-icon class="material-icons">arrow_back</md-icon>
     </md-button>
-    <md-button class="md-mini col-xs-2" href="/home">
+    <md-button class="md-mini" href="/home">
       <md-tooltip md-direction="top" md-visible="tooltipVisible">Return Home</md-tooltip>
       <md-icon class="material-icons">home</md-icon>
     </md-button>

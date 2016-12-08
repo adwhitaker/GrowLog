@@ -11,100 +11,99 @@
 <md-content class="well" layout="column">
   <h3 class="titleheader">Seeds in Inventory</h3>
   <div ng-repeat="seedvar in seeds.allTheSeeds.seeds.allSeeds | orderBy: 'seedvar.id' | filter:search">
-      <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }} | MFR: {{ seedvar.manufacturer }}</a></h5>
-      <div ng-show="seeds.details{{seedvar.id}}">
-        <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="seeds.editDetails(seedvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Seed</md-tooltip>
-          <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
-        </md-button>
-        <md-button aria-label="delete" class="btn1 md-warn" ng-click="seeds.deleteSeed(seedvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Seed</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">delete</md-icon>
-        </md-button>
-        <p class="indisplay"><strong>Family:</strong> {{ seedvar.family }}</p>
-        <p class="indisplay"><strong>Lot Number:</strong> {{ seedvar.lotnumber }}</p>
+    <div layout="row">
+      <div flex="75">
+        <h5><a href="#" ng-click="seeds.showDetails(seedvar.id)">{{ seedvar.generic }} - {{ seedvar.variety }} | MFR: {{ seedvar.manufacturer }}</a></h5>
+        <div ng-show="seeds.details{{seedvar.id}}">
+          <p class="indisplay"><strong>Family:</strong> {{ seedvar.family }}</p>
+          <p class="indisplay"><strong>Lot Number:</strong> {{ seedvar.lotnumber }}</p>
+        </div>
+        <div ng-show="seeds.edits{{seedvar.id}}">
+          <md-input-container class="md-block">
+            <label>Generic Name</label>
+            <input ng-model="seedvar.genericUpdated" placeholder="{{seedvar.generic}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Family Name</label>
+            <input ng-model="seedvar.family" placeholder="{{seedvar.family}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Variety</label>
+            <input ng-model="seedvar.varietyUpdated" placeholder="{{seedvar.variety}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Manufacturer</label>
+            <input ng-model="seedvar.manufacturerUpdated" placeholder="{{seedvar.manufacturer}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Supplier</label>
+            <input ng-model="seedvar.supplier" placeholder="{{seedvar.supplier}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Lot Number</label>
+            <input ng-model="seedvar.lotnumber" placeholder="{{seedvar.lotnumber}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Ordered</label>
+            <md-datepicker ng-model="seedvar.orderdate" md-placeholder="{{seedvar.orderdate}}"></md-datepicker>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Received</label>
+            <md-datepicker ng-model="seedvar.receivedate" md-placeholder="{{seedvar.receivedate}}"></md-datepicker>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Quantity</label>
+            <input type="number" ng-model="seedvar.quantity" placeholder="{{seedvar.quantity}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Quantity Units</label>
+            <input type="text" ng-model="seedvar.quantityunits" placeholder="{{seedvar.quantityunits}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Seeds Per Units</label>
+            <input type="number" ng-model="seedvar.seedsperunit" placeholder="{{seedvar.seedsperunit}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Units Per Pack</label>
+            <input type="number" ng-model="seedvar.unitsperpack" placeholder="{{seedvar.unitsperpack}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Days Until Harvest</label>
+            <input type="number" ng-model="seedvar.daystoharvest" placeholder="{{seedvar.daystoharvest}}"></input>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <md-checkbox ng-model="seedvar.donation">Donation</md-checkbox>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <md-checkbox ng-model="seedvar.plantouse">Plan to Use</md-md-checkbox>
+          </md-input-container>
+        </div>
       </div>
-      <div ng-show="seeds.edits{{seedvar.id}}">
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="seeds.updateSeed(seedvar)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="seeds.editDetails(seedvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
-        <md-input-container class="md-block">
-          <label>Generic Name</label>
-          <input ng-model="seedvar.genericUpdated" placeholder="{{seedvar.generic}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Family Name</label>
-          <input ng-model="seedvar.family" placeholder="{{seedvar.family}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Variety</label>
-          <input ng-model="seedvar.varietyUpdated" placeholder="{{seedvar.variety}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Manufacturer</label>
-          <input ng-model="seedvar.manufacturerUpdated" placeholder="{{seedvar.manufacturer}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Supplier</label>
-          <input ng-model="seedvar.supplier" placeholder="{{seedvar.supplier}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Lot Number</label>
-          <input ng-model="seedvar.lotnumber" placeholder="{{seedvar.lotnumber}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Ordered</label>
-          <md-datepicker ng-model="seedvar.orderdate" md-placeholder="{{seedvar.orderdate}}"></md-datepicker>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Received</label>
-          <md-datepicker ng-model="seedvar.receivedate" md-placeholder="{{seedvar.receivedate}}"></md-datepicker>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Quantity</label>
-          <input type="number" ng-model="seedvar.quantity" placeholder="{{seedvar.quantity}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Quantity Units</label>
-          <input type="text" ng-model="seedvar.quantityunits" placeholder="{{seedvar.quantityunits}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Seeds Per Units</label>
-          <input type="number" ng-model="seedvar.seedsperunit" placeholder="{{seedvar.seedsperunit}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Units Per Pack</label>
-          <input type="number" ng-model="seedvar.unitsperpack" placeholder="{{seedvar.unitsperpack}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <label>Days Until Harvest</label>
-          <input type="number" ng-model="seedvar.daystoharvest" placeholder="{{seedvar.daystoharvest}}"></input>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <md-checkbox ng-model="seedvar.donation">Donation</md-checkbox>
-        </md-input-container>
-        <md-input-container class="md-block">
-          <md-checkbox ng-model="seedvar.plantouse">Plan to Use</md-md-checkbox>
-        </md-input-container>
-        <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="seeds.updateSeed(seedvar)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">done</md-icon>
-        </md-button>
-        <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="seeds.editDetails(seedvar.id)">
-          <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
-          <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
-        </md-button>
-      </div>
-      <div class="line">
+      <div flex>
+        <div ng-show="seeds.details{{seedvar.id}}">
+          <md-button aria-label="edit" class="btn1 md-accent md-hue-3" ng-click="seeds.editDetails(seedvar.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Edit Seed</md-tooltip>
+            <md-icon class="material-icons accent" aria-label="menu">create</md-icon>
+          </md-button>
+          <md-button aria-label="delete" class="btn1 md-warn" ng-click="seeds.deleteSeed(seedvar.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Delete Seed</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">delete</md-icon>
+          </md-button>
+        </div>
+        <div ng-show="seeds.edits{{seedvar.id}}">
+          <md-button aria-label="submit edits" class="btn1 md-accent md-hue-3" ng-click="seeds.updateSeed(seedvar)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Submit</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">done</md-icon>
+          </md-button>
+          <md-button aria-label="cancel edits" class="btn1 md-warn" ng-click="seeds.editDetails(seedvar.id)">
+            <md-tooltip md-direction="right" md-visible="tooltipVisible">Cancel</md-tooltip>
+            <md-icon class="material-icons" aria-label="menu">not_interested</md-icon>
+          </md-button>
+        </div>
       </div>
     </div>
-    <div class="line"></div>
   </div>
+  <div class="line"></div>
 </md-content>
 
 <md-content layout="row" id="navigationbar">
