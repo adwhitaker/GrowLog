@@ -64,7 +64,7 @@ function seedsService($http) {
         ctrl.getSeeds();
         return;
       }).catch(function (err) {
-        console.log('err', err);
+        return err;
       });
   };
 
