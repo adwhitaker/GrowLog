@@ -2,10 +2,22 @@ angular.module('growLogApp')
     .controller('SeedsController', SeedsController);
 
 
-function SeedsController(seedsService, locationService) {
+function SeedsController(seedsService, locationService, $mdDialog) {
   var seeds = this;
 
   seeds.allTheSeeds = seedsService;
+
+  seeds.showAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Warning!')
+      .textContent('You cannot delete a seed that is currently in use.')
+      .ariaLabel('Alert Success')
+      .ok('Confirm')
+    );
+  };
 
   seeds.showDetails = function (id) {
     seeds['details' + id] = !seeds['details' + id];
@@ -68,7 +80,13 @@ function SeedsController(seedsService, locationService) {
   // delete seed from DB
   seeds.deleteSeed = function (seedID) {
     console.log(seedID);
-    seedsService.deleteSeed(seedID);
-  };
+    seedsService.deleteSeed(seedID)
+      .then(function (response) {
+        if (response.status == 500) {
+          seeds.showAlert();
+        }
 
-};
+        return;
+      });
+  };
+}
