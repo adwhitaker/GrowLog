@@ -81,3 +81,23 @@ p.indisplay {
 a {
   color: rgb(90, 60, 50);
 }
+
+#water {
+  background-color: #009fd4;
+}
+
+#weed {
+  background-color: #00aa55;
+}
+
+#harvest {
+  background-color: #d47500;
+}
+
+#other {
+  background-color: #C0C0C0;
+}
+
+#issue {
+  background-color: #939393;
+}
