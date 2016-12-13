@@ -8,9 +8,6 @@ router.route('/')
       .get(getReport);
 
 function getReport(req, res) {
-  // seeds.getSeeds().then(function(response) {
-  //   return response;
-  // });
   knex.select('field', 'section', 'row', 'type', 'assigndate', 'completedate', 'duration', 'amount', 'weedtype', 'title', 'comments', 'google_name', 'transfer', 'usedquantity', 'plantedassigndate', 'plantduration', 'projectedharvestdate', 'actualharvestdate', 'amountharvested', 'amountharvestedunits', 'harvestduration', 'generic', 'variety', 'family', 'orderdate', 'quantity', 'unitsperpack', 'quantityunits', 'seedsperunit', 'manufacturer', 'supplier', 'daystoharvest', 'receivedate', 'lotnumber', 'donation', 'plantouse')
       .from('location')
       .join('act_loc_users', 'location.id', 'act_loc_users.location_id')
