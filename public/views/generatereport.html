@@ -1,17 +1,9 @@
-<md-content layout="column" class="well">
-  <h3 class="titleheader">Select a Date Range</h3>
-  <md-input-container>
-    <label>Start</label>
-    <md-datepicker ng-model="reportCtrl.date.start"></md-datepicker>
-  </md-input-container>
-  <md-input-container>
-    <label>End</label>
-    <md-datepicker ng-model="reportCtrl.date.end"></md-datepicker>
-  </md-input-container>
-  <div class="centerbutton">
-    <md-button ng-click="reportCtrl.generateReport(reportCtrl.date)" class="md-raised md-cornered md-accent md-hue-3 btn-block">Generate Report</md-button>
-  </div>
-</md-content>
+
+<div class="centerbutton">
+  <!-- Export Report button -->
+  <md-button ng-csv="reportCtrl.getInfo()" csv-header=" ['Field', 'Section', 'Row', 'Activity Type', 'Assign Date', 'Complete Date', 'Activity Duration', 'Activity Amount', 'Weed Type', 'Activity Title', 'Comments', 'User Name', 'Transfer?', 'Used Quantity', 'Planting Assign Date', 'Planting Date', 'Grow Duration', 'Projected Harvest Date', 'Actual Harvest Date', 'Amount Harvested', 'Amount Harvested (units)', 'Harvest Duration', 'Generic Plant Name', 'Variety Name', 'Family', 'Seed Order Date', 'Seed Order Quantity', 'Seed Units per Pack', 'Quantity Units', 'Seeds per Unit', 'Manufacturer', 'Supplier', 'Days until Harvest', 'Seed Receive Date', 'Lot #', 'Donation?', 'Plan to Use?'] " filename="report.csv">Generate Report</md-button>
+</div>
+
 
 <md-content layout="row" id="navigationbar">
   <md-toolbar class="row navbar one">
