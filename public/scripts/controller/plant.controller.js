@@ -3,7 +3,6 @@ angular.module('growLogApp')
 
 function PlantController(seedsService) {
   var plant = this;
-  console.log('PlantController loaded');
 
   plant.usedSeeds = seedsService;
 

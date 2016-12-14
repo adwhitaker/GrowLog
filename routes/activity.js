@@ -49,7 +49,6 @@ function addActivity(req, res) {
     }
   };
 
-  console.log('new activity', newActivity);
   knex.insert(newActivity.activity)
       .into('activities')
       .returning('*')
@@ -67,7 +66,6 @@ function addActivity(req, res) {
 };
 
 function updateActivity(req, res) {
-console.log(req);
   var updateActivity = {
     activity: {
       type: req.body.type,

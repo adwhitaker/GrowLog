@@ -44,9 +44,6 @@ function addLocation(req, res) {
 
 
 function updateLocation(req, res) {
-  console.log('req.body', req.body);
-
-  console.log("req.params", req.params);
   var locationID = req.params.id;
   var updatedLocation = {
     field: req.body.field,

@@ -19,7 +19,6 @@ function LocationController(locationService, $route) {
   // update location in DB
   loc.updateLocation = function (locationObject) {
     loc.editDetails(locationObject.id);
-    console.log(locationObject);
     if (locationObject.fieldUpdated === null) {
       return;
     } else {
@@ -45,7 +44,6 @@ function LocationController(locationService, $route) {
       row: locationObject.row,
     };
 
-    console.log(data);
     locationService.updateLocation(id, data)
     .then(function (response) {
 

@@ -83,7 +83,6 @@ function activityService($http) {
 
     return $http.delete('/activity/' + activityId, { params: { joinsID: joinsId } })
     .then(function (response) {
-      console.log('response', response);
       activity.getActivities();
       return;
     }).catch(function (err) {

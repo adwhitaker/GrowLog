@@ -41,8 +41,6 @@ function PlantFormController($http, locationService, seedsService, $mdDialog) {
 
   // put seed in use (plant)
   plantForm.submitPlant = function (plant) {
-
-    console.log(plant);
     let data = {
       seedsId: plant.choice['id'],
       transfer: plant.transfer,

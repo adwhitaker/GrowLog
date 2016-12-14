@@ -20,8 +20,6 @@ function OtherFormController(locationService, activityService, $mdDialog) {
 
   // adding new "other" activity to DB
   otherForm.addTask = function (task) {
-    // let id = task.id;
-
     let data = {
       location_id: task.location.id,
       type: 'other',

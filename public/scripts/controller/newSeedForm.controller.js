@@ -3,7 +3,6 @@ angular.module('growLogApp')
 
 function NewSeedFormController($http, seedsService, $mdDialog) {
   var newSeed = this;
-  console.log('NewSeedFormController loaded');
 
   newSeed.showAlert = function() {
     $mdDialog.show(

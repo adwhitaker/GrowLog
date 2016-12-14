@@ -68,7 +68,6 @@ function IssuesController(activityService, $route) {
       joins_id: issueObject.id,
       users_id: issueObject.users_id,
     };
-    console.log(activity);
 
     activityService.updateActivity(id, activity);
   }

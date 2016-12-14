@@ -6,7 +6,6 @@ function WeedController($http, activityService, $route) {
     weed.weedArray;
 
     weed.showDetails = function (id) {
-      console.log('showing');
       weed['details' + id] = !weed['details' + id];
       weed['edits' + id] = false;
       weed['complete' + id] = false;
@@ -39,8 +38,6 @@ function WeedController($http, activityService, $route) {
 
     weed.completeWeed = function(id, weedObject) {
       var id = id;
-      console.log("id", id);
-      console.log("weedobject", weedObject);
       var completeDate = new Date();
       var completeDate = moment(completeDate).format('L');
 
@@ -54,7 +51,6 @@ function WeedController($http, activityService, $route) {
         joins_id: weedObject.id,
         users_id: weedObject.users_id,
       };
-      console.log(activity);
 
       activityService.updateActivity(id, activity);
 
@@ -72,7 +68,6 @@ function WeedController($http, activityService, $route) {
           joins_id: weedObject.id,
           users_id: weedObject.users_id,
         };
-        console.log(activity);
 
         activityService.updateActivity(id, activity);
       };

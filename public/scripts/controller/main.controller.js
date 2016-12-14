@@ -3,5 +3,4 @@ angular.module('growLogApp')
 
 function MainController() {
   var main = this;
-  console.log('MainController loaded');
 }

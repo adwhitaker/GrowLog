@@ -3,10 +3,8 @@ angular.module('growLogApp')
 
 function OthersController(activityService, $route) {
   var others = this;
-  console.log('OthersController loaded');
 
   others.activities = activityService;
-  console.log(others.activities);
 
   activityService.getActivities();
 
@@ -35,9 +33,6 @@ function OthersController(activityService, $route) {
 
   // delete
   others.deleteOther = function(activityId, joinsId) {
-    console.log('activityID', activityId);
-    console.log('joinsId', joinsId);
-    console.log('Delete button clicked');
     activityService.deleteActivity(activityId, joinsId);
   };
 

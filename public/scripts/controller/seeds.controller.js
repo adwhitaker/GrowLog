@@ -79,7 +79,6 @@ function SeedsController(seedsService, locationService, $mdDialog) {
 
   // delete seed from DB
   seeds.deleteSeed = function (seedID) {
-    console.log(seedID);
     seedsService.deleteSeed(seedID)
       .then(function (response) {
         if (response.status == 500) {

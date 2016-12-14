@@ -3,7 +3,6 @@ angular.module('growLogApp')
 
 function WaterController(activityService, $route) {
   var water = this;
-  console.log('WaterController loaded');
 
   water.showDetails = function (id) {
     water['details' + id] = !water['details' + id];
@@ -54,7 +53,6 @@ function WaterController(activityService, $route) {
       joins_id: waterObject.id,
       users_id: waterObject.users_id,
     };
-    console.log(activity);
 
     activityService.updateActivity(id, activity);
   };
@@ -63,7 +61,6 @@ function WaterController(activityService, $route) {
     water.showDetails(id);
     var id = id;
     var newDate = moment(waterObject.newAssignDate).format('L');
-    console.log(newDate);
     var activity = {
       location_id: waterObject.location_id,
       type: 'water',
@@ -74,7 +71,6 @@ function WaterController(activityService, $route) {
       duration: waterObject.duration,
       amount: waterObject.amount
     };
-    console.log(activity);
 
     activityService.updateActivity(id, activity);
   };
