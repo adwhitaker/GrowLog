@@ -4,7 +4,7 @@ GrowLog is an application that allows gardeners to track and manage the life cyc
 ## Features
 **Login/Logout | Seeds | Activities | Reports**
 
-Login/Logout using Google Email Account
+**Login/Logout** using Google Email Account
 
 **Seeds**
 Add, Edit, Complete and Delete information about seed inventory in searchable database  
@@ -25,19 +25,22 @@ Passport-google-oauth2 0.1.6
 PostgreSQL 6.1.0  
 
 ## Instructions
-Run *npm install* in the terminal to download dependencies listed in package.json  
-To use Google OAuth:  
-go to *https://console.developers.google.com*, create a new project,   
+
+__Google OAuth Instructions:__  
+Go to *https://console.developers.google.com*, create a new project,   
 Create an **.env** file which includes the following information:  
-AUTHORIZATION_URL, TOKEN_URL, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL, and SECRET  
-PostgreSQL database setup information can be found in **database.sql**  
-Type *npm start* in the terminal to start the server connection  
-Enter *localhost:3000* in the browser address bar  
-Type *Control + C* in the terminal to quit the server connection  
+AUTHORIZATION_URL, TOKEN_URL, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL, and SECRET   
+
+__General Operating Instructions:__   
+- Run *npm install* in the terminal to download dependencies listed in package.json  
+- PostgreSQL database setup information can be found in **database.sql**  
+- Type *npm start* in the terminal to start the server connection  
+- Enter *localhost:3000* in the browser address bar  
+- Type *Control + C* in the terminal to quit the server connection  
 
 ## Authors
-- Laura Abend
-- Ally Boyd
-- Elisa Lee
-- Jackie Torborg
-- Alexander Whitaker
+Laura Abend  
+Ally Boyd  
+Elisa Lee  
+Jackie Torborg  
+Alexander Whitaker  
