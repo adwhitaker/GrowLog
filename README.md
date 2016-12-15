@@ -23,6 +23,7 @@ Knex 0.12.6
 Moment 2.16.0  
 Passport-google-oauth2 0.1.6  
 PostgreSQL 6.1.0  
+Angular Material
 
 ## Instructions
 
