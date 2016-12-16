@@ -6,8 +6,8 @@ const auth = params.auth.split(':');
 // DB setup for Knex.js
 module.exports = {
   development: {
-    // client: 'pg',
-    // connection: {
+    client: 'pg',
+    connection: {
       user: auth[0],
       password: auth[1],
       host: params.hostname,
@@ -15,7 +15,7 @@ module.exports = {
       database: params.pathname.split('/')[1],
       ssl: true
     }
-  // }
+  }
 };
 
 // // Knex.js DB setup
