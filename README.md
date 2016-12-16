@@ -9,22 +9,28 @@ Check out [GrowLog here](https://blooming-anchorage-93223.herokuapp.com/)
 [Login](#login) | [Homepage](#homepage) | [Seeds](#seeds) | [Activities](#activities) | [Reports](#reports) | [Setup](#setup) | [Tech Used](#tech) | [Authors](#authors)
 
 ### <a name="login">Login</a>
-For easy access, a user can login using their Gmail account.
 ![GrowLog Login](screenshots/login.png)
+
+For easy access, a user can login using their Gmail account.
+
 ![GrowLog Google Login](screenshots/googleOAuth.png)
 
 ### <a name="homepage">GrowLog Homepage</a>
 The landing page after logging in.
+
 ![GrowLog Homepage](screenshots/homepage.png)
 
 ### <a name="seeds">Seeds</a>
 Add, edit, complete and delete information about seed inventory using the searchable database.
+
 ![GrowLog Seed Inventory](screenshots/seeds.png)
+
 ![GrowLog Search Seeds](screenshots/searchSeeds.png)
 
 ### <a name="activities">Activities</a>
 Add, edit, complete and delete planting, watering, weeding, harvesting, and other activities or issues (such as pests) happening out in the field.
-![GrowLog Activities](screenshots/activities)
+
+![GrowLog Activities](screenshots/activities.png)
 
 ## <a name="setup">Set-up</a>
 
