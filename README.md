@@ -1,9 +1,9 @@
 # <a name="top">GrowLog</a>
-GrowLog is an application that allows gardeners to track and manage the lifecycle of their plants from seed purchase to harvest. It features a searchable seed inventory, the ability to schedule gardening activities, and the ability to generate reports.
+GrowLog is a mobile-friendly application that allows gardeners to track and manage the lifecycle of their plants from seed purchase to harvest. It features a searchable seed inventory, the ability to schedule gardening activities, and the ability to generate reports.
 
 GrowLog was built for our final group project and is the culmination of our time [@PrimeAcademy](https://github.com/PrimeAcademy). Our group worked with the client, Page & Flowers, to create a real-world solution for their urban farming tracking needs. Over the course of three weeks, we worked collaboratively to define the scope of work, build a fully functioning web application, and present our solution to over 150 people.
 
-Check out [GrowLog here](https://blooming-anchorage-93223.herokuapp.com/)
+[Check out GrowLog](https://blooming-anchorage-93223.herokuapp.com/).
 
 ## Features
 [Login](#login) | [Homepage](#homepage) | [Seeds](#seeds) | [Activities](#activities) | [Reports](#reports) | [Setup](#setup) | [Tech Used](#tech) | [Authors](#authors)
@@ -46,19 +46,19 @@ __General Operating Instructions:__
 - Enter *localhost:3000* in the browser address bar  
 - Type *Control + C* in the terminal to quit the server connection
 
-### Or visit GrowLog on Heroku at https://blooming-anchorage-93223.herokuapp.com/
+#### Or visit GrowLog on Heroku at https://blooming-anchorage-93223.herokuapp.com/
 
 ## <a name="tech">Technologies Used</a>
-AngularJS 1.5.8
-Angular Material
-Expressjs 4.14.0
-Heroku
-jQuery 3.1.1  
-Knexjs 0.12.6  
-Momentjs 2.16.0
-Nodejs
-Passport-google-oauth2 0.1.6  
-PostgreSQL 6.1.0
+- AngularJS 1.5.8
+- Angular Material
+- Expressjs 4.14.0
+- Heroku
+- jQuery 3.1.1  
+- Knexjs 0.12.6  
+- Momentjs 2.16.0
+- Nodejs
+- Passport-google-oauth2 0.1.6  
+- PostgreSQL 6.1.0
 
 # <a name="authors">Authors</a>
 - Laura Abend  
